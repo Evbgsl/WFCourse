@@ -1,6 +1,6 @@
 ﻿Console.WriteLine("Как Вас зовут?");
 string UserName = Console.ReadLine();
-// новый комментарий test 123
+// ...
 bool flagRepeatTest = true;
 
 while (flagRepeatTest) 
