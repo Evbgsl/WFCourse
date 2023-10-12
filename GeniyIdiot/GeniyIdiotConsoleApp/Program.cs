@@ -38,10 +38,6 @@ while (flagRepeatTest)
     }
 
     Console.WriteLine("Кол-во прав ответов: " + countRightAnswers);
-
-
-
-
     Console.WriteLine(UserName + ", Ваш диагноз: " + GetDiagnose(countQuestions, countRightAnswers));
 
     Console.WriteLine("Желаете повторить тест?");
