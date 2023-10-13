@@ -18,7 +18,16 @@ while (flagRepeatTest)
         }
         Console.WriteLine("Номер вопроса " + (i+1));
         Console.WriteLine(GetQuestion(index));
-        int userAnswer = Convert.ToInt32(Console.ReadLine());
+        bool flag = false;
+        int userAnswer = 0;
+
+        while (!flag)
+        {
+            var ans_string = Console.ReadLine();
+            flag = int.TryParse(ans_string, out userAnswer);
+            if (!flag) {Console.WriteLine("Пожалуйста, введите число!");}
+        }
+
         int rightAnswer = GetRightAnswer(index);
         if (userAnswer == rightAnswer)
         {
