@@ -1,7 +1,13 @@
-﻿Console.WriteLine("Как Вас зовут?");
+﻿using System.IO;
+using System.Reflection.PortableExecutable;
+using static System.Net.Mime.MediaTypeNames;
+
+Console.WriteLine("Как Вас зовут?");
 string UserName = Console.ReadLine();
 // ...
 bool flagRepeatTest = true;
+
+string path = @"C:\Users\Пользователь\source\repos\WFCourse\GeniyIdiot\TestResults\results.txt";
 
 while (flagRepeatTest) 
 { 
@@ -38,7 +44,17 @@ while (flagRepeatTest)
     }
 
     Console.WriteLine("Кол-во прав ответов: " + countRightAnswers);
-    Console.WriteLine(UserName + ", Ваш диагноз: " + GetDiagnose(countQuestions, countRightAnswers));
+    var percentOfRightAnswers = GetPercentOfRightAnswers(countQuestions, countRightAnswers);
+    var diagnose = GetDiagnose(percentOfRightAnswers);
+    Console.WriteLine(UserName + ", Ваш диагноз: " + diagnose);
+    
+    string testResult = $"{UserName},{percentOfRightAnswers},{diagnose}";
+
+
+    using (StreamWriter sw = new StreamWriter(path, true, System.Text.Encoding.Default))
+    {
+        sw.WriteLine(testResult);
+    }
 
     Console.WriteLine("Желаете повторить тест?");
     if (Console.ReadLine() == "да")
@@ -47,6 +63,24 @@ while (flagRepeatTest)
     }
     else {flagRepeatTest = false;}   
 }
+
+Console.WriteLine("Показать результаты предыдущих тестов?");
+if (Console.ReadLine() == "да")
+{
+    Console.WriteLine("{0,20} | {1,20} | {2, 20}", "ФИО", "% верных ответов", "Диагноз");
+    using (StreamReader sr = new StreamReader(path))
+    {
+        string? line;
+        while ((line = sr.ReadLine()) != null)
+        {
+            var lineArray = line.Split(",");
+            Console.WriteLine("{0,20} | {1,20} | {2,20}", lineArray[0], lineArray[1], lineArray[2]);
+        }
+    }
+}
+
+
+
 
 static string GetQuestion(int countQuestions, int n)
 {
@@ -59,7 +93,6 @@ static string GetQuestion(int countQuestions, int n)
 
     return questions[n];
 }
-
 static int GetRightAnswer(int n)
 {
     int[] answers = new int[5];
@@ -71,12 +104,8 @@ static int GetRightAnswer(int n)
 
     return answers[n];
 }
-
-static string GetDiagnose(int countQuestions, int countRightAnswers)
-{
-
-
-    int percentOfRightAnswers = (int)Math.Round(100.0 * countRightAnswers / countQuestions);
+static string GetDiagnose(int percentOfRightAnswers)
+{    
     int n = 0;
 
     if (percentOfRightAnswers <= 16)
@@ -116,4 +145,8 @@ static string GetDiagnose(int countQuestions, int countRightAnswers)
     diagnosis[5] = "Гений";
 
     return diagnosis[n];
+}
+static int GetPercentOfRightAnswers(int countQuestions, int countRightAnswers)
+{
+    return (int)Math.Round(100.0 * countRightAnswers / countQuestions);
 }
