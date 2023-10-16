@@ -7,48 +7,46 @@ string UserName = Console.ReadLine();
 // ...
 bool flagRepeatTest = true;
 
-string path = @"C:\Users\Пользователь\source\repos\WFCourse\GeniyIdiot\TestResults\results.txt";
+var path = @"results.txt";
 
 while (flagRepeatTest) 
-{ 
-    int countQuestions = 5;
-    int countRightAnswers = 0;
+{
+    var questions = GetQuestion();
+    var answers = GetAnswer();
+    var countQuestions = questions.Count;
+    var countRightAnswers = 0;
+    
     var random = new Random();
-    var numbersOfRandom = new List<int>();
-    for (int i=0; i < countQuestions; i++)
+
+    for (int i = 0; i < countQuestions; i++)
     {
-        int index = random.Next(0, countQuestions);
-        if (numbersOfRandom.Contains(index))
-        {
-            i--;
-            continue;    
-        }
-        Console.WriteLine("Номер вопроса " + (i+1));
-        Console.WriteLine(GetQuestion(countQuestions, index));
-        bool flag = false;
-        int userAnswer = 0;
+        Console.WriteLine("Номер вопроса " + (i + 1));
 
-        while (!flag)
-        {
-            var ans_string = Console.ReadLine();
-            flag = int.TryParse(ans_string, out userAnswer);
-            if (!flag) {Console.WriteLine("Пожалуйста, введите число!");}
-        }
+        var randomQuestionIndex = random.Next(0, questions.Count);
 
-        int rightAnswer = GetRightAnswer(index);
+        Console.WriteLine(questions[randomQuestionIndex]);
+
+        var rightAnswer = answers[randomQuestionIndex];
+
+        var userAnswer = GetUserAnswer();
+
+        questions.RemoveAt(randomQuestionIndex);
+        answers.RemoveAt(randomQuestionIndex);
+
         if (userAnswer == rightAnswer)
         {
             countRightAnswers++;
         }
-        numbersOfRandom.Add(index);
+
     }
+
 
     Console.WriteLine("Кол-во прав ответов: " + countRightAnswers);
     var percentOfRightAnswers = GetPercentOfRightAnswers(countQuestions, countRightAnswers);
     var diagnose = GetDiagnose(percentOfRightAnswers);
     Console.WriteLine(UserName + ", Ваш диагноз: " + diagnose);
     
-    string testResult = $"{UserName},{percentOfRightAnswers},{diagnose}";
+    var testResult = $"{UserName},{percentOfRightAnswers},{diagnose}";
 
 
     using (StreamWriter sw = new StreamWriter(path, true, System.Text.Encoding.Default))
@@ -63,6 +61,8 @@ while (flagRepeatTest)
     }
     else {flagRepeatTest = false;}   
 }
+
+
 
 Console.WriteLine("Показать результаты предыдущих тестов?");
 if (Console.ReadLine() == "да")
@@ -80,29 +80,41 @@ if (Console.ReadLine() == "да")
 }
 
 
-
-
-static string GetQuestion(int countQuestions, int n)
+static int GetUserAnswer()
 {
-    string[] questions = new string[countQuestions];
-    questions[0] = "Два плюс два умн на два?";
-    questions[1] = "Бревно на 10 частей?";
-    questions[2] = "Сколько пальцев на 5 руках?";
-    questions[3] = "Сколько мин на 3 укола?";
-    questions[4] = "5 горело, 2 потухли - сколько сгорело?";
+    while (true)
+    {
+        try
+        {
+            return Convert.ToInt32(Console.ReadLine());
+        }
 
-    return questions[n];
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+    }
 }
-static int GetRightAnswer(int n)
+static List<string> GetQuestion()
 {
-    int[] answers = new int[5];
-    answers[0] = 6;
-    answers[1] = 9;
-    answers[2] = 25;
-    answers[3] = 60;
-    answers[4] = 2;
+    var questions = new List<string>();
+    questions.Add("Два плюс два умн на два?");
+    questions.Add("Бревно на 10 частей?");
+    questions.Add("Сколько пальцев на 5 руках?");
+    questions.Add("Сколько мин на 3 укола?");
+    questions.Add("5 горело, 2 потухли - сколько сгорело?");
+    return questions;
+}
+static List<int> GetAnswer()
+{
+    var answers = new List<int>();
+    answers.Add(6);
+    answers.Add(9);
+    answers.Add(25);
+    answers.Add(60);
+    answers.Add(2);
 
-    return answers[n];
+    return answers;
 }
 static string GetDiagnose(int percentOfRightAnswers)
 {    
