@@ -1,11 +1,13 @@
 ﻿public class Question
 {
-    public string Text;
-    public int Answer;
+    public string Id { get; set; }
+    public string Text { get; set; }
+    public int Answer { get; set; }
 
-    public Question(string text, int answer)
+    public Question(string id, string text, int answer)
     {
-        Text = text ?? throw new ArgumentNullException(nameof(text));
+        Id = id;
+        Text = text;
         Answer = answer;
     }
 }
