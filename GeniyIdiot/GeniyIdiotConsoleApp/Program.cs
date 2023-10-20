@@ -12,16 +12,6 @@ dataFileProvider.DataFilePath = @"datafile.txt";
 
 var questions = DataFileProvider.GetQuestionsFromFile(dataFileProvider.DataFilePath);
 
-
-//var questions = new List<Question>
-//{
-//    new Question("Два плюс два умножить на два?", 6),
-//    new Question("Сколько нужно распилов, чтобы разделить бревно на 10 частей?", 9),
-//    new Question("На двух руках 10 пальцев. Сколько пальцев на 5 руках?", 25),
-//    new Question("Укол делают 1 раз в 30 минут. Сколько нужно мин на 3 укола?", 60),
-//    new Question("5 свечей горело, 2 потухли. Сколько свечей сгорело?", 2)
-//};
-
 var diagnosis = new List<Diagnose>
 {
     new Diagnose("Идиот"),
@@ -70,8 +60,6 @@ while (flagRepeatTest)
 
     Console.WriteLine(userName.Name + ", Ваш диагноз: " + userDiagnose);
 
-    //var testResult = $"result{userName.Name},{percentOfRightAnswers},{userDiagnose}";
-
     DataFileProvider.SetResultToFile(userName, percentOfRightAnswers, userDiagnose, dataFileProvider.DataFilePath);
 
 
@@ -98,14 +86,11 @@ if (Console.ReadLine() == "да")
 }
 
 Console.WriteLine("Хотите удалить вопрос? ");
+if (Console.ReadLine() == "да")
 {
-    if (Console.ReadLine() == "да")
-    {
-        Console.WriteLine("Введите ID вопроса, который следует удалить");
-        var id = Console.ReadLine();
-        DataFileProvider.RemoveQuestionFromFile(dataFileProvider.DataFilePath, id);
-        return;
-    }
-
+    Console.WriteLine("Введите ID вопроса, который следует удалить");
+    var id = Console.ReadLine();
+    DataFileProvider.RemoveQuestionFromFile(dataFileProvider.DataFilePath, id);
+    return;
 }
 
