@@ -6,13 +6,10 @@ using static System.Net.Mime.MediaTypeNames;
 Console.WriteLine("Как Вас зовут?");
 
 var userName = new User(Console.ReadLine());
-
-var dataFileProvider = new DataFileProvider();
-dataFileProvider.DataFilePath = @"datafile.txt";
-
-var questions = DataFileProvider.GetQuestionsFromFile(dataFileProvider.DataFilePath);
-
-var diagnosis = new List<Diagnose>
+string fileName = @"datafile.txt";
+var value = DataFileProvider.GetValue(fileName);
+var questions = QuestionsStorage.GetQuestions(value);
+var diagnoses = new List<Diagnose>
 {
     new Diagnose("Идиот"),
     new Diagnose("Кретин"),
@@ -21,10 +18,15 @@ var diagnosis = new List<Diagnose>
     new Diagnose("Талант"),
     new Diagnose("Гений")
 };
-
 bool flagRepeatTest = true;
+static bool GetUserChoice(string question)
+{
+    Console.WriteLine($"{question}");
+    if (Console.ReadLine().ToLower() == "да")
+    { return true; }
+    else { return false; }
 
-var path = @"results.txt";
+}
 
 while (flagRepeatTest)
 {
@@ -42,7 +44,7 @@ while (flagRepeatTest)
 
         var rightAnswer = _questions[randomQuestionIndex].Answer;
 
-        var userAnswer = UserStorage.GetUserAnswer();
+        var userAnswer = UserStorage.GetNumber();
 
         _questions.RemoveAt(randomQuestionIndex);
 
@@ -55,14 +57,12 @@ while (flagRepeatTest)
     Console.WriteLine("Кол-во прав ответов: " + countRightAnswers);
     var percentOfRightAnswers = 100 * countRightAnswers / countQuestions;
 
-    var userDiagnose = DiagnoseStorage.GetDiagnose(diagnosis, percentOfRightAnswers);
+    var userDiagnose = DiagnoseStorage.GetDiagnose(diagnoses, percentOfRightAnswers);
 
 
     Console.WriteLine(userName.Name + ", Ваш диагноз: " + userDiagnose);
-
-    DataFileProvider.SetResultToFile(userName, percentOfRightAnswers, userDiagnose, dataFileProvider.DataFilePath);
-
-
+    UserStorage.SetResult(userName, percentOfRightAnswers, userDiagnose, fileName);
+    
     Console.WriteLine("Желаете повторить тест?");
     if (Console.ReadLine() == "да")
     {
@@ -71,26 +71,24 @@ while (flagRepeatTest)
     else { flagRepeatTest = false; }
 }
 
-Console.WriteLine("Показать результаты предыдущих тестов?");
-if (Console.ReadLine() == "да")
+var userChoice = GetUserChoice("Показать результаты предыдущих тестов?");
+if (userChoice)
 {
-    DataFileProvider.GetResultsFromFile(dataFileProvider.DataFilePath);
+    UserStorage.GetResultsFromFile(fileName);
 }
 
-Console.WriteLine("Хотите добавить вопрос? ");
-if (Console.ReadLine() == "да")
-{
-    Console.WriteLine("Введите через знак & текст вопрос и цифру с правильным ответом");
-    DataFileProvider.SetQuestionToFile(dataFileProvider.DataFilePath);
+userChoice = GetUserChoice("Хотите добавить вопрос? ");
+if (userChoice)
+{    
+    QuestionsStorage.SetQuestionToFile(fileName);
     return;
 }
 
-Console.WriteLine("Хотите удалить вопрос? ");
-if (Console.ReadLine() == "да")
+userChoice = GetUserChoice("Хотите удалить вопрос?");
+if (userChoice)
 {
     Console.WriteLine("Введите ID вопроса, который следует удалить");
     var id = Console.ReadLine();
-    DataFileProvider.RemoveQuestionFromFile(dataFileProvider.DataFilePath, id);
+    QuestionsStorage.RemoveQuestionFromFile(fileName, id);
     return;
 }
-

@@ -8,4 +8,6 @@
         return diagnoses[percent / 20].DiagnoseName;
 
     }
+
+
 }
