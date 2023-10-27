@@ -2,6 +2,8 @@
 using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
 using static System.Net.Mime.MediaTypeNames;
+using GeniyIdiot.Common;
+
 
 Console.WriteLine("Как Вас зовут?");
 
