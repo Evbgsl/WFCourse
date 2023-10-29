@@ -44,19 +44,26 @@ namespace GeniyIdiotWinFormApp
 
         private void nextButton_Click(object sender, EventArgs e)
         {
-            
+
             var userAnswer = Convert.ToInt32(userAnswerTextBox.Text);
             if (userAnswer == rightAnswer)
             {
                 countRightAnswers++;
             }
             var endTest = questions.Count == 0;
-            if (endTest) 
+            if (endTest)
             {
                 MessageBox.Show("Тест окончен", "Гений - идиот");
-                return; 
+                return;
             }
             ShowNextQuestion();
+
+        }
+
+        private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Супер тест 2023", "Гений - идиот");
+            return;
 
         }
     }
