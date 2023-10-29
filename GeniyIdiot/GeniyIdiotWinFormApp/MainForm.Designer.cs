@@ -32,6 +32,12 @@
             questionNumberLabel = new Label();
             questionTextLabel = new Label();
             userAnswerTextBox = new TextBox();
+            menuStrip1 = new MenuStrip();
+            toolStripMenuItem1 = new ToolStripMenuItem();
+            оПрограммеToolStripMenuItem = new ToolStripMenuItem();
+            выходToolStripMenuItem = new ToolStripMenuItem();
+            показатьРезульToolStripMenuItem = new ToolStripMenuItem();
+            menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // nextButton
@@ -75,6 +81,42 @@
             userAnswerTextBox.TabIndex = 3;
             userAnswerTextBox.TextChanged += userAnswerTextBox_TextChanged;
             // 
+            // menuStrip1
+            // 
+            menuStrip1.ImageScalingSize = new Size(24, 24);
+            menuStrip1.Items.AddRange(new ToolStripItem[] { toolStripMenuItem1 });
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(387, 33);
+            menuStrip1.TabIndex = 4;
+            menuStrip1.Text = "menuStrip1";
+            // 
+            // toolStripMenuItem1
+            // 
+            toolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { выходToolStripMenuItem, показатьРезульToolStripMenuItem, оПрограммеToolStripMenuItem });
+            toolStripMenuItem1.Name = "toolStripMenuItem1";
+            toolStripMenuItem1.Size = new Size(73, 29);
+            toolStripMenuItem1.Text = "Menu";
+            // 
+            // оПрограммеToolStripMenuItem
+            // 
+            оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
+            оПрограммеToolStripMenuItem.Size = new Size(285, 34);
+            оПрограммеToolStripMenuItem.Text = "О программе...";
+            оПрограммеToolStripMenuItem.Click += оПрограммеToolStripMenuItem_Click;
+            // 
+            // выходToolStripMenuItem
+            // 
+            выходToolStripMenuItem.Name = "выходToolStripMenuItem";
+            выходToolStripMenuItem.Size = new Size(285, 34);
+            выходToolStripMenuItem.Text = "Выход";
+            // 
+            // показатьРезульToolStripMenuItem
+            // 
+            показатьРезульToolStripMenuItem.Name = "показатьРезульToolStripMenuItem";
+            показатьРезульToolStripMenuItem.Size = new Size(285, 34);
+            показатьРезульToolStripMenuItem.Text = "Показать результаты";
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -84,10 +126,14 @@
             Controls.Add(questionTextLabel);
             Controls.Add(questionNumberLabel);
             Controls.Add(nextButton);
+            Controls.Add(menuStrip1);
+            MainMenuStrip = menuStrip1;
             Margin = new Padding(4, 5, 4, 5);
             Name = "MainForm";
             Text = "Гений - идиот";
             Load += MainForm_Load;
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -98,5 +144,10 @@
         private Label questionNumberLabel;
         private Label questionTextLabel;
         private TextBox userAnswerTextBox;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem toolStripMenuItem1;
+        private ToolStripMenuItem оПрограммеToolStripMenuItem;
+        private ToolStripMenuItem выходToolStripMenuItem;
+        private ToolStripMenuItem показатьРезульToolStripMenuItem;
     }
 }
