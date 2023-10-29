@@ -22,6 +22,8 @@ namespace GeniyIdiotWinFormApp
 
         }
 
+        //test2
+
         private void MainForm_Load(object sender, EventArgs e)
         {
             fileName = @"datafile.txt";
