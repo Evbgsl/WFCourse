@@ -103,7 +103,7 @@
             оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
             оПрограммеToolStripMenuItem.Size = new Size(285, 34);
             оПрограммеToolStripMenuItem.Text = "О программе...";
-            оПрограммеToolStripMenuItem.Click += оПрограммеToolStripMenuItem_Click;
+            оПрограммеToolStripMenuItem.Click += ToolStripMenuItem_Click;
             // 
             // выходToolStripMenuItem
             // 
@@ -113,7 +113,7 @@
             // 
             // показатьРезульToolStripMenuItem
             // 
-            показатьРезульToolStripMenuItem.Name = "показатьРезульToolStripMenuItem";
+            показатьРезульToolStripMenuItem.Name = "ToolStripMenuItem";
             показатьРезульToolStripMenuItem.Size = new Size(285, 34);
             показатьРезульToolStripMenuItem.Text = "Показать результаты";
             // 
