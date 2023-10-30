@@ -1,5 +1,6 @@
 using System.Net.WebSockets;
 using GeniyIdiot.Common;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace GeniyIdiotWinFormApp
 {
@@ -17,16 +18,10 @@ namespace GeniyIdiotWinFormApp
             InitializeComponent();
         }
 
-        private void userAnswerTextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        //test2
-
         private void MainForm_Load(object sender, EventArgs e)
         {
             fileName = @"datafile.txt";
+
             user = new User("неизвестно");
             value = DataFileProvider.GetValue(fileName);
             questions = QuestionsStorage.GetQuestions(value);
@@ -46,23 +41,32 @@ namespace GeniyIdiotWinFormApp
 
         private void nextButton_Click(object sender, EventArgs e)
         {
-
-            var userAnswer = Convert.ToInt32(userAnswerTextBox.Text);
-            if (userAnswer == rightAnswer)
-            {
-                countRightAnswers++;
+            int userAnswer;
+            { 
+                try
+                {
+                    userAnswer = Convert.ToInt32(userAnswerTextBox.Text);
+                    if (userAnswer == rightAnswer)
+                    {
+                        countRightAnswers++;
+                    }
+                    var endTest = questions.Count == 0;
+                    if (endTest)
+                    {
+                        MessageBox.Show("Тест окончен", "Гений - идиот");
+                        return;
+                    }
+                    ShowNextQuestion();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Некорректный формат числа", "Гений - идиот");
+                    return;
+                }
             }
-            var endTest = questions.Count == 0;
-            if (endTest)
-            {
-                MessageBox.Show("Тест окончен", "Гений - идиот");
-                return;
-            }
-            ShowNextQuestion();
-
         }
 
-        private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Супер тест 2023", "Гений - идиот");
             return;

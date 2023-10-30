@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System;
+using System.Windows.Forms;
 
 namespace GeniyIdiot.Common
 {
@@ -26,9 +27,11 @@ namespace GeniyIdiot.Common
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
+                    
                 }
             }
         }
+
 
         public static void SetResult(User user, int percentOfRightAnswers, string userDiagnose, string fileName)
         {
