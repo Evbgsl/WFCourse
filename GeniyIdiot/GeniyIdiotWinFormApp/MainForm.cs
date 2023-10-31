@@ -1,6 +1,7 @@
 using System.Net.WebSockets;
 using GeniyIdiot.Common;
 using static System.Net.Mime.MediaTypeNames;
+using Application = System.Windows.Forms.Application;
 
 namespace GeniyIdiotWinFormApp
 {
@@ -65,8 +66,8 @@ namespace GeniyIdiotWinFormApp
             {
                 MessageBox.Show("Введите имя пользователя", "Гений - идиот");
                 return;
-            }    
-                
+            }
+
 
             
             {
@@ -80,7 +81,7 @@ namespace GeniyIdiotWinFormApp
                     var endTest = questions.Count == 0;
                     if (endTest)
                     {
-                        
+
                         var percentOfRightAnswers = 100 * countRightAnswers / countQuestions;
                         var userDiagnose = DiagnoseStorage.GetDiagnose(diagnoses, percentOfRightAnswers);
                         DataFileProvider.Append(fileName, $"result#{user}#{userDiagnose}");
@@ -111,6 +112,12 @@ namespace GeniyIdiotWinFormApp
         {
             user = newUserTextBox.Text;
             newUserTextBox.Enabled = false;
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
 
         }
     }
