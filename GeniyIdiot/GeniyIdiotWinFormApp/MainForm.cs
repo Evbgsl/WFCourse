@@ -7,12 +7,13 @@ namespace GeniyIdiotWinFormApp
     public partial class MainForm : Form
     {
         private List<Question> questions;
-        string user;
+        private string user;
         private string value;
         private string fileName;
         private int rightAnswer;
         private int countRightAnswers;
         private int countQuestions;
+        private int questionNumber;
         private List<Diagnose> diagnoses = new List<Diagnose>
                                                 {
                                                     new Diagnose("Идиот"),
@@ -36,12 +37,16 @@ namespace GeniyIdiotWinFormApp
             //user = new User("неизвестно");
             value = DataFileProvider.GetValue(fileName);
             questions = QuestionsStorage.GetQuestions(value);
+            questionNumberLabel.Text = $"Вопрос номер 1";
             ShowNextQuestion();
 
         }
 
         private void ShowNextQuestion()
         {
+            questionNumber++;
+            questionNumberLabel.Text = $"Вопрос номер {questionNumber}";
+
             var random = new Random();
             countQuestions = questions.Count;
             var randomIndex = random.Next(countQuestions);
