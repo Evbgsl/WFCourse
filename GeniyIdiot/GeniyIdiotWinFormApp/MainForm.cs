@@ -37,6 +37,9 @@ namespace GeniyIdiotWinFormApp
             //user = new User("неизвестно");
             value = DataFileProvider.GetValue(fileName);
             questions = QuestionsStorage.GetQuestions(value);
+            countQuestions = questions.Count;
+            
+            
             questionNumberLabel.Text = $"Вопрос номер 1";
             ShowNextQuestion();
 
@@ -44,12 +47,13 @@ namespace GeniyIdiotWinFormApp
 
         private void ShowNextQuestion()
         {
+            userAnswerTextBox.Text = null;
             questionNumber++;
             questionNumberLabel.Text = $"Вопрос номер {questionNumber}";
 
             var random = new Random();
-            countQuestions = questions.Count;
-            var randomIndex = random.Next(countQuestions);
+            var _countQuestions = questions.Count;
+            var randomIndex = random.Next(_countQuestions);
             questionTextLabel.Text = questions[randomIndex].Text;
             rightAnswer = questions[randomIndex].Answer;
             questions.RemoveAt(randomIndex);
@@ -64,11 +68,11 @@ namespace GeniyIdiotWinFormApp
             }    
                 
 
-            int userAnswer;
+            
             {
                 try
                 {
-                    userAnswer = Convert.ToInt32(userAnswerTextBox.Text);
+                    var userAnswer = Convert.ToInt32(userAnswerTextBox.Text);
                     if (userAnswer == rightAnswer)
                     {
                         countRightAnswers++;
@@ -88,6 +92,8 @@ namespace GeniyIdiotWinFormApp
                 }
                 catch (Exception ex)
                 {
+                    MessageBox.Show(ex.Message);
+
                     MessageBox.Show("Некорректный формат числа", "Гений - идиот");
                     return;
                 }
