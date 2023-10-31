@@ -7,11 +7,23 @@ namespace GeniyIdiotWinFormApp
     public partial class MainForm : Form
     {
         private List<Question> questions;
-        private User user;
+        string user;
         private string value;
         private string fileName;
         private int rightAnswer;
         private int countRightAnswers;
+        private int countQuestions;
+        private List<Diagnose> diagnoses = new List<Diagnose>
+                                                {
+                                                    new Diagnose("Идиот"),
+                                                    new Diagnose("Кретин"),
+                                                    new Diagnose("Дурак"),
+                                                    new Diagnose("Нормальный"),
+                                                    new Diagnose("Талант"),
+                                                    new Diagnose("Гений")
+                                                };
+
+
 
         public MainForm()
         {
@@ -21,8 +33,7 @@ namespace GeniyIdiotWinFormApp
         private void MainForm_Load(object sender, EventArgs e)
         {
             fileName = @"datafile.txt";
-
-            user = new User("неизвестно");
+            //user = new User("неизвестно");
             value = DataFileProvider.GetValue(fileName);
             questions = QuestionsStorage.GetQuestions(value);
             ShowNextQuestion();
@@ -32,7 +43,7 @@ namespace GeniyIdiotWinFormApp
         private void ShowNextQuestion()
         {
             var random = new Random();
-            var countQuestions = questions.Count;
+            countQuestions = questions.Count;
             var randomIndex = random.Next(countQuestions);
             questionTextLabel.Text = questions[randomIndex].Text;
             rightAnswer = questions[randomIndex].Answer;
@@ -41,8 +52,15 @@ namespace GeniyIdiotWinFormApp
 
         private void nextButton_Click(object sender, EventArgs e)
         {
+            if (user == null)
+            {
+                MessageBox.Show("Введите имя пользователя", "Гений - идиот");
+                return;
+            }    
+                
+
             int userAnswer;
-            { 
+            {
                 try
                 {
                     userAnswer = Convert.ToInt32(userAnswerTextBox.Text);
@@ -53,7 +71,12 @@ namespace GeniyIdiotWinFormApp
                     var endTest = questions.Count == 0;
                     if (endTest)
                     {
-                        MessageBox.Show("Тест окончен", "Гений - идиот");
+                        
+                        var percentOfRightAnswers = 100 * countRightAnswers / countQuestions;
+                        var userDiagnose = DiagnoseStorage.GetDiagnose(diagnoses, percentOfRightAnswers);
+                        DataFileProvider.Append(fileName, $"result#{user}#{userDiagnose}");
+                        MessageBox.Show($"Тест окончен. Количество правильных ответов {countQuestions}. Ваш диагноз - {userDiagnose}", "Гений - идиот");
+
                         return;
                     }
                     ShowNextQuestion();
@@ -70,6 +93,13 @@ namespace GeniyIdiotWinFormApp
         {
             MessageBox.Show("Супер тест 2023", "Гений - идиот");
             return;
+
+        }
+
+        private void addNewUserButton_Click(object sender, EventArgs e)
+        {
+            user = newUserTextBox.Text;
+            newUserTextBox.Enabled = false;
 
         }
     }
