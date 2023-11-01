@@ -41,7 +41,11 @@
             addNewUserButton = new Button();
             newUserTextBox = new TextBox();
             label1 = new Label();
+            resultPanel = new Panel();
+            resultDataGridView = new DataGridView();
             menuStrip1.SuspendLayout();
+            resultPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)resultDataGridView).BeginInit();
             SuspendLayout();
             // 
             // nextButton
@@ -96,7 +100,7 @@
             // 
             // toolStripMenuItem1
             // 
-            toolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { выходToolStripMenuItem, показатьРезульToolStripMenuItem, оПрограммеToolStripMenuItem, начатьЗановоToolStripMenuItem });
+            toolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { начатьЗановоToolStripMenuItem, показатьРезульToolStripMenuItem, выходToolStripMenuItem, оПрограммеToolStripMenuItem });
             toolStripMenuItem1.Name = "toolStripMenuItem1";
             toolStripMenuItem1.Size = new Size(73, 29);
             toolStripMenuItem1.Text = "Menu";
@@ -155,11 +159,31 @@
             label1.TabIndex = 7;
             label1.Text = "Новый пользователь";
             // 
+            // resultPanel
+            // 
+            resultPanel.Controls.Add(resultDataGridView);
+            resultPanel.Location = new Point(332, 263);
+            resultPanel.Name = "resultPanel";
+            resultPanel.Size = new Size(429, 249);
+            resultPanel.TabIndex = 8;
+            resultPanel.Visible = false;
+            // 
+            // resultDataGridView
+            // 
+            resultDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            resultDataGridView.Location = new Point(31, 3);
+            resultDataGridView.Name = "resultDataGridView";
+            resultDataGridView.RowHeadersWidth = 62;
+            resultDataGridView.RowTemplate.Height = 33;
+            resultDataGridView.Size = new Size(360, 225);
+            resultDataGridView.TabIndex = 0;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(803, 578);
+            Controls.Add(resultPanel);
             Controls.Add(label1);
             Controls.Add(addNewUserButton);
             Controls.Add(newUserTextBox);
@@ -175,6 +199,8 @@
             Load += MainForm_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
+            resultPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)resultDataGridView).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -194,5 +220,7 @@
         private TextBox newUserTextBox;
         private Label label1;
         private ToolStripMenuItem начатьЗановоToolStripMenuItem;
+        private Panel resultPanel;
+        private DataGridView resultDataGridView;
     }
 }
