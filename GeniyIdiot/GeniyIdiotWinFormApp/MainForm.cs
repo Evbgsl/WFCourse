@@ -84,7 +84,7 @@ namespace GeniyIdiotWinFormApp
 
                         var percentOfRightAnswers = 100 * countRightAnswers / countQuestions;
                         var userDiagnose = DiagnoseStorage.GetDiagnose(diagnoses, percentOfRightAnswers);
-                        DataFileProvider.Append(fileName, $"result#{user}#{userDiagnose}");
+                        DataFileProvider.Append(fileName, $"result#@{user}@{percentOfRightAnswers}@{userDiagnose}");
                         MessageBox.Show($"Тест окончен. Количество правильных ответов {countQuestions}. Ваш диагноз - {userDiagnose}", "Гений - идиот");
 
                         return;
@@ -133,8 +133,12 @@ namespace GeniyIdiotWinFormApp
 
         private void показатьРезульToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            var results = UserStorage.GetResultsFromFile(fileName);
+            foreach (var result in results)
+            {
+                resultDataGridView.Rows.Add(result[1], result[2], result[3]);
+            }
             resultPanel.Visible = true;
-            MessageBox.Show("Хорошие результаты", "Гений - идиот");
         }
     }
 }
