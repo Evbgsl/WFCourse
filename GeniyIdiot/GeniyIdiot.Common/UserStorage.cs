@@ -39,19 +39,22 @@ namespace GeniyIdiot.Common
             DataFileProvider.Append(fileName, _testResult);
         }
 
-        public static void GetResultsFromFile(string fileName)
+        public static List<string[]> GetResultsFromFile(string fileName)
         {
             Console.WriteLine("{0,20} | {1,20} | {2, 20}", "ФИО", "% верных ответов", "Диагноз");
             var value = DataFileProvider.GetValue(fileName);
             var lines = value.Split('\n');
+            var string_collection = new List<string[]>();
             foreach (string line in lines)
             {
                 if (line.StartsWith("result#"))
                 {
                     var lineArray = line.Split('@');
-                    Console.WriteLine("{0,20} | {1,20} | {2,20}", lineArray[1], lineArray[2], lineArray[3]);
+                    string_collection.Add(lineArray);
+                    
                 }
             }
+            return string_collection;
         }
     }
 

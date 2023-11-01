@@ -44,6 +44,7 @@
             resultPanel = new Panel();
             resultDataGridView = new DataGridView();
             userName = new DataGridViewTextBoxColumn();
+            Percent = new DataGridViewTextBoxColumn();
             userDiagnose = new DataGridViewTextBoxColumn();
             menuStrip1.SuspendLayout();
             resultPanel.SuspendLayout();
@@ -53,7 +54,7 @@
             // nextButton
             // 
             nextButton.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            nextButton.Location = new Point(100, 360);
+            nextButton.Location = new Point(26, 359);
             nextButton.Margin = new Padding(4, 5, 4, 5);
             nextButton.Name = "nextButton";
             nextButton.Size = new Size(170, 153);
@@ -65,7 +66,7 @@
             // questionNumberLabel
             // 
             questionNumberLabel.AutoSize = true;
-            questionNumberLabel.Location = new Point(100, 137);
+            questionNumberLabel.Location = new Point(26, 130);
             questionNumberLabel.Margin = new Padding(4, 0, 4, 0);
             questionNumberLabel.Name = "questionNumberLabel";
             questionNumberLabel.Size = new Size(108, 25);
@@ -75,7 +76,7 @@
             // questionTextLabel
             // 
             questionTextLabel.AutoSize = true;
-            questionTextLabel.Location = new Point(100, 188);
+            questionTextLabel.Location = new Point(26, 182);
             questionTextLabel.Margin = new Padding(4, 0, 4, 0);
             questionTextLabel.Name = "questionTextLabel";
             questionTextLabel.Size = new Size(129, 25);
@@ -84,7 +85,7 @@
             // 
             // userAnswerTextBox
             // 
-            userAnswerTextBox.Location = new Point(100, 255);
+            userAnswerTextBox.Location = new Point(26, 263);
             userAnswerTextBox.Margin = new Padding(4, 5, 4, 5);
             userAnswerTextBox.Name = "userAnswerTextBox";
             userAnswerTextBox.Size = new Size(168, 31);
@@ -96,7 +97,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { toolStripMenuItem1 });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(803, 33);
+            menuStrip1.Size = new Size(987, 33);
             menuStrip1.TabIndex = 4;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -166,19 +167,19 @@
             resultPanel.Controls.Add(resultDataGridView);
             resultPanel.Location = new Point(332, 263);
             resultPanel.Name = "resultPanel";
-            resultPanel.Size = new Size(429, 249);
+            resultPanel.Size = new Size(620, 249);
             resultPanel.TabIndex = 8;
             resultPanel.Visible = false;
             // 
             // resultDataGridView
             // 
             resultDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            resultDataGridView.Columns.AddRange(new DataGridViewColumn[] { userName, userDiagnose });
+            resultDataGridView.Columns.AddRange(new DataGridViewColumn[] { userName, Percent, userDiagnose });
             resultDataGridView.Location = new Point(31, 3);
             resultDataGridView.Name = "resultDataGridView";
             resultDataGridView.RowHeadersWidth = 62;
             resultDataGridView.RowTemplate.Height = 33;
-            resultDataGridView.Size = new Size(360, 225);
+            resultDataGridView.Size = new Size(560, 233);
             resultDataGridView.TabIndex = 0;
             // 
             // userName
@@ -187,6 +188,13 @@
             userName.MinimumWidth = 8;
             userName.Name = "userName";
             userName.Width = 150;
+            // 
+            // Percent
+            // 
+            Percent.HeaderText = "Кол верных";
+            Percent.MinimumWidth = 8;
+            Percent.Name = "Percent";
+            Percent.Width = 150;
             // 
             // userDiagnose
             // 
@@ -199,7 +207,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(803, 578);
+            ClientSize = new Size(987, 578);
             Controls.Add(resultPanel);
             Controls.Add(label1);
             Controls.Add(addNewUserButton);
@@ -212,6 +220,7 @@
             MainMenuStrip = menuStrip1;
             Margin = new Padding(4, 5, 4, 5);
             Name = "MainForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Гений - идиот";
             Load += MainForm_Load;
             menuStrip1.ResumeLayout(false);
@@ -240,6 +249,7 @@
         private Panel resultPanel;
         private DataGridView resultDataGridView;
         private DataGridViewTextBoxColumn userName;
+        private DataGridViewTextBoxColumn Percent;
         private DataGridViewTextBoxColumn userDiagnose;
     }
 }
