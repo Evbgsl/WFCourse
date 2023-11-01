@@ -34,8 +34,9 @@
             userAnswerTextBox = new TextBox();
             menuStrip1 = new MenuStrip();
             toolStripMenuItem1 = new ToolStripMenuItem();
-            выходToolStripMenuItem = new ToolStripMenuItem();
             показатьРезульToolStripMenuItem = new ToolStripMenuItem();
+            выходToolStripMenuItem = new ToolStripMenuItem();
+            начатьЗановоToolStripMenuItem = new ToolStripMenuItem();
             оПрограммеToolStripMenuItem = new ToolStripMenuItem();
             addNewUserButton = new Button();
             newUserTextBox = new TextBox();
@@ -95,22 +96,30 @@
             // 
             // toolStripMenuItem1
             // 
-            toolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { выходToolStripMenuItem, показатьРезульToolStripMenuItem, оПрограммеToolStripMenuItem });
+            toolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { показатьРезульToolStripMenuItem, выходToolStripMenuItem, начатьЗановоToolStripMenuItem, оПрограммеToolStripMenuItem });
             toolStripMenuItem1.Name = "toolStripMenuItem1";
             toolStripMenuItem1.Size = new Size(73, 29);
             toolStripMenuItem1.Text = "Menu";
-            // 
-            // выходToolStripMenuItem
-            // 
-            выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            выходToolStripMenuItem.Size = new Size(285, 34);
-            выходToolStripMenuItem.Text = "Выход";
             // 
             // показатьРезульToolStripMenuItem
             // 
             показатьРезульToolStripMenuItem.Name = "показатьРезульToolStripMenuItem";
             показатьРезульToolStripMenuItem.Size = new Size(285, 34);
             показатьРезульToolStripMenuItem.Text = "Показать результаты";
+            // 
+            // выходToolStripMenuItem
+            // 
+            выходToolStripMenuItem.Name = "выходToolStripMenuItem";
+            выходToolStripMenuItem.Size = new Size(285, 34);
+            выходToolStripMenuItem.Text = "Выход";
+            выходToolStripMenuItem.Click += выходToolStripMenuItem_Click;
+            // 
+            // начатьЗановоToolStripMenuItem
+            // 
+            начатьЗановоToolStripMenuItem.Name = "начатьЗановоToolStripMenuItem";
+            начатьЗановоToolStripMenuItem.Size = new Size(285, 34);
+            начатьЗановоToolStripMenuItem.Text = "Начать заново";
+            начатьЗановоToolStripMenuItem.Click += начатьЗановоToolStripMenuItem_Click;
             // 
             // оПрограммеToolStripMenuItem
             // 
@@ -161,6 +170,7 @@
             MainMenuStrip = menuStrip1;
             Margin = new Padding(4, 5, 4, 5);
             Name = "MainForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Гений - идиот";
             Load += MainForm_Load;
             menuStrip1.ResumeLayout(false);
@@ -183,5 +193,6 @@
         private Button addNewUserButton;
         private TextBox newUserTextBox;
         private Label label1;
+        private ToolStripMenuItem начатьЗановоToolStripMenuItem;
     }
 }
