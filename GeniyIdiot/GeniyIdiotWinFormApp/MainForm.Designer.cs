@@ -37,19 +37,20 @@
             выходToolStripMenuItem = new ToolStripMenuItem();
             показатьРезульToolStripMenuItem = new ToolStripMenuItem();
             оПрограммеToolStripMenuItem = new ToolStripMenuItem();
+            начатьЗановоToolStripMenuItem = new ToolStripMenuItem();
             addNewUserButton = new Button();
             newUserTextBox = new TextBox();
             label1 = new Label();
-            начатьЗановоToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // nextButton
             // 
             nextButton.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            nextButton.Location = new Point(70, 216);
+            nextButton.Location = new Point(100, 360);
+            nextButton.Margin = new Padding(4, 5, 4, 5);
             nextButton.Name = "nextButton";
-            nextButton.Size = new Size(119, 92);
+            nextButton.Size = new Size(170, 153);
             nextButton.TabIndex = 0;
             nextButton.Text = "Далее...";
             nextButton.UseVisualStyleBackColor = true;
@@ -58,26 +59,29 @@
             // questionNumberLabel
             // 
             questionNumberLabel.AutoSize = true;
-            questionNumberLabel.Location = new Point(70, 82);
+            questionNumberLabel.Location = new Point(100, 137);
+            questionNumberLabel.Margin = new Padding(4, 0, 4, 0);
             questionNumberLabel.Name = "questionNumberLabel";
-            questionNumberLabel.Size = new Size(70, 15);
+            questionNumberLabel.Size = new Size(108, 25);
             questionNumberLabel.TabIndex = 1;
             questionNumberLabel.Text = "Вопрос №1";
             // 
             // questionTextLabel
             // 
             questionTextLabel.AutoSize = true;
-            questionTextLabel.Location = new Point(70, 113);
+            questionTextLabel.Location = new Point(100, 188);
+            questionTextLabel.Margin = new Padding(4, 0, 4, 0);
             questionTextLabel.Name = "questionTextLabel";
-            questionTextLabel.Size = new Size(85, 15);
+            questionTextLabel.Size = new Size(129, 25);
             questionTextLabel.TabIndex = 2;
             questionTextLabel.Text = "Текст вопроса";
             // 
             // userAnswerTextBox
             // 
-            userAnswerTextBox.Location = new Point(70, 153);
+            userAnswerTextBox.Location = new Point(100, 255);
+            userAnswerTextBox.Margin = new Padding(4, 5, 4, 5);
             userAnswerTextBox.Name = "userAnswerTextBox";
-            userAnswerTextBox.Size = new Size(119, 23);
+            userAnswerTextBox.Size = new Size(168, 31);
             userAnswerTextBox.TabIndex = 3;
             // 
             // menuStrip1
@@ -86,8 +90,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { toolStripMenuItem1 });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Padding = new Padding(4, 1, 0, 1);
-            menuStrip1.Size = new Size(562, 24);
+            menuStrip1.Size = new Size(803, 33);
             menuStrip1.TabIndex = 4;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -95,34 +98,41 @@
             // 
             toolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { выходToolStripMenuItem, показатьРезульToolStripMenuItem, оПрограммеToolStripMenuItem, начатьЗановоToolStripMenuItem });
             toolStripMenuItem1.Name = "toolStripMenuItem1";
-            toolStripMenuItem1.Size = new Size(50, 22);
+            toolStripMenuItem1.Size = new Size(73, 29);
             toolStripMenuItem1.Text = "Menu";
             // 
             // выходToolStripMenuItem
             // 
             выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            выходToolStripMenuItem.Size = new Size(189, 22);
+            выходToolStripMenuItem.Size = new Size(285, 34);
             выходToolStripMenuItem.Text = "Выход";
+            выходToolStripMenuItem.Click += выходToolStripMenuItem_Click;
             // 
             // показатьРезульToolStripMenuItem
             // 
             показатьРезульToolStripMenuItem.Name = "показатьРезульToolStripMenuItem";
-            показатьРезульToolStripMenuItem.Size = new Size(189, 22);
+            показатьРезульToolStripMenuItem.Size = new Size(285, 34);
             показатьРезульToolStripMenuItem.Text = "Показать результаты";
             // 
             // оПрограммеToolStripMenuItem
             // 
             оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
-            оПрограммеToolStripMenuItem.Size = new Size(189, 22);
+            оПрограммеToolStripMenuItem.Size = new Size(285, 34);
             оПрограммеToolStripMenuItem.Text = "О программе...";
             оПрограммеToolStripMenuItem.Click += ToolStripMenuItem_Click;
             // 
+            // начатьЗановоToolStripMenuItem
+            // 
+            начатьЗановоToolStripMenuItem.Name = "начатьЗановоToolStripMenuItem";
+            начатьЗановоToolStripMenuItem.Size = new Size(285, 34);
+            начатьЗановоToolStripMenuItem.Text = "Начать заново";
+            начатьЗановоToolStripMenuItem.Click += начатьЗановоToolStripMenuItem_Click;
+            // 
             // addNewUserButton
             // 
-            addNewUserButton.Location = new Point(379, 38);
-            addNewUserButton.Margin = new Padding(2);
+            addNewUserButton.Location = new Point(541, 63);
             addNewUserButton.Name = "addNewUserButton";
-            addNewUserButton.Size = new Size(78, 23);
+            addNewUserButton.Size = new Size(111, 38);
             addNewUserButton.TabIndex = 6;
             addNewUserButton.Text = "Добавить";
             addNewUserButton.UseVisualStyleBackColor = true;
@@ -130,34 +140,25 @@
             // 
             // newUserTextBox
             // 
-            newUserTextBox.Location = new Point(158, 38);
-            newUserTextBox.Margin = new Padding(2);
+            newUserTextBox.Location = new Point(226, 63);
             newUserTextBox.Name = "newUserTextBox";
-            newUserTextBox.Size = new Size(191, 23);
+            newUserTextBox.Size = new Size(271, 31);
             newUserTextBox.TabIndex = 5;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(8, 41);
-            label1.Margin = new Padding(2, 0, 2, 0);
+            label1.Location = new Point(11, 68);
             label1.Name = "label1";
-            label1.Size = new Size(123, 15);
+            label1.Size = new Size(185, 25);
             label1.TabIndex = 7;
             label1.Text = "Новый пользователь";
             // 
-            // начатьЗановоToolStripMenuItem
-            // 
-            начатьЗановоToolStripMenuItem.Name = "начатьЗановоToolStripMenuItem";
-            начатьЗановоToolStripMenuItem.Size = new Size(189, 22);
-            начатьЗановоToolStripMenuItem.Text = "Начать заново";
-            начатьЗановоToolStripMenuItem.Click += начатьЗановоToolStripMenuItem_Click;
-            // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(562, 347);
+            ClientSize = new Size(803, 578);
             Controls.Add(label1);
             Controls.Add(addNewUserButton);
             Controls.Add(newUserTextBox);
@@ -167,6 +168,7 @@
             Controls.Add(nextButton);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
+            Margin = new Padding(4, 5, 4, 5);
             Name = "MainForm";
             Text = "Гений - идиот";
             Load += MainForm_Load;

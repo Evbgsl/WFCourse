@@ -125,5 +125,10 @@ namespace GeniyIdiotWinFormApp
         {
             Application.Restart();
         }
+
+        private void ‚˚ıÓ‰ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
