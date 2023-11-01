@@ -39,8 +39,8 @@ namespace GeniyIdiotWinFormApp
             value = DataFileProvider.GetValue(fileName);
             questions = QuestionsStorage.GetQuestions(value);
             countQuestions = questions.Count;
-            
-            
+
+
             questionNumberLabel.Text = $"Вопрос номер 1";
             ShowNextQuestion();
 
@@ -69,7 +69,7 @@ namespace GeniyIdiotWinFormApp
             }
 
 
-            
+
             {
                 try
                 {
@@ -119,6 +119,11 @@ namespace GeniyIdiotWinFormApp
         {
             Application.Restart();
 
+        }
+
+        private void начатьЗановоToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
         }
     }
 }

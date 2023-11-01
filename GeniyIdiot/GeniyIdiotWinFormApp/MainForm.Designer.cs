@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             nextButton = new Button();
             questionNumberLabel = new Label();
             questionTextLabel = new Label();
@@ -41,7 +40,7 @@
             addNewUserButton = new Button();
             newUserTextBox = new TextBox();
             label1 = new Label();
-            button1 = new Button();
+            начатьЗановоToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -94,7 +93,7 @@
             // 
             // toolStripMenuItem1
             // 
-            toolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { выходToolStripMenuItem, показатьРезульToolStripMenuItem, оПрограммеToolStripMenuItem });
+            toolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { выходToolStripMenuItem, показатьРезульToolStripMenuItem, оПрограммеToolStripMenuItem, начатьЗановоToolStripMenuItem });
             toolStripMenuItem1.Name = "toolStripMenuItem1";
             toolStripMenuItem1.Size = new Size(50, 22);
             toolStripMenuItem1.Text = "Menu";
@@ -121,7 +120,7 @@
             // addNewUserButton
             // 
             addNewUserButton.Location = new Point(379, 38);
-            addNewUserButton.Margin = new Padding(2, 2, 2, 2);
+            addNewUserButton.Margin = new Padding(2);
             addNewUserButton.Name = "addNewUserButton";
             addNewUserButton.Size = new Size(78, 23);
             addNewUserButton.TabIndex = 6;
@@ -132,7 +131,7 @@
             // newUserTextBox
             // 
             newUserTextBox.Location = new Point(158, 38);
-            newUserTextBox.Margin = new Padding(2, 2, 2, 2);
+            newUserTextBox.Margin = new Padding(2);
             newUserTextBox.Name = "newUserTextBox";
             newUserTextBox.Size = new Size(191, 23);
             newUserTextBox.TabIndex = 5;
@@ -147,27 +146,18 @@
             label1.TabIndex = 7;
             label1.Text = "Новый пользователь";
             // 
-            // button1
+            // начатьЗановоToolStripMenuItem
             // 
-            button1.Font = new Font("Segoe UI", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            button1.Image = (Image)resources.GetObject("button1.Image");
-            button1.ImageAlign = ContentAlignment.BottomCenter;
-            button1.Location = new Point(351, 216);
-            button1.Margin = new Padding(2, 2, 2, 2);
-            button1.Name = "button1";
-            button1.Size = new Size(106, 92);
-            button1.TabIndex = 8;
-            button1.Text = "Начать заново";
-            button1.TextAlign = ContentAlignment.TopCenter;
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            начатьЗановоToolStripMenuItem.Name = "начатьЗановоToolStripMenuItem";
+            начатьЗановоToolStripMenuItem.Size = new Size(189, 22);
+            начатьЗановоToolStripMenuItem.Text = "Начать заново";
+            начатьЗановоToolStripMenuItem.Click += начатьЗановоToolStripMenuItem_Click;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(562, 347);
-            Controls.Add(button1);
             Controls.Add(label1);
             Controls.Add(addNewUserButton);
             Controls.Add(newUserTextBox);
@@ -200,6 +190,6 @@
         private Button addNewUserButton;
         private TextBox newUserTextBox;
         private Label label1;
-        private Button button1;
+        private ToolStripMenuItem начатьЗановоToolStripMenuItem;
     }
 }
