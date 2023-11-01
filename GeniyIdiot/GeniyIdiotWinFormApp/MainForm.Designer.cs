@@ -34,15 +34,17 @@
             userAnswerTextBox = new TextBox();
             menuStrip1 = new MenuStrip();
             toolStripMenuItem1 = new ToolStripMenuItem();
-            выходToolStripMenuItem = new ToolStripMenuItem();
-            показатьРезульToolStripMenuItem = new ToolStripMenuItem();
-            оПрограммеToolStripMenuItem = new ToolStripMenuItem();
             начатьЗановоToolStripMenuItem = new ToolStripMenuItem();
+            показатьРезульToolStripMenuItem = new ToolStripMenuItem();
+            выходToolStripMenuItem = new ToolStripMenuItem();
+            оПрограммеToolStripMenuItem = new ToolStripMenuItem();
             addNewUserButton = new Button();
             newUserTextBox = new TextBox();
             label1 = new Label();
             resultPanel = new Panel();
             resultDataGridView = new DataGridView();
+            userName = new DataGridViewTextBoxColumn();
+            userDiagnose = new DataGridViewTextBoxColumn();
             menuStrip1.SuspendLayout();
             resultPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)resultDataGridView).BeginInit();
@@ -105,12 +107,12 @@
             toolStripMenuItem1.Size = new Size(73, 29);
             toolStripMenuItem1.Text = "Menu";
             // 
-            // выходToolStripMenuItem
+            // начатьЗановоToolStripMenuItem
             // 
-            выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            выходToolStripMenuItem.Size = new Size(285, 34);
-            выходToolStripMenuItem.Text = "Выход";
-            выходToolStripMenuItem.Click += выходToolStripMenuItem_Click;
+            начатьЗановоToolStripMenuItem.Name = "начатьЗановоToolStripMenuItem";
+            начатьЗановоToolStripMenuItem.Size = new Size(285, 34);
+            начатьЗановоToolStripMenuItem.Text = "Начать заново";
+            начатьЗановоToolStripMenuItem.Click += начатьЗановоToolStripMenuItem_Click;
             // 
             // показатьРезульToolStripMenuItem
             // 
@@ -119,19 +121,19 @@
             показатьРезульToolStripMenuItem.Text = "Показать результаты";
             показатьРезульToolStripMenuItem.Click += показатьРезульToolStripMenuItem_Click;
             // 
+            // выходToolStripMenuItem
+            // 
+            выходToolStripMenuItem.Name = "выходToolStripMenuItem";
+            выходToolStripMenuItem.Size = new Size(285, 34);
+            выходToolStripMenuItem.Text = "Выход";
+            выходToolStripMenuItem.Click += выходToolStripMenuItem_Click;
+            // 
             // оПрограммеToolStripMenuItem
             // 
             оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
             оПрограммеToolStripMenuItem.Size = new Size(285, 34);
             оПрограммеToolStripMenuItem.Text = "О программе...";
             оПрограммеToolStripMenuItem.Click += ToolStripMenuItem_Click;
-            // 
-            // начатьЗановоToolStripMenuItem
-            // 
-            начатьЗановоToolStripMenuItem.Name = "начатьЗановоToolStripMenuItem";
-            начатьЗановоToolStripMenuItem.Size = new Size(285, 34);
-            начатьЗановоToolStripMenuItem.Text = "Начать заново";
-            начатьЗановоToolStripMenuItem.Click += начатьЗановоToolStripMenuItem_Click;
             // 
             // addNewUserButton
             // 
@@ -171,12 +173,27 @@
             // resultDataGridView
             // 
             resultDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            resultDataGridView.Columns.AddRange(new DataGridViewColumn[] { userName, userDiagnose });
             resultDataGridView.Location = new Point(31, 3);
             resultDataGridView.Name = "resultDataGridView";
             resultDataGridView.RowHeadersWidth = 62;
             resultDataGridView.RowTemplate.Height = 33;
             resultDataGridView.Size = new Size(360, 225);
             resultDataGridView.TabIndex = 0;
+            // 
+            // userName
+            // 
+            userName.HeaderText = "Пользователь";
+            userName.MinimumWidth = 8;
+            userName.Name = "userName";
+            userName.Width = 150;
+            // 
+            // userDiagnose
+            // 
+            userDiagnose.HeaderText = "Диагноз";
+            userDiagnose.MinimumWidth = 8;
+            userDiagnose.Name = "userDiagnose";
+            userDiagnose.Width = 150;
             // 
             // MainForm
             // 
@@ -222,5 +239,7 @@
         private ToolStripMenuItem начатьЗановоToolStripMenuItem;
         private Panel resultPanel;
         private DataGridView resultDataGridView;
+        private DataGridViewTextBoxColumn userName;
+        private DataGridViewTextBoxColumn userDiagnose;
     }
 }
