@@ -133,6 +133,7 @@ namespace GeniyIdiotWinFormApp
 
         private void показать–езульToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            resultPanel.Visible = true;
             MessageBox.Show("’орошие результаты", "√ений - идиот");
         }
     }
