@@ -1,6 +1,7 @@
 using System.Net.WebSockets;
 using GeniyIdiot.Common;
 using static System.Net.Mime.MediaTypeNames;
+using Application = System.Windows.Forms.Application;
 
 namespace GeniyIdiotWinFormApp
 {
@@ -37,6 +38,9 @@ namespace GeniyIdiotWinFormApp
             //user = new User("неизвестно");
             value = DataFileProvider.GetValue(fileName);
             questions = QuestionsStorage.GetQuestions(value);
+            countQuestions = questions.Count;
+            
+            
             questionNumberLabel.Text = $"Вопрос номер 1";
             ShowNextQuestion();
 
@@ -44,12 +48,13 @@ namespace GeniyIdiotWinFormApp
 
         private void ShowNextQuestion()
         {
+            userAnswerTextBox.Text = null;
             questionNumber++;
             questionNumberLabel.Text = $"Вопрос номер {questionNumber}";
 
             var random = new Random();
-            countQuestions = questions.Count;
-            var randomIndex = random.Next(countQuestions);
+            var _countQuestions = questions.Count;
+            var randomIndex = random.Next(_countQuestions);
             questionTextLabel.Text = questions[randomIndex].Text;
             rightAnswer = questions[randomIndex].Answer;
             questions.RemoveAt(randomIndex);
@@ -61,14 +66,14 @@ namespace GeniyIdiotWinFormApp
             {
                 MessageBox.Show("Введите имя пользователя", "Гений - идиот");
                 return;
-            }    
-                
+            }
 
-            int userAnswer;
+
+            
             {
                 try
                 {
-                    userAnswer = Convert.ToInt32(userAnswerTextBox.Text);
+                    var userAnswer = Convert.ToInt32(userAnswerTextBox.Text);
                     if (userAnswer == rightAnswer)
                     {
                         countRightAnswers++;
@@ -76,7 +81,7 @@ namespace GeniyIdiotWinFormApp
                     var endTest = questions.Count == 0;
                     if (endTest)
                     {
-                        
+
                         var percentOfRightAnswers = 100 * countRightAnswers / countQuestions;
                         var userDiagnose = DiagnoseStorage.GetDiagnose(diagnoses, percentOfRightAnswers);
                         DataFileProvider.Append(fileName, $"result#{user}#{userDiagnose}");
@@ -88,6 +93,8 @@ namespace GeniyIdiotWinFormApp
                 }
                 catch (Exception ex)
                 {
+                    MessageBox.Show(ex.Message);
+
                     MessageBox.Show("Некорректный формат числа", "Гений - идиот");
                     return;
                 }
@@ -105,6 +112,12 @@ namespace GeniyIdiotWinFormApp
         {
             user = newUserTextBox.Text;
             newUserTextBox.Enabled = false;
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
 
         }
     }
