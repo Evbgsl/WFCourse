@@ -17,12 +17,12 @@ namespace GeniyIdiotWinFormApp
         private int questionNumber;
         private List<Diagnose> diagnoses = new List<Diagnose>
                                                 {
-                                                    new Diagnose("Идиот"),
-                                                    new Diagnose("Кретин"),
-                                                    new Diagnose("Дурак"),
-                                                    new Diagnose("Нормальный"),
-                                                    new Diagnose("Талант"),
-                                                    new Diagnose("Гений")
+                                                    new Diagnose("Г€Г¤ГЁГ®ГІ"),
+                                                    new Diagnose("ГЉГ°ГҐГІГЁГ­"),
+                                                    new Diagnose("Г„ГіГ°Г ГЄ"),
+                                                    new Diagnose("ГЌГ®Г°Г¬Г Г«ГјГ­Г»Г©"),
+                                                    new Diagnose("Г’Г Г«Г Г­ГІ"),
+                                                    new Diagnose("ГѓГҐГ­ГЁГ©")
                                                 };
 
 
@@ -35,13 +35,13 @@ namespace GeniyIdiotWinFormApp
         private void MainForm_Load(object sender, EventArgs e)
         {
             fileName = @"datafile.txt";
-            //user = new User("неизвестно");
+            //user = new User("Г­ГҐГЁГ§ГўГҐГ±ГІГ­Г®");
             value = DataFileProvider.GetValue(fileName);
             questions = QuestionsStorage.GetQuestions(value);
             countQuestions = questions.Count;
             
             
-            questionNumberLabel.Text = $"Вопрос номер 1";
+            questionNumberLabel.Text = $"Г‚Г®ГЇГ°Г®Г± Г­Г®Г¬ГҐГ° 1";
             ShowNextQuestion();
 
         }
@@ -50,7 +50,7 @@ namespace GeniyIdiotWinFormApp
         {
             userAnswerTextBox.Text = null;
             questionNumber++;
-            questionNumberLabel.Text = $"Вопрос номер {questionNumber}";
+            questionNumberLabel.Text = $"Г‚Г®ГЇГ°Г®Г± Г­Г®Г¬ГҐГ° {questionNumber}";
 
             var random = new Random();
             var _countQuestions = questions.Count;
@@ -64,9 +64,10 @@ namespace GeniyIdiotWinFormApp
         {
             if (user == null)
             {
-                MessageBox.Show("Введите имя пользователя", "Гений - идиот");
+                MessageBox.Show("Г‚ГўГҐГ¤ГЁГІГҐ ГЁГ¬Гї ГЇГ®Г«ГјГ§Г®ГўГ ГІГҐГ«Гї", "ГѓГҐГ­ГЁГ© - ГЁГ¤ГЁГ®ГІ");
                 return;
             }
+
 
 
             
@@ -85,7 +86,7 @@ namespace GeniyIdiotWinFormApp
                         var percentOfRightAnswers = 100 * countRightAnswers / countQuestions;
                         var userDiagnose = DiagnoseStorage.GetDiagnose(diagnoses, percentOfRightAnswers);
                         DataFileProvider.Append(fileName, $"result#{user}#{userDiagnose}");
-                        MessageBox.Show($"Тест окончен. Количество правильных ответов {countQuestions}. Ваш диагноз - {userDiagnose}", "Гений - идиот");
+                        MessageBox.Show($"Г’ГҐГ±ГІ Г®ГЄГ®Г­Г·ГҐГ­. ГЉГ®Г«ГЁГ·ГҐГ±ГІГўГ® ГЇГ°Г ГўГЁГ«ГјГ­Г»Гµ Г®ГІГўГҐГІГ®Гў {countQuestions}. Г‚Г Гё Г¤ГЁГ ГЈГ­Г®Г§ - {userDiagnose}", "ГѓГҐГ­ГЁГ© - ГЁГ¤ГЁГ®ГІ");
 
                         return;
                     }
@@ -95,7 +96,7 @@ namespace GeniyIdiotWinFormApp
                 {
                     MessageBox.Show(ex.Message);
 
-                    MessageBox.Show("Некорректный формат числа", "Гений - идиот");
+                    MessageBox.Show("ГЌГҐГЄГ®Г°Г°ГҐГЄГІГ­Г»Г© ГґГ®Г°Г¬Г ГІ Г·ГЁГ±Г«Г ", "ГѓГҐГ­ГЁГ© - ГЁГ¤ГЁГ®ГІ");
                     return;
                 }
             }
@@ -103,7 +104,7 @@ namespace GeniyIdiotWinFormApp
 
         private void ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Супер тест 2023", "Гений - идиот");
+            MessageBox.Show("Г‘ГіГЇГҐГ° ГІГҐГ±ГІ 2023", "ГѓГҐГ­ГЁГ© - ГЁГ¤ГЁГ®ГІ");
             return;
 
         }
@@ -115,9 +116,25 @@ namespace GeniyIdiotWinFormApp
 
         }
 
+
+        private void ГўГ»ГµГ®Г¤ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void Г­Г Г·Г ГІГјГ‡Г Г­Г®ГўГ®ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
+        }
+
+        private void ГЇГ®ГЄГ Г§Г ГІГјГђГҐГ§ГіГ«ГјToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            resultPanel.Visible = true;
+
         private void button1_Click(object sender, EventArgs e)
         {
             Application.Restart();
+
 
         }
     }
