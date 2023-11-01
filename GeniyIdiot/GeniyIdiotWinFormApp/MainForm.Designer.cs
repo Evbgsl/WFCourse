@@ -113,6 +113,7 @@
             показатьРезульToolStripMenuItem.Name = "показатьРезульToolStripMenuItem";
             показатьРезульToolStripMenuItem.Size = new Size(285, 34);
             показатьРезульToolStripMenuItem.Text = "Показать результаты";
+            показатьРезульToolStripMenuItem.Click += показатьРезульToolStripMenuItem_Click;
             // 
             // оПрограммеToolStripMenuItem
             // 

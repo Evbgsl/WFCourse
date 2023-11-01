@@ -130,5 +130,10 @@ namespace GeniyIdiotWinFormApp
         {
             Application.Exit();
         }
+
+        private void показать–езульToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("’орошие результаты", "√ений - идиот");
+        }
     }
 }
