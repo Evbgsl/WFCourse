@@ -118,5 +118,10 @@ namespace GeniyIdiotWinFormApp
         {
             Application.Restart();
         }
+
+        private void ïîêàçàòüĞåçóëüToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            resultPanel.Visible = true;
+        }
     }
 }
