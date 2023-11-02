@@ -46,9 +46,15 @@
             userName = new DataGridViewTextBoxColumn();
             Percent = new DataGridViewTextBoxColumn();
             userDiagnose = new DataGridViewTextBoxColumn();
+            показатьВопросыToolStripMenuItem = new ToolStripMenuItem();
+            questionsDataGridView = new DataGridView();
+            IdQuestion = new DataGridViewTextBoxColumn();
+            Queistion = new DataGridViewTextBoxColumn();
+            Answer = new DataGridViewTextBoxColumn();
             menuStrip1.SuspendLayout();
             resultPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)resultDataGridView).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)questionsDataGridView).BeginInit();
             SuspendLayout();
             // 
             // nextButton
@@ -103,7 +109,7 @@
             // 
             // toolStripMenuItem1
             // 
-            toolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { начатьЗановоToolStripMenuItem, показатьРезульToolStripMenuItem, выходToolStripMenuItem, оПрограммеToolStripMenuItem });
+            toolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { начатьЗановоToolStripMenuItem, показатьВопросыToolStripMenuItem, показатьРезульToolStripMenuItem, выходToolStripMenuItem, оПрограммеToolStripMenuItem });
             toolStripMenuItem1.Name = "toolStripMenuItem1";
             toolStripMenuItem1.Size = new Size(73, 29);
             toolStripMenuItem1.Text = "Menu";
@@ -164,6 +170,7 @@
             // 
             // resultPanel
             // 
+            resultPanel.Controls.Add(questionsDataGridView);
             resultPanel.Controls.Add(resultDataGridView);
             resultPanel.Location = new Point(332, 263);
             resultPanel.Name = "resultPanel";
@@ -181,6 +188,7 @@
             resultDataGridView.RowTemplate.Height = 33;
             resultDataGridView.Size = new Size(560, 233);
             resultDataGridView.TabIndex = 0;
+            resultDataGridView.Visible = false;
             // 
             // userName
             // 
@@ -202,6 +210,45 @@
             userDiagnose.MinimumWidth = 8;
             userDiagnose.Name = "userDiagnose";
             userDiagnose.Width = 150;
+            // 
+            // показатьВопросыToolStripMenuItem
+            // 
+            показатьВопросыToolStripMenuItem.Name = "показатьВопросыToolStripMenuItem";
+            показатьВопросыToolStripMenuItem.Size = new Size(285, 34);
+            показатьВопросыToolStripMenuItem.Text = "Показать вопросы";
+            показатьВопросыToolStripMenuItem.Click += показатьВопросыToolStripMenuItem_Click;
+            // 
+            // questionsDataGridView
+            // 
+            questionsDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            questionsDataGridView.Columns.AddRange(new DataGridViewColumn[] { IdQuestion, Queistion, Answer });
+            questionsDataGridView.Location = new Point(31, 3);
+            questionsDataGridView.Name = "questionsDataGridView";
+            questionsDataGridView.RowHeadersWidth = 62;
+            questionsDataGridView.RowTemplate.Height = 33;
+            questionsDataGridView.Size = new Size(560, 233);
+            questionsDataGridView.TabIndex = 1;
+            // 
+            // IdQuestion
+            // 
+            IdQuestion.HeaderText = "ID вопроса";
+            IdQuestion.MinimumWidth = 8;
+            IdQuestion.Name = "IdQuestion";
+            IdQuestion.Width = 150;
+            // 
+            // Queistion
+            // 
+            Queistion.HeaderText = "Вопрос";
+            Queistion.MinimumWidth = 8;
+            Queistion.Name = "Queistion";
+            Queistion.Width = 150;
+            // 
+            // Answer
+            // 
+            Answer.HeaderText = "Ответ";
+            Answer.MinimumWidth = 8;
+            Answer.Name = "Answer";
+            Answer.Width = 150;
             // 
             // MainForm
             // 
@@ -227,6 +274,7 @@
             menuStrip1.PerformLayout();
             resultPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)resultDataGridView).EndInit();
+            ((System.ComponentModel.ISupportInitialize)questionsDataGridView).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -251,5 +299,10 @@
         private DataGridViewTextBoxColumn userName;
         private DataGridViewTextBoxColumn Percent;
         private DataGridViewTextBoxColumn userDiagnose;
+        private ToolStripMenuItem показатьВопросыToolStripMenuItem;
+        private DataGridView questionsDataGridView;
+        private DataGridViewTextBoxColumn IdQuestion;
+        private DataGridViewTextBoxColumn Queistion;
+        private DataGridViewTextBoxColumn Answer;
     }
 }
