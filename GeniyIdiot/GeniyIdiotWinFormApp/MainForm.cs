@@ -1,4 +1,5 @@
 using System.Net.WebSockets;
+using System.Windows.Forms;
 using GeniyIdiot.Common;
 using static System.Net.Mime.MediaTypeNames;
 using Application = System.Windows.Forms.Application;
@@ -147,8 +148,38 @@ namespace GeniyIdiotWinFormApp
             {
                 questionsDataGridView.Rows.Add(question.Id, question.Text, question.Answer);
             }
+            deleteQuestionLabel.Visible = true;
             resultPanel.Visible = true;
             questionsDataGridView.Visible = true;
+            DeleteQuestionButton.Visible = true;
+
+            questionsDataGridView.SelectionChanged += QuestionsDataGridView_SelectionChanged;
+
+        }
+
+        private void QuestionsDataGridView_SelectionChanged(object? sender, EventArgs e)
+        {
+            if (questionsDataGridView.SelectedRows.Count > 0)
+            {
+                DeleteQuestionButton.Enabled = true;
+            }
+        }
+
+        private void DeleteQuestionButton_Click(object sender, EventArgs e)
+        {
+
+            if (questionsDataGridView.SelectedRows.Count > 0)
+            {
+                foreach (DataGridViewRow row in questionsDataGridView.SelectedRows)
+                {
+                    string valueInFirstColumn = row.Cells[0].Value?.ToString(); // Получаем значение из первой колонки текущей строки
+                    if (!string.IsNullOrEmpty(valueInFirstColumn))
+                    {
+                        QuestionsStorage.RemoveQuestionFromFile(fileName, valueInFirstColumn);
+                        MessageBox.Show("Вопрос удален!", "Гений - идиот");
+                    }
+                }
+            }
 
         }
     }

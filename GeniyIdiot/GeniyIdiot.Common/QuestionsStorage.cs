@@ -57,11 +57,11 @@ namespace GeniyIdiot.Common
         {
             var value = DataFileProvider.GetValue(fileName).Split('\n').ToList();
             var lines = value.Where(line => (line != "" && line.Split('@')[1] != id)).Select(line => line).ToArray();
-            if (value.Count > lines.Length - 1)
-            {
-                Console.WriteLine("Вопрос удален");
-            }
-            else Console.WriteLine("Вопроса с таким ID не существует");
+            //if (value.Count > lines.Length - 1)
+            //{
+            //    Console.WriteLine("Вопрос удален");
+            //}
+            //else Console.WriteLine("Вопроса с таким ID не существует");
 
             DataFileProvider.Append(fileName, lines, true);
         }
