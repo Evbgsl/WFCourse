@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Text;
+using static System.Windows.Forms.LinkLabel;
 
 namespace GeniyIdiot.Common
 {
@@ -16,9 +17,14 @@ namespace GeniyIdiot.Common
 
         public static void Append(string fileName, string[] value, bool rewrite)
         {
-            var writer = new StreamWriter(fileName, rewrite, Encoding.UTF8);
-            writer.WriteLine(value);
-            writer.Close();
+            using (StreamWriter writer = new StreamWriter(fileName))
+            {
+                foreach (string line in value)
+                {
+                    writer.WriteLine(line);
+                }
+                writer.Close();
+            }
         }
 
 
