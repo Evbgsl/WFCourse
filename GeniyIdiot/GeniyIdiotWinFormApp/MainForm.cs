@@ -177,6 +177,8 @@ namespace GeniyIdiotWinFormApp
                     {
                         QuestionsStorage.RemoveQuestionFromFile(fileName, valueInFirstColumn);
                         MessageBox.Show("Вопрос удален!", "Гений - идиот");
+                        row.Visible = false;
+                        
                     }
                 }
             }
