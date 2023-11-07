@@ -2,6 +2,7 @@ using System.Net.WebSockets;
 using System.Windows.Forms;
 using GeniyIdiot.Common;
 using static System.Net.Mime.MediaTypeNames;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using Application = System.Windows.Forms.Application;
 
 namespace GeniyIdiotWinFormApp
@@ -132,30 +133,34 @@ namespace GeniyIdiotWinFormApp
 
         private void показатьРезульToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            resultDataGridView.Rows.Clear();
+
             var results = UserStorage.GetResultsFromFile(fileName);
             foreach (var result in results)
             {
                 resultDataGridView.Rows.Add(result[1], result[2], result[3]);
             }
             resultPanel.Visible = true;
+            questionsDataGridView.Visible = false;
             resultDataGridView.Visible = true;
         }
 
         private void показатьВопросыToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            questions = QuestionsStorage.GetQuestions(value);
-            foreach (var question in questions)
-            {
-                questionsDataGridView.Rows.Add(question.Id, question.Text, question.Answer);
-            }
+            QuestionsStorage.GetQuestionsFromDataFile(value, fileName, questionsDataGridView);
+
+
+            DeleteQuestionButton.Visible = true;
             deleteQuestionLabel.Visible = true;
             resultPanel.Visible = true;
             questionsDataGridView.Visible = true;
-            DeleteQuestionButton.Visible = true;
 
             questionsDataGridView.SelectionChanged += QuestionsDataGridView_SelectionChanged;
 
+
         }
+
+
 
         private void QuestionsDataGridView_SelectionChanged(object? sender, EventArgs e)
         {
@@ -183,6 +188,41 @@ namespace GeniyIdiotWinFormApp
                 }
             }
 
+        }
+
+        private void добавитьВопросToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //resultPanel.Visible = true;
+            addQuestionButton.Visible = true;
+            answerTextBox.Visible = true;
+            questionTextBox.Visible = true;
+            addQuestionLabel.Visible = true;
+
+        }
+
+        private void addQuestionButton_Click(object sender, EventArgs e)
+        {
+
+            if (!string.IsNullOrEmpty(answerTextBox.Text) && !string.IsNullOrEmpty(questionTextBox.Text))
+            {
+
+                try
+                {
+                    var id = Guid.NewGuid().ToString().Remove(6);
+                    var stringForQuestion = questionTextBox.Text;
+                    var answerForQuestion = Convert.ToInt32(answerTextBox.Text);
+                    var newQuestion = new Question(id, stringForQuestion, answerForQuestion);
+                    string _newQuestion = $"question#@{newQuestion.Id}@{newQuestion.Text}@{newQuestion.Answer}";
+                    DataFileProvider.Append(fileName, _newQuestion);
+                    MessageBox.Show("Добавлен вопрос!", "Гений - идиот");
+                    QuestionsStorage.GetQuestionsFromDataFile(value, fileName, questionsDataGridView);
+                    return;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message + " Неверный формат вопроса");
+                }
+            }
         }
     }
 }

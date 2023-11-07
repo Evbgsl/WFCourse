@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System;
+using System.Windows.Forms;
 
 namespace GeniyIdiot.Common
 {
@@ -30,6 +31,19 @@ namespace GeniyIdiot.Common
                     questionsFromFile.Add(new Question(_question[1], _question[2], Convert.ToInt32(_question[3])));
                 }
             return questionsFromFile;
+        }
+
+        public static void GetQuestionsFromDataFile(string value, string fileName, DataGridView questionsDataGridView)
+        {
+            value = DataFileProvider.GetValue(fileName);
+            questionsDataGridView.Rows.Clear();
+
+            var questions = QuestionsStorage.GetQuestions(value);
+            foreach (var question in questions)
+            {
+                questionsDataGridView.Rows.Add(question.Id, question.Text, question.Answer);
+            }
+
         }
 
         public static void SetQuestionToFile(string fileName)
