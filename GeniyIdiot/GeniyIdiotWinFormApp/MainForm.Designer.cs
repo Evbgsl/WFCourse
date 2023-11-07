@@ -39,24 +39,29 @@
             показатьРезульToolStripMenuItem = new ToolStripMenuItem();
             выходToolStripMenuItem = new ToolStripMenuItem();
             оПрограммеToolStripMenuItem = new ToolStripMenuItem();
+            добавитьВопросToolStripMenuItem = new ToolStripMenuItem();
             addNewUserButton = new Button();
             newUserTextBox = new TextBox();
             label1 = new Label();
             resultPanel = new Panel();
-            resultDataGridView = new DataGridView();
-            userName = new DataGridViewTextBoxColumn();
-            Percent = new DataGridViewTextBoxColumn();
-            userDiagnose = new DataGridViewTextBoxColumn();
             questionsDataGridView = new DataGridView();
             IdQuestion = new DataGridViewTextBoxColumn();
             Queistion = new DataGridViewTextBoxColumn();
             Answer = new DataGridViewTextBoxColumn();
+            resultDataGridView = new DataGridView();
+            userName = new DataGridViewTextBoxColumn();
+            Percent = new DataGridViewTextBoxColumn();
+            userDiagnose = new DataGridViewTextBoxColumn();
+            addQuestionButton = new Button();
+            answerTextBox = new TextBox();
+            questionTextBox = new TextBox();
+            addQuestionLabel = new Label();
             deleteQuestionLabel = new Label();
             DeleteQuestionButton = new Button();
             menuStrip1.SuspendLayout();
             resultPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)resultDataGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)questionsDataGridView).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)resultDataGridView).BeginInit();
             SuspendLayout();
             // 
             // nextButton
@@ -108,7 +113,7 @@
             // 
             // toolStripMenuItem1
             // 
-            toolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { начатьЗановоToolStripMenuItem, показатьВопросыToolStripMenuItem, показатьРезульToolStripMenuItem, выходToolStripMenuItem, оПрограммеToolStripMenuItem });
+            toolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { начатьЗановоToolStripMenuItem, показатьВопросыToolStripMenuItem, показатьРезульToolStripMenuItem, выходToolStripMenuItem, оПрограммеToolStripMenuItem, добавитьВопросToolStripMenuItem });
             toolStripMenuItem1.Name = "toolStripMenuItem1";
             toolStripMenuItem1.Size = new Size(50, 22);
             toolStripMenuItem1.Text = "Menu";
@@ -148,6 +153,13 @@
             оПрограммеToolStripMenuItem.Text = "О программе...";
             оПрограммеToolStripMenuItem.Click += ToolStripMenuItem_Click;
             // 
+            // добавитьВопросToolStripMenuItem
+            // 
+            добавитьВопросToolStripMenuItem.Name = "добавитьВопросToolStripMenuItem";
+            добавитьВопросToolStripMenuItem.Size = new Size(189, 22);
+            добавитьВопросToolStripMenuItem.Text = "Добавить вопрос";
+            добавитьВопросToolStripMenuItem.Click += добавитьВопросToolStripMenuItem_Click;
+            // 
             // addNewUserButton
             // 
             addNewUserButton.Location = new Point(359, 41);
@@ -179,24 +191,58 @@
             // 
             // resultPanel
             // 
+            resultPanel.Controls.Add(questionsDataGridView);
             resultPanel.Controls.Add(resultDataGridView);
-            resultPanel.Location = new Point(385, 160);
+            resultPanel.Location = new Point(385, 178);
             resultPanel.Margin = new Padding(2);
             resultPanel.Name = "resultPanel";
-            resultPanel.Size = new Size(586, 271);
+            resultPanel.Size = new Size(586, 253);
             resultPanel.TabIndex = 8;
             resultPanel.Visible = false;
+            // 
+            // questionsDataGridView
+            // 
+            questionsDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            questionsDataGridView.Columns.AddRange(new DataGridViewColumn[] { IdQuestion, Queistion, Answer });
+            questionsDataGridView.Location = new Point(0, 2);
+            questionsDataGridView.Margin = new Padding(2);
+            questionsDataGridView.Name = "questionsDataGridView";
+            questionsDataGridView.RowHeadersWidth = 62;
+            questionsDataGridView.RowTemplate.Height = 33;
+            questionsDataGridView.Size = new Size(582, 249);
+            questionsDataGridView.TabIndex = 1;
+            // 
+            // IdQuestion
+            // 
+            IdQuestion.HeaderText = "ID вопроса";
+            IdQuestion.MinimumWidth = 8;
+            IdQuestion.Name = "IdQuestion";
+            IdQuestion.Width = 150;
+            // 
+            // Queistion
+            // 
+            Queistion.HeaderText = "Вопрос";
+            Queistion.MinimumWidth = 8;
+            Queistion.Name = "Queistion";
+            Queistion.Width = 150;
+            // 
+            // Answer
+            // 
+            Answer.HeaderText = "Ответ";
+            Answer.MinimumWidth = 8;
+            Answer.Name = "Answer";
+            Answer.Width = 150;
             // 
             // resultDataGridView
             // 
             resultDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             resultDataGridView.Columns.AddRange(new DataGridViewColumn[] { userName, Percent, userDiagnose });
-            resultDataGridView.Location = new Point(22, 2);
+            resultDataGridView.Location = new Point(2, 13);
             resultDataGridView.Margin = new Padding(2);
             resultDataGridView.Name = "resultDataGridView";
             resultDataGridView.RowHeadersWidth = 62;
             resultDataGridView.RowTemplate.Height = 33;
-            resultDataGridView.Size = new Size(392, 140);
+            resultDataGridView.Size = new Size(567, 228);
             resultDataGridView.TabIndex = 0;
             resultDataGridView.Visible = false;
             // 
@@ -221,39 +267,42 @@
             userDiagnose.Name = "userDiagnose";
             userDiagnose.Width = 150;
             // 
-            // questionsDataGridView
+            // addQuestionButton
             // 
-            questionsDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            questionsDataGridView.Columns.AddRange(new DataGridViewColumn[] { IdQuestion, Queistion, Answer });
-            questionsDataGridView.Location = new Point(385, 160);
-            questionsDataGridView.Margin = new Padding(2);
-            questionsDataGridView.Name = "questionsDataGridView";
-            questionsDataGridView.RowHeadersWidth = 62;
-            questionsDataGridView.RowTemplate.Height = 33;
-            questionsDataGridView.Size = new Size(582, 267);
-            questionsDataGridView.TabIndex = 1;
-            questionsDataGridView.Visible = false;
+            addQuestionButton.Location = new Point(18, 443);
+            addQuestionButton.Name = "addQuestionButton";
+            addQuestionButton.Size = new Size(130, 23);
+            addQuestionButton.TabIndex = 11;
+            addQuestionButton.Text = "Добавить вопрос";
+            addQuestionButton.UseVisualStyleBackColor = true;
+            addQuestionButton.Visible = false;
+            addQuestionButton.Click += addQuestionButton_Click;
             // 
-            // IdQuestion
+            // answerTextBox
             // 
-            IdQuestion.HeaderText = "ID вопроса";
-            IdQuestion.MinimumWidth = 8;
-            IdQuestion.Name = "IdQuestion";
-            IdQuestion.Width = 150;
+            answerTextBox.Location = new Point(298, 396);
+            answerTextBox.Name = "answerTextBox";
+            answerTextBox.Size = new Size(69, 23);
+            answerTextBox.TabIndex = 11;
+            answerTextBox.Visible = false;
             // 
-            // Queistion
+            // questionTextBox
             // 
-            Queistion.HeaderText = "Вопрос";
-            Queistion.MinimumWidth = 8;
-            Queistion.Name = "Queistion";
-            Queistion.Width = 150;
+            questionTextBox.Location = new Point(18, 396);
+            questionTextBox.Name = "questionTextBox";
+            questionTextBox.Size = new Size(256, 23);
+            questionTextBox.TabIndex = 11;
+            questionTextBox.Visible = false;
             // 
-            // Answer
+            // addQuestionLabel
             // 
-            Answer.HeaderText = "Ответ";
-            Answer.MinimumWidth = 8;
-            Answer.Name = "Answer";
-            Answer.Width = 150;
+            addQuestionLabel.AutoSize = true;
+            addQuestionLabel.Location = new Point(18, 362);
+            addQuestionLabel.Name = "addQuestionLabel";
+            addQuestionLabel.Size = new Size(172, 15);
+            addQuestionLabel.TabIndex = 11;
+            addQuestionLabel.Text = "Введите текст вопроса и ответ";
+            addQuestionLabel.Visible = false;
             // 
             // deleteQuestionLabel
             // 
@@ -284,9 +333,12 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1039, 581);
-            Controls.Add(questionsDataGridView);
+            Controls.Add(addQuestionLabel);
+            Controls.Add(answerTextBox);
+            Controls.Add(addQuestionButton);
             Controls.Add(DeleteQuestionButton);
             Controls.Add(deleteQuestionLabel);
+            Controls.Add(questionTextBox);
             Controls.Add(resultPanel);
             Controls.Add(label1);
             Controls.Add(addNewUserButton);
@@ -304,8 +356,8 @@
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             resultPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)resultDataGridView).EndInit();
             ((System.ComponentModel.ISupportInitialize)questionsDataGridView).EndInit();
+            ((System.ComponentModel.ISupportInitialize)resultDataGridView).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -337,5 +389,10 @@
         private DataGridViewTextBoxColumn Answer;
         private Label deleteQuestionLabel;
         private Button DeleteQuestionButton;
+        private ToolStripMenuItem добавитьВопросToolStripMenuItem;
+        private Label addQuestionLabel;
+        private Button addQuestionButton;
+        private TextBox answerTextBox;
+        private TextBox questionTextBox;
     }
 }
