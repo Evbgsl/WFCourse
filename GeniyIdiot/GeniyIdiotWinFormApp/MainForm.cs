@@ -39,8 +39,6 @@ namespace GeniyIdiotWinFormApp
             value = DataFileProvider.GetValue(fileName);
             questions = QuestionsStorage.GetQuestions(value);
             countQuestions = questions.Count;
-
-
             questionNumberLabel.Text = $"Вопрос номер 1";
             ShowNextQuestion();
 
@@ -139,6 +137,19 @@ namespace GeniyIdiotWinFormApp
                 resultDataGridView.Rows.Add(result[1], result[2], result[3]);
             }
             resultPanel.Visible = true;
+            resultDataGridView.Visible = true;
+        }
+
+        private void показатьВопросыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            questions = QuestionsStorage.GetQuestions(value);
+            foreach (var question in questions)
+            {
+                questionsDataGridView.Rows.Add(question.Id, question.Text, question.Answer);
+            }
+            resultPanel.Visible = true;
+            questionsDataGridView.Visible = true;
+
         }
     }
 }
