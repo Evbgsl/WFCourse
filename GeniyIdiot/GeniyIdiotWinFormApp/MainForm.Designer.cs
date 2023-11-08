@@ -40,9 +40,6 @@
             выходToolStripMenuItem = new ToolStripMenuItem();
             оПрограммеToolStripMenuItem = new ToolStripMenuItem();
             добавитьВопросToolStripMenuItem = new ToolStripMenuItem();
-            addNewUserButton = new Button();
-            newUserTextBox = new TextBox();
-            label1 = new Label();
             resultPanel = new Panel();
             questionsDataGridView = new DataGridView();
             IdQuestion = new DataGridViewTextBoxColumn();
@@ -67,7 +64,7 @@
             // nextButton
             // 
             nextButton.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            nextButton.Location = new Point(18, 208);
+            nextButton.Location = new Point(18, 127);
             nextButton.Name = "nextButton";
             nextButton.Size = new Size(119, 92);
             nextButton.TabIndex = 0;
@@ -78,7 +75,7 @@
             // questionNumberLabel
             // 
             questionNumberLabel.AutoSize = true;
-            questionNumberLabel.Location = new Point(18, 65);
+            questionNumberLabel.Location = new Point(18, 38);
             questionNumberLabel.Name = "questionNumberLabel";
             questionNumberLabel.Size = new Size(70, 15);
             questionNumberLabel.TabIndex = 1;
@@ -87,7 +84,7 @@
             // questionTextLabel
             // 
             questionTextLabel.AutoSize = true;
-            questionTextLabel.Location = new Point(18, 93);
+            questionTextLabel.Location = new Point(18, 65);
             questionTextLabel.Name = "questionTextLabel";
             questionTextLabel.Size = new Size(85, 15);
             questionTextLabel.TabIndex = 2;
@@ -95,7 +92,7 @@
             // 
             // userAnswerTextBox
             // 
-            userAnswerTextBox.Location = new Point(18, 129);
+            userAnswerTextBox.Location = new Point(18, 83);
             userAnswerTextBox.Name = "userAnswerTextBox";
             userAnswerTextBox.Size = new Size(119, 23);
             userAnswerTextBox.TabIndex = 3;
@@ -159,35 +156,6 @@
             добавитьВопросToolStripMenuItem.Size = new Size(189, 22);
             добавитьВопросToolStripMenuItem.Text = "Добавить вопрос";
             добавитьВопросToolStripMenuItem.Click += добавитьВопросToolStripMenuItem_Click;
-            // 
-            // addNewUserButton
-            // 
-            addNewUserButton.Location = new Point(359, 41);
-            addNewUserButton.Margin = new Padding(2);
-            addNewUserButton.Name = "addNewUserButton";
-            addNewUserButton.Size = new Size(78, 23);
-            addNewUserButton.TabIndex = 6;
-            addNewUserButton.Text = "Добавить";
-            addNewUserButton.UseVisualStyleBackColor = true;
-            addNewUserButton.Click += addNewUserButton_Click;
-            // 
-            // newUserTextBox
-            // 
-            newUserTextBox.Location = new Point(152, 42);
-            newUserTextBox.Margin = new Padding(2);
-            newUserTextBox.Name = "newUserTextBox";
-            newUserTextBox.Size = new Size(191, 23);
-            newUserTextBox.TabIndex = 5;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(18, 41);
-            label1.Margin = new Padding(2, 0, 2, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(123, 15);
-            label1.TabIndex = 7;
-            label1.Text = "Новый пользователь";
             // 
             // resultPanel
             // 
@@ -269,7 +237,7 @@
             // 
             // addQuestionButton
             // 
-            addQuestionButton.Location = new Point(18, 443);
+            addQuestionButton.Location = new Point(18, 330);
             addQuestionButton.Name = "addQuestionButton";
             addQuestionButton.Size = new Size(130, 23);
             addQuestionButton.TabIndex = 11;
@@ -280,7 +248,7 @@
             // 
             // answerTextBox
             // 
-            answerTextBox.Location = new Point(298, 396);
+            answerTextBox.Location = new Point(298, 283);
             answerTextBox.Name = "answerTextBox";
             answerTextBox.Size = new Size(69, 23);
             answerTextBox.TabIndex = 11;
@@ -288,7 +256,7 @@
             // 
             // questionTextBox
             // 
-            questionTextBox.Location = new Point(18, 396);
+            questionTextBox.Location = new Point(18, 283);
             questionTextBox.Name = "questionTextBox";
             questionTextBox.Size = new Size(256, 23);
             questionTextBox.TabIndex = 11;
@@ -297,7 +265,7 @@
             // addQuestionLabel
             // 
             addQuestionLabel.AutoSize = true;
-            addQuestionLabel.Location = new Point(18, 362);
+            addQuestionLabel.Location = new Point(18, 249);
             addQuestionLabel.Name = "addQuestionLabel";
             addQuestionLabel.Size = new Size(172, 15);
             addQuestionLabel.TabIndex = 11;
@@ -340,9 +308,6 @@
             Controls.Add(deleteQuestionLabel);
             Controls.Add(questionTextBox);
             Controls.Add(resultPanel);
-            Controls.Add(label1);
-            Controls.Add(addNewUserButton);
-            Controls.Add(newUserTextBox);
             Controls.Add(userAnswerTextBox);
             Controls.Add(questionTextLabel);
             Controls.Add(questionNumberLabel);
@@ -373,9 +338,6 @@
         private ToolStripMenuItem оПрограммеToolStripMenuItem;
         private ToolStripMenuItem выходToolStripMenuItem;
         private ToolStripMenuItem показатьРезульToolStripMenuItem;
-        private Button addNewUserButton;
-        private TextBox newUserTextBox;
-        private Label label1;
         private ToolStripMenuItem начатьЗановоToolStripMenuItem;
         private Panel resultPanel;
         private DataGridView resultDataGridView;

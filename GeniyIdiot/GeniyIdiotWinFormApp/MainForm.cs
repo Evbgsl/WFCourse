@@ -36,6 +36,11 @@ namespace GeniyIdiotWinFormApp
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            user = "Неизвестен";
+            var helloForm = new HelloForm();
+            helloForm.ShowDialog();
+            user = helloForm.userNameTextBox.Text;
+
             fileName = @"datafile.txt";
             //user = new User("неизвестно");
             value = DataFileProvider.GetValue(fileName);
@@ -62,13 +67,6 @@ namespace GeniyIdiotWinFormApp
 
         private void nextButton_Click(object sender, EventArgs e)
         {
-            if (user == null)
-            {
-                MessageBox.Show("Введите имя пользователя", "Гений - идиот");
-                return;
-            }
-
-
 
             {
                 try
@@ -105,13 +103,6 @@ namespace GeniyIdiotWinFormApp
         {
             MessageBox.Show("Супер тест 2023", "Гений - идиот");
             return;
-
-        }
-
-        private void addNewUserButton_Click(object sender, EventArgs e)
-        {
-            user = newUserTextBox.Text;
-            newUserTextBox.Enabled = false;
 
         }
 
