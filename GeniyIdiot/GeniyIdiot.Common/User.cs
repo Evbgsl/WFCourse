@@ -1,4 +1,6 @@
-﻿namespace GeniyIdiot.Common
+﻿using System;
+
+namespace GeniyIdiot.Common
 {
     public class User
     {
