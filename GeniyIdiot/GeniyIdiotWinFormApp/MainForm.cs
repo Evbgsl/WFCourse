@@ -19,8 +19,10 @@ namespace GeniyIdiotWinFormApp
         private string value;
         private string fileName;
 
-        private string questionsDataFilePath;
-        private string resultsDataFilePath;
+        public string questionsDataFilePath;
+        public string resultsDataFilePath;
+
+        private QuestionsForm questionsForm;
 
         private int rightAnswer;
         private int countRightAnswers;
@@ -48,6 +50,11 @@ namespace GeniyIdiotWinFormApp
         private void MainForm_Load(object sender, EventArgs e)
         {
             var helloForm = new HelloForm();
+            questionsForm = new QuestionsForm();
+
+
+
+
             helloForm.ShowDialog();
             user = new User(helloForm.userNameTextBox.Text, "", 0);
 
@@ -94,7 +101,7 @@ namespace GeniyIdiotWinFormApp
                         var percentOfRightAnswers = 100 * countRightAnswers / countQuestions;
                         var userDiagnose = DiagnoseStorage.GetDiagnose(diagnoses, percentOfRightAnswers);
 
-                        
+
                         user.Diagnose = userDiagnose;
                         user.PercentOfRightAnswers = percentOfRightAnswers;
                         var usersResults = new List<User>();
@@ -103,7 +110,7 @@ namespace GeniyIdiotWinFormApp
                         {
                             usersResults = new List<User>();
                         }
-                        else 
+                        else
                         {
                             value = DataFileProvider.GetValue(resultsDataFilePath);
                             usersResults = JsonConvert.DeserializeObject<List<User>>(value);
@@ -152,33 +159,19 @@ namespace GeniyIdiotWinFormApp
         {
 
 
-            QuestionsStorage.GetQuestionsFromDataFile(questionsDataFilePath, questionsDataGridView);
+            QuestionsStorage.GetQuestionsFromDataFile(questionsDataFilePath, questionsForm.questionsDataGridView);
+            questionsForm.Show();
 
-
-            DeleteQuestionButton.Visible = true;
-            deleteQuestionLabel.Visible = true;
-            resultPanel.Visible = true;
-            questionsDataGridView.Visible = true;
-
-            questionsDataGridView.SelectionChanged += QuestionsDataGridView_SelectionChanged;
-
+            questionsForm.questionsDataGridViewSelectionChanged += QuestionsDataGridView_SelectionChanged;
+            questionsForm.DeleteQuestionButtonClickEvent += QuestionsForm_DeleteQuestionButtonClickEvent;
 
         }
 
-        private void QuestionsDataGridView_SelectionChanged(object? sender, EventArgs e)
+        private void QuestionsForm_DeleteQuestionButtonClickEvent(object? sender, EventArgs e)
         {
-            if (questionsDataGridView.SelectedRows.Count > 0)
+            if (questionsForm.questionsDataGridView.SelectedRows.Count > 0)
             {
-                DeleteQuestionButton.Enabled = true;
-            }
-        }
-
-        private void DeleteQuestionButton_Click(object sender, EventArgs e)
-        {
-
-            if (questionsDataGridView.SelectedRows.Count > 0)
-            {
-                foreach (DataGridViewRow row in questionsDataGridView.SelectedRows)
+                foreach (DataGridViewRow row in questionsForm.questionsDataGridView.SelectedRows)
                 {
                     string valueInFirstColumn = row.Cells[0].Value?.ToString(); // Получаем значение из первой колонки текущей строки
                     if (!string.IsNullOrEmpty(valueInFirstColumn))
@@ -186,15 +179,46 @@ namespace GeniyIdiotWinFormApp
                         QuestionsStorage.RemoveQuestionFromFile(questionsDataFilePath, valueInFirstColumn);
                         MessageBox.Show("Вопрос удален!", "Гений - идиот");
                         row.Visible = false;
+                        questionsForm.DeleteQuestionButton.Enabled = false;
 
                     }
                 }
             }
-
         }
+
+        private void QuestionsDataGridView_SelectionChanged(object? sender, EventArgs e)
+        {
+
+            if (questionsForm.questionsDataGridView.SelectedRows.Count > 0)
+            {
+                questionsForm.DeleteQuestionButton.Enabled = true;
+            }
+        }
+
+        //private void DeleteQuestionButton_Click(object sender, EventArgs e)
+        //{
+
+        //    if (questionsForm.questionsDataGridView.SelectedRows.Count > 0)
+        //    {
+        //        foreach (DataGridViewRow row in questionsForm.questionsDataGridView.SelectedRows)
+        //        {
+        //            string valueInFirstColumn = row.Cells[0].Value?.ToString(); // Получаем значение из первой колонки текущей строки
+        //            if (!string.IsNullOrEmpty(valueInFirstColumn))
+        //            {
+        //                QuestionsStorage.RemoveQuestionFromFile(questionsDataFilePath, valueInFirstColumn);
+        //                MessageBox.Show("Вопрос удален!", "Гений - идиот");
+        //                row.Visible = false;
+
+        //            }
+        //        }
+        //    }
+
+        //}
 
         private void добавитьВопросToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //questionsForm.Show();
+
             addQuestionButton.Visible = true;
             answerTextBox.Visible = true;
             questionTextBox.Visible = true;
@@ -222,7 +246,7 @@ namespace GeniyIdiotWinFormApp
 
                     DataFileProvider.Replace(questionsDataFilePath, _newQuestions, false);
                     MessageBox.Show("Добавлен вопрос!", "Гений - идиот");
-                    QuestionsStorage.GetQuestionsFromDataFile(questionsDataFilePath, questionsDataGridView);
+                    QuestionsStorage.GetQuestionsFromDataFile(questionsDataFilePath, questionsForm.questionsDataGridView);
 
                     return;
                 }
@@ -248,7 +272,7 @@ namespace GeniyIdiotWinFormApp
                 resultDataGridView.Rows.Add(user.Name, user.PercentOfRightAnswers, user.Diagnose);
             }
             resultPanel.Visible = true;
-            questionsDataGridView.Visible = false;
+            
             resultDataGridView.Visible = true;
         }
 
@@ -274,6 +298,11 @@ namespace GeniyIdiotWinFormApp
         private void показатьРезульToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowResults();
+        }
+
+        private void deleteQuestionLabel_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

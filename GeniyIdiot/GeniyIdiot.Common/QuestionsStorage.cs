@@ -4,6 +4,7 @@ using System;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.IO;
 
 namespace GeniyIdiot.Common
 {
@@ -38,8 +39,11 @@ namespace GeniyIdiot.Common
         {
             var value = DataFileProvider.GetValue(questionsDataFilePath);
             var questions = JsonConvert.DeserializeObject<List<Question>>(value);
-            var _questions = JsonConvert.SerializeObject(questions.Where(question => question.Id != id));
-            DataFileProvider.Replace(questionsDataFilePath, _questions, false);
+            var updatedQuestions = questions.Where(question => question.Id != id).ToList();
+            var updatedQuestionsSerialized = JsonConvert.SerializeObject(updatedQuestions);
+            DataFileProvider.Replace(questionsDataFilePath, updatedQuestionsSerialized, false);
+
+
         }
     }
 }
