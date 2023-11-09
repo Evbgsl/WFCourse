@@ -22,13 +22,14 @@ namespace GeniyIdiotWinFormApp
 
         private void startButton_Click(object sender, EventArgs e)
         {
-            if (userNameTextBox.Text == null)
+            if (string.IsNullOrEmpty(userNameTextBox.Text))
             {
                 MessageBox.Show("Введите имя пользователя", "Гений - идиот");
                 return;
             }
-            Close();
-
+            {
+                Close();
+            }
         }
     }
 }

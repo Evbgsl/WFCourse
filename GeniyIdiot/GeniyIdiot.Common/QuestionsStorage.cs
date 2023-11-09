@@ -2,6 +2,8 @@
 using System.Linq;
 using System;
 using System.Windows.Forms;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace GeniyIdiot.Common
 {
@@ -20,58 +22,24 @@ namespace GeniyIdiot.Common
         }
 
 
-        public static List<Question> GetQuestions(string value)
+        public static void GetQuestionsFromDataFile(string questionsDataFilePath, DataGridView questionsDataGridView)
         {
-            var questionsFromFile = new List<Question>();
-            var lines = value.Split('\n');
-            foreach (var line in lines)
-                if (line.StartsWith("question#"))
-                {
-                    var _question = line.Split('@');
-                    questionsFromFile.Add(new Question(_question[1], _question[2], Convert.ToInt32(_question[3])));
-                }
-            return questionsFromFile;
-        }
-
-        public static void GetQuestionsFromDataFile(string value, string fileName, DataGridView questionsDataGridView)
-        {
-            value = DataFileProvider.GetValue(fileName);
+            
             questionsDataGridView.Rows.Clear();
-
-            var questions = QuestionsStorage.GetQuestions(value);
+            var value = DataFileProvider.GetValue(questionsDataFilePath);
+            var questions = JsonConvert.DeserializeObject<List<Question>>(value);
             foreach (var question in questions)
             {
                 questionsDataGridView.Rows.Add(question.Id, question.Text, question.Answer);
             }
-
         }
 
-        public static void SetQuestionToFile(string fileName)
+        public static void RemoveQuestionFromFile(string questionsDataFilePath, string id)
         {
-            Console.WriteLine("Введите через знак & текст вопрос и цифру с правильным ответом");
-            while (true)
-            {
-                try
-                {
-                    var stringForQuestion = Console.ReadLine().Split('&');
-                    var id = Guid.NewGuid().ToString().Remove(6);
-                    var newQuestion = new Question(id, stringForQuestion[0], Convert.ToInt32(stringForQuestion[1]));
-                    string _newQuestion = $"question#@{newQuestion.Id}@{newQuestion.Text}@{newQuestion.Answer}";
-                    DataFileProvider.Append(fileName, _newQuestion);
-                    return;
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message + " Неверный формат вопроса");
-                }
-            }
-        }
-
-        public static void RemoveQuestionFromFile(string fileName, string id)
-        {
-            var value = DataFileProvider.GetValue(fileName).Split('\n').ToList();
-            var lines = value.Where(line => (line != "" && line.Split('@')[1] != id)).Select(line => line).ToArray();
-            DataFileProvider.Append(fileName, lines, false);
+            var value = DataFileProvider.GetValue(questionsDataFilePath);
+            var questions = JsonConvert.DeserializeObject<List<Question>>(value);
+            var _questions = JsonConvert.SerializeObject(questions.Where(question => question.Id != id));
+            DataFileProvider.Replace(questionsDataFilePath, _questions, false);
         }
     }
 }
