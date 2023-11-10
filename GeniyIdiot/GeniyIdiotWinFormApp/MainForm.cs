@@ -162,6 +162,7 @@ namespace GeniyIdiotWinFormApp
             questionNumber++;
             questionNumberLabel.Text = $"Вопрос номер {questionNumber}";
 
+
             var random = new Random();
             var _countQuestions = questions.Count;
             if (_countQuestions == 0)
@@ -173,6 +174,8 @@ namespace GeniyIdiotWinFormApp
 
             var randomIndex = random.Next(_countQuestions);
             questionTextLabel.Text = questions[randomIndex].Text;
+            //questionTextLabel.Location = new Point((this.ClientSize.Width - questionTextLabel.Width) / 2, (this.ClientSize.Height - questionTextLabel.Height) / 2);
+            //questionTextLabel.AutoSize = true;
             rightAnswer = questions[randomIndex].Answer;
             questions.RemoveAt(randomIndex);
         }

@@ -44,13 +44,14 @@
             answerTextBox = new TextBox();
             questionTextBox = new TextBox();
             addQuestionLabel = new Label();
+            label1 = new Label();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // nextButton
             // 
-            nextButton.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            nextButton.Location = new Point(18, 161);
+            nextButton.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Regular, GraphicsUnit.Point);
+            nextButton.Location = new Point(17, 144);
             nextButton.Name = "nextButton";
             nextButton.Size = new Size(526, 38);
             nextButton.TabIndex = 0;
@@ -62,7 +63,7 @@
             // 
             questionNumberLabel.AutoSize = true;
             questionNumberLabel.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            questionNumberLabel.Location = new Point(235, 40);
+            questionNumberLabel.Location = new Point(234, 35);
             questionNumberLabel.Name = "questionNumberLabel";
             questionNumberLabel.Size = new Size(70, 15);
             questionNumberLabel.TabIndex = 1;
@@ -70,19 +71,20 @@
             // 
             // questionTextLabel
             // 
-            questionTextLabel.AutoSize = true;
-            questionTextLabel.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            questionTextLabel.Location = new Point(18, 67);
+            questionTextLabel.Anchor = AnchorStyles.Top;
+            questionTextLabel.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            questionTextLabel.Location = new Point(45, 67);
             questionTextLabel.Name = "questionTextLabel";
-            questionTextLabel.Size = new Size(136, 25);
+            questionTextLabel.Size = new Size(466, 19);
             questionTextLabel.TabIndex = 2;
             questionTextLabel.Text = "Текст вопроса";
+            questionTextLabel.TextAlign = ContentAlignment.TopCenter;
             // 
             // userAnswerTextBox
             // 
-            userAnswerTextBox.Location = new Point(18, 112);
+            userAnswerTextBox.Location = new Point(308, 102);
             userAnswerTextBox.Name = "userAnswerTextBox";
-            userAnswerTextBox.Size = new Size(63, 23);
+            userAnswerTextBox.Size = new Size(40, 23);
             userAnswerTextBox.TabIndex = 3;
             // 
             // menuStrip1
@@ -147,7 +149,7 @@
             // 
             // addQuestionButton
             // 
-            addQuestionButton.Location = new Point(18, 330);
+            addQuestionButton.Location = new Point(413, 230);
             addQuestionButton.Name = "addQuestionButton";
             addQuestionButton.Size = new Size(130, 23);
             addQuestionButton.TabIndex = 11;
@@ -158,7 +160,7 @@
             // 
             // answerTextBox
             // 
-            answerTextBox.Location = new Point(298, 283);
+            answerTextBox.Location = new Point(338, 230);
             answerTextBox.Name = "answerTextBox";
             answerTextBox.Size = new Size(69, 23);
             answerTextBox.TabIndex = 11;
@@ -166,27 +168,39 @@
             // 
             // questionTextBox
             // 
-            questionTextBox.Location = new Point(18, 283);
+            questionTextBox.Location = new Point(17, 230);
             questionTextBox.Name = "questionTextBox";
-            questionTextBox.Size = new Size(256, 23);
+            questionTextBox.Size = new Size(310, 23);
             questionTextBox.TabIndex = 11;
             questionTextBox.Visible = false;
             // 
             // addQuestionLabel
             // 
             addQuestionLabel.AutoSize = true;
-            addQuestionLabel.Location = new Point(18, 249);
+            addQuestionLabel.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            addQuestionLabel.Location = new Point(191, 198);
             addQuestionLabel.Name = "addQuestionLabel";
-            addQuestionLabel.Size = new Size(172, 15);
+            addQuestionLabel.Size = new Size(176, 15);
             addQuestionLabel.TabIndex = 11;
             addQuestionLabel.Text = "Введите текст вопроса и ответ";
             addQuestionLabel.Visible = false;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.Location = new Point(191, 105);
+            label1.Name = "label1";
+            label1.Size = new Size(85, 15);
+            label1.TabIndex = 12;
+            label1.Text = "Введите ответ";
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(562, 373);
+            ClientSize = new Size(562, 282);
+            Controls.Add(label1);
             Controls.Add(addQuestionLabel);
             Controls.Add(answerTextBox);
             Controls.Add(addQuestionButton);
@@ -225,5 +239,6 @@
         private Button addQuestionButton;
         private TextBox answerTextBox;
         private TextBox questionTextBox;
+        private Label label1;
     }
 }
