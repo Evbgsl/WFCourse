@@ -147,8 +147,6 @@ namespace GeniyIdiotWinFormApp
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
-
                     MessageBox.Show("Некорректный формат числа", "Гений - идиот");
                     return;
                 }
