@@ -23,6 +23,7 @@ namespace GeniyIdiotWinFormApp
         public string resultsDataFilePath;
 
         private QuestionsForm questionsForm;
+        private ResultsForm resultsForm;
 
         private int rightAnswer;
         private int countRightAnswers;
@@ -51,6 +52,7 @@ namespace GeniyIdiotWinFormApp
         {
             var helloForm = new HelloForm();
             questionsForm = new QuestionsForm();
+            resultsForm = new ResultsForm();
 
 
 
@@ -182,11 +184,11 @@ namespace GeniyIdiotWinFormApp
 
 
             QuestionsStorage.GetQuestionsFromDataFile(questionsDataFilePath, questionsForm.questionsDataGridView);
-            if (questionsForm.questionsDataGridView.Rows.Count < 2) 
+            if (questionsForm.questionsDataGridView.Rows.Count < 2)
             {
                 MessageBox.Show("Вопросы кончились, перезапустите тест", "Гений - идиот");
                 return;
-            
+
             }
             questionsForm.Show();
 
@@ -205,7 +207,7 @@ namespace GeniyIdiotWinFormApp
                     if (!string.IsNullOrEmpty(valueInFirstColumn))
                     {
                         QuestionsStorage.RemoveQuestionFromFile(questionsDataFilePath, valueInFirstColumn);
-                        
+
                         row.Visible = false;
                         questionsForm.DeleteQuestionButton.Enabled = false;
 
@@ -272,18 +274,19 @@ namespace GeniyIdiotWinFormApp
 
         private void ShowResults()
         {
-            resultDataGridView.Rows.Clear();
+            resultsForm.resultDataGridView.Rows.Clear();
 
             value = DataFileProvider.GetValue(resultsDataFilePath);
             var users = JsonConvert.DeserializeObject<List<User>>(value);
 
             foreach (var user in users)
             {
-                resultDataGridView.Rows.Add(user.Name, user.PercentOfRightAnswers, user.Diagnose);
+                resultsForm.resultDataGridView.Rows.Add(user.Name, user.PercentOfRightAnswers, user.Diagnose);
             }
-            resultPanel.Visible = true;
-            
-            resultDataGridView.Visible = true;
+            //resultPanel.Visible = true;
+
+            //resultDataGridView.Visible = true;
+            resultsForm.Show();
         }
 
 
@@ -311,6 +314,11 @@ namespace GeniyIdiotWinFormApp
         }
 
         private void deleteQuestionLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void resultDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

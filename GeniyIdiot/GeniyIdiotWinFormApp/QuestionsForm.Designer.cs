@@ -100,6 +100,7 @@
             Controls.Add(questionsDataGridView);
             Margin = new Padding(4, 5, 4, 5);
             Name = "QuestionsForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "QuestionsForm";
             FormClosing += QuestionsForm_FormClosing;
             ((System.ComponentModel.ISupportInitialize)questionsDataGridView).EndInit();
