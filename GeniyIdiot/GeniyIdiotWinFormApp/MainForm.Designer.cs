@@ -64,9 +64,10 @@
             // nextButton
             // 
             nextButton.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            nextButton.Location = new Point(18, 127);
+            nextButton.Location = new Point(26, 212);
+            nextButton.Margin = new Padding(4, 5, 4, 5);
             nextButton.Name = "nextButton";
-            nextButton.Size = new Size(119, 92);
+            nextButton.Size = new Size(170, 153);
             nextButton.TabIndex = 0;
             nextButton.Text = "Далее...";
             nextButton.UseVisualStyleBackColor = true;
@@ -75,26 +76,29 @@
             // questionNumberLabel
             // 
             questionNumberLabel.AutoSize = true;
-            questionNumberLabel.Location = new Point(18, 38);
+            questionNumberLabel.Location = new Point(26, 63);
+            questionNumberLabel.Margin = new Padding(4, 0, 4, 0);
             questionNumberLabel.Name = "questionNumberLabel";
-            questionNumberLabel.Size = new Size(70, 15);
+            questionNumberLabel.Size = new Size(108, 25);
             questionNumberLabel.TabIndex = 1;
             questionNumberLabel.Text = "Вопрос №1";
             // 
             // questionTextLabel
             // 
             questionTextLabel.AutoSize = true;
-            questionTextLabel.Location = new Point(18, 65);
+            questionTextLabel.Location = new Point(26, 108);
+            questionTextLabel.Margin = new Padding(4, 0, 4, 0);
             questionTextLabel.Name = "questionTextLabel";
-            questionTextLabel.Size = new Size(85, 15);
+            questionTextLabel.Size = new Size(129, 25);
             questionTextLabel.TabIndex = 2;
             questionTextLabel.Text = "Текст вопроса";
             // 
             // userAnswerTextBox
             // 
-            userAnswerTextBox.Location = new Point(18, 83);
+            userAnswerTextBox.Location = new Point(26, 138);
+            userAnswerTextBox.Margin = new Padding(4, 5, 4, 5);
             userAnswerTextBox.Name = "userAnswerTextBox";
-            userAnswerTextBox.Size = new Size(119, 23);
+            userAnswerTextBox.Size = new Size(168, 31);
             userAnswerTextBox.TabIndex = 3;
             // 
             // menuStrip1
@@ -103,8 +107,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { toolStripMenuItem1 });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Padding = new Padding(4, 1, 0, 1);
-            menuStrip1.Size = new Size(1039, 24);
+            menuStrip1.Size = new Size(1484, 33);
             menuStrip1.TabIndex = 4;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -112,48 +115,48 @@
             // 
             toolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { начатьЗановоToolStripMenuItem, показатьВопросыToolStripMenuItem, показатьРезульToolStripMenuItem, выходToolStripMenuItem, оПрограммеToolStripMenuItem, добавитьВопросToolStripMenuItem });
             toolStripMenuItem1.Name = "toolStripMenuItem1";
-            toolStripMenuItem1.Size = new Size(50, 22);
+            toolStripMenuItem1.Size = new Size(73, 29);
             toolStripMenuItem1.Text = "Menu";
             // 
             // начатьЗановоToolStripMenuItem
             // 
             начатьЗановоToolStripMenuItem.Name = "начатьЗановоToolStripMenuItem";
-            начатьЗановоToolStripMenuItem.Size = new Size(189, 22);
+            начатьЗановоToolStripMenuItem.Size = new Size(285, 34);
             начатьЗановоToolStripMenuItem.Text = "Начать заново";
             начатьЗановоToolStripMenuItem.Click += начатьЗановоToolStripMenuItem_Click;
             // 
             // показатьВопросыToolStripMenuItem
             // 
             показатьВопросыToolStripMenuItem.Name = "показатьВопросыToolStripMenuItem";
-            показатьВопросыToolStripMenuItem.Size = new Size(189, 22);
+            показатьВопросыToolStripMenuItem.Size = new Size(285, 34);
             показатьВопросыToolStripMenuItem.Text = "Показать вопросы";
             показатьВопросыToolStripMenuItem.Click += показатьВопросыToolStripMenuItem_Click;
             // 
             // показатьРезульToolStripMenuItem
             // 
             показатьРезульToolStripMenuItem.Name = "показатьРезульToolStripMenuItem";
-            показатьРезульToolStripMenuItem.Size = new Size(189, 22);
+            показатьРезульToolStripMenuItem.Size = new Size(285, 34);
             показатьРезульToolStripMenuItem.Text = "Показать результаты";
             показатьРезульToolStripMenuItem.Click += показатьРезульToolStripMenuItem_Click;
             // 
             // выходToolStripMenuItem
             // 
             выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            выходToolStripMenuItem.Size = new Size(189, 22);
+            выходToolStripMenuItem.Size = new Size(285, 34);
             выходToolStripMenuItem.Text = "Выход";
             выходToolStripMenuItem.Click += выходToolStripMenuItem_Click;
             // 
             // оПрограммеToolStripMenuItem
             // 
             оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
-            оПрограммеToolStripMenuItem.Size = new Size(189, 22);
+            оПрограммеToolStripMenuItem.Size = new Size(285, 34);
             оПрограммеToolStripMenuItem.Text = "О программе...";
             оПрограммеToolStripMenuItem.Click += ToolStripMenuItem_Click;
             // 
             // добавитьВопросToolStripMenuItem
             // 
             добавитьВопросToolStripMenuItem.Name = "добавитьВопросToolStripMenuItem";
-            добавитьВопросToolStripMenuItem.Size = new Size(189, 22);
+            добавитьВопросToolStripMenuItem.Size = new Size(285, 34);
             добавитьВопросToolStripMenuItem.Text = "Добавить вопрос";
             добавитьВопросToolStripMenuItem.Click += добавитьВопросToolStripMenuItem_Click;
             // 
@@ -161,10 +164,9 @@
             // 
             resultPanel.Controls.Add(questionsDataGridView);
             resultPanel.Controls.Add(resultDataGridView);
-            resultPanel.Location = new Point(385, 178);
-            resultPanel.Margin = new Padding(2);
+            resultPanel.Location = new Point(550, 297);
             resultPanel.Name = "resultPanel";
-            resultPanel.Size = new Size(586, 253);
+            resultPanel.Size = new Size(837, 422);
             resultPanel.TabIndex = 8;
             resultPanel.Visible = false;
             // 
@@ -172,12 +174,11 @@
             // 
             questionsDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             questionsDataGridView.Columns.AddRange(new DataGridViewColumn[] { IdQuestion, Queistion, Answer });
-            questionsDataGridView.Location = new Point(0, 2);
-            questionsDataGridView.Margin = new Padding(2);
+            questionsDataGridView.Location = new Point(0, 3);
             questionsDataGridView.Name = "questionsDataGridView";
             questionsDataGridView.RowHeadersWidth = 62;
             questionsDataGridView.RowTemplate.Height = 33;
-            questionsDataGridView.Size = new Size(582, 249);
+            questionsDataGridView.Size = new Size(831, 415);
             questionsDataGridView.TabIndex = 1;
             // 
             // IdQuestion
@@ -205,12 +206,11 @@
             // 
             resultDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             resultDataGridView.Columns.AddRange(new DataGridViewColumn[] { userName, Percent, userDiagnose });
-            resultDataGridView.Location = new Point(2, 13);
-            resultDataGridView.Margin = new Padding(2);
+            resultDataGridView.Location = new Point(3, 22);
             resultDataGridView.Name = "resultDataGridView";
             resultDataGridView.RowHeadersWidth = 62;
             resultDataGridView.RowTemplate.Height = 33;
-            resultDataGridView.Size = new Size(567, 228);
+            resultDataGridView.Size = new Size(810, 380);
             resultDataGridView.TabIndex = 0;
             resultDataGridView.Visible = false;
             // 
@@ -237,9 +237,10 @@
             // 
             // addQuestionButton
             // 
-            addQuestionButton.Location = new Point(18, 330);
+            addQuestionButton.Location = new Point(26, 550);
+            addQuestionButton.Margin = new Padding(4, 5, 4, 5);
             addQuestionButton.Name = "addQuestionButton";
-            addQuestionButton.Size = new Size(130, 23);
+            addQuestionButton.Size = new Size(186, 38);
             addQuestionButton.TabIndex = 11;
             addQuestionButton.Text = "Добавить вопрос";
             addQuestionButton.UseVisualStyleBackColor = true;
@@ -248,26 +249,29 @@
             // 
             // answerTextBox
             // 
-            answerTextBox.Location = new Point(298, 283);
+            answerTextBox.Location = new Point(426, 472);
+            answerTextBox.Margin = new Padding(4, 5, 4, 5);
             answerTextBox.Name = "answerTextBox";
-            answerTextBox.Size = new Size(69, 23);
+            answerTextBox.Size = new Size(97, 31);
             answerTextBox.TabIndex = 11;
             answerTextBox.Visible = false;
             // 
             // questionTextBox
             // 
-            questionTextBox.Location = new Point(18, 283);
+            questionTextBox.Location = new Point(26, 472);
+            questionTextBox.Margin = new Padding(4, 5, 4, 5);
             questionTextBox.Name = "questionTextBox";
-            questionTextBox.Size = new Size(256, 23);
+            questionTextBox.Size = new Size(364, 31);
             questionTextBox.TabIndex = 11;
             questionTextBox.Visible = false;
             // 
             // addQuestionLabel
             // 
             addQuestionLabel.AutoSize = true;
-            addQuestionLabel.Location = new Point(18, 249);
+            addQuestionLabel.Location = new Point(26, 415);
+            addQuestionLabel.Margin = new Padding(4, 0, 4, 0);
             addQuestionLabel.Name = "addQuestionLabel";
-            addQuestionLabel.Size = new Size(172, 15);
+            addQuestionLabel.Size = new Size(261, 25);
             addQuestionLabel.TabIndex = 11;
             addQuestionLabel.Text = "Введите текст вопроса и ответ";
             addQuestionLabel.Visible = false;
@@ -275,10 +279,9 @@
             // deleteQuestionLabel
             // 
             deleteQuestionLabel.AutoSize = true;
-            deleteQuestionLabel.Location = new Point(438, 127);
-            deleteQuestionLabel.Margin = new Padding(2, 0, 2, 0);
+            deleteQuestionLabel.Location = new Point(626, 212);
             deleteQuestionLabel.Name = "deleteQuestionLabel";
-            deleteQuestionLabel.Size = new Size(310, 15);
+            deleteQuestionLabel.Size = new Size(464, 25);
             deleteQuestionLabel.TabIndex = 9;
             deleteQuestionLabel.Text = "Выделите строку с вопросом, который нужно удалить!";
             deleteQuestionLabel.Visible = false;
@@ -286,10 +289,9 @@
             // DeleteQuestionButton
             // 
             DeleteQuestionButton.Enabled = false;
-            DeleteQuestionButton.Location = new Point(869, 120);
-            DeleteQuestionButton.Margin = new Padding(2);
+            DeleteQuestionButton.Location = new Point(1241, 200);
             DeleteQuestionButton.Name = "DeleteQuestionButton";
-            DeleteQuestionButton.Size = new Size(98, 28);
+            DeleteQuestionButton.Size = new Size(140, 47);
             DeleteQuestionButton.TabIndex = 10;
             DeleteQuestionButton.Text = "Удалить";
             DeleteQuestionButton.UseVisualStyleBackColor = true;
@@ -298,9 +300,9 @@
             // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1039, 581);
+            ClientSize = new Size(1484, 968);
             Controls.Add(addQuestionLabel);
             Controls.Add(answerTextBox);
             Controls.Add(addQuestionButton);
@@ -314,6 +316,7 @@
             Controls.Add(nextButton);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
+            Margin = new Padding(4, 5, 4, 5);
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Гений - идиот";

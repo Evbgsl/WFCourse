@@ -15,7 +15,7 @@ namespace GeniyIdiotWinFormApp
     public partial class MainForm : Form
     {
         private List<Question> questions;
-        private string user;
+        private User user;
         private string value;
         private string fileName;
 
@@ -37,6 +37,9 @@ namespace GeniyIdiotWinFormApp
                                                 };
 
 
+
+        //Основная логика
+
         public MainForm()
         {
             InitializeComponent();
@@ -44,10 +47,9 @@ namespace GeniyIdiotWinFormApp
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            user = "Неизвестен";
             var helloForm = new HelloForm();
             helloForm.ShowDialog();
-            user = helloForm.userNameTextBox.Text;
+            user = new User(helloForm.userNameTextBox.Text, "", 0);
 
             fileName = @"datafile.txt";
             questionsDataFilePath = @"questionsDataFile.json";
@@ -63,31 +65,15 @@ namespace GeniyIdiotWinFormApp
 
 
                 var _newQuestions = JsonConvert.SerializeObject(questions);
-                DataFileProvider.Replace(questionsDataFilePath, _newQuestions, false);                
+                DataFileProvider.Replace(questionsDataFilePath, _newQuestions, false);
             }
 
             value = DataFileProvider.GetValue(questionsDataFilePath);
             questions = JsonConvert.DeserializeObject<List<Question>>(value);
 
-
             countQuestions = questions.Count;
             questionNumberLabel.Text = $"Вопрос номер 1";
             ShowNextQuestion();
-
-        }
-
-        private void ShowNextQuestion()
-        {
-            userAnswerTextBox.Text = null;
-            questionNumber++;
-            questionNumberLabel.Text = $"Вопрос номер {questionNumber}";
-
-            var random = new Random();
-            var _countQuestions = questions.Count;
-            var randomIndex = random.Next(_countQuestions);
-            questionTextLabel.Text = questions[randomIndex].Text;
-            rightAnswer = questions[randomIndex].Answer;
-            questions.RemoveAt(randomIndex);
         }
 
         private void nextButton_Click(object sender, EventArgs e)
@@ -107,7 +93,28 @@ namespace GeniyIdiotWinFormApp
 
                         var percentOfRightAnswers = 100 * countRightAnswers / countQuestions;
                         var userDiagnose = DiagnoseStorage.GetDiagnose(diagnoses, percentOfRightAnswers);
-                        DataFileProvider.Append(fileName, $"result#@{user}@{percentOfRightAnswers}@{userDiagnose}");
+
+                        
+                        user.Diagnose = userDiagnose;
+                        user.PercentOfRightAnswers = percentOfRightAnswers;
+                        var usersResults = new List<User>();
+
+                        if (!File.Exists(resultsDataFilePath))
+                        {
+                            usersResults = new List<User>();
+                        }
+                        else 
+                        {
+                            value = DataFileProvider.GetValue(resultsDataFilePath);
+                            usersResults = JsonConvert.DeserializeObject<List<User>>(value);
+
+                        }
+
+                        usersResults.Add(user);
+
+                        var _userResults = JsonConvert.SerializeObject(usersResults);
+                        DataFileProvider.Replace(resultsDataFilePath, _userResults, false);
+
                         MessageBox.Show($"Тест окончен. Количество правильных ответов {countQuestions}. Ваш диагноз - {userDiagnose}", "Гений - идиот");
 
                         return;
@@ -124,41 +131,27 @@ namespace GeniyIdiotWinFormApp
             }
         }
 
-        private void ToolStripMenuItem_Click(object sender, EventArgs e)
+
+
+        //Работа с вопросами
+        private void ShowNextQuestion()
         {
-            MessageBox.Show("Супер тест 2023", "Гений - идиот");
-            return;
+            userAnswerTextBox.Text = null;
+            questionNumber++;
+            questionNumberLabel.Text = $"Вопрос номер {questionNumber}";
 
-        }
-
-        private void начатьЗановоToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.Restart();
-        }
-
-        private void выходToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void показатьРезульToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            resultDataGridView.Rows.Clear();
-
-            var results = UserStorage.GetResultsFromFile(fileName);
-            foreach (var result in results)
-            {
-                resultDataGridView.Rows.Add(result[1], result[2], result[3]);
-            }
-            resultPanel.Visible = true;
-            questionsDataGridView.Visible = false;
-            resultDataGridView.Visible = true;
+            var random = new Random();
+            var _countQuestions = questions.Count;
+            var randomIndex = random.Next(_countQuestions);
+            questionTextLabel.Text = questions[randomIndex].Text;
+            rightAnswer = questions[randomIndex].Answer;
+            questions.RemoveAt(randomIndex);
         }
 
         private void показатьВопросыToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
-            
+
+
             QuestionsStorage.GetQuestionsFromDataFile(questionsDataFilePath, questionsDataGridView);
 
 
@@ -171,8 +164,6 @@ namespace GeniyIdiotWinFormApp
 
 
         }
-
-
 
         private void QuestionsDataGridView_SelectionChanged(object? sender, EventArgs e)
         {
@@ -229,8 +220,6 @@ namespace GeniyIdiotWinFormApp
 
                     var _newQuestions = JsonConvert.SerializeObject(questions);
 
-
-                    
                     DataFileProvider.Replace(questionsDataFilePath, _newQuestions, false);
                     MessageBox.Show("Добавлен вопрос!", "Гений - идиот");
                     QuestionsStorage.GetQuestionsFromDataFile(questionsDataFilePath, questionsDataGridView);
@@ -243,5 +232,49 @@ namespace GeniyIdiotWinFormApp
                 }
             }
         }
+
+
+        //Работа с результатами 
+
+        private void ShowResults()
+        {
+            resultDataGridView.Rows.Clear();
+
+            value = DataFileProvider.GetValue(resultsDataFilePath);
+            var users = JsonConvert.DeserializeObject<List<User>>(value);
+
+            foreach (var user in users)
+            {
+                resultDataGridView.Rows.Add(user.Name, user.PercentOfRightAnswers, user.Diagnose);
+            }
+            resultPanel.Visible = true;
+            questionsDataGridView.Visible = false;
+            resultDataGridView.Visible = true;
+        }
+
+
+        //Работа с меню
+        private void ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Супер тест 2023", "Гений - идиот");
+            return;
+
+        }
+
+        private void начатьЗановоToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
+        }
+
+        private void выходToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void показатьРезульToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowResults();
+        }
     }
+
 }
