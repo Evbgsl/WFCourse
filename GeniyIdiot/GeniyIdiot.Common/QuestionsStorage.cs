@@ -29,6 +29,7 @@ namespace GeniyIdiot.Common
             questionsDataGridView.Rows.Clear();
             var value = DataFileProvider.GetValue(questionsDataFilePath);
             var questions = JsonConvert.DeserializeObject<List<Question>>(value);
+
             foreach (var question in questions)
             {
                 questionsDataGridView.Rows.Add(question.Id, question.Text, question.Answer);

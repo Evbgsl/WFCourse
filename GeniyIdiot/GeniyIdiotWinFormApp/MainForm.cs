@@ -79,6 +79,20 @@ namespace GeniyIdiotWinFormApp
             questions = JsonConvert.DeserializeObject<List<Question>>(value);
 
             countQuestions = questions.Count;
+
+            if (countQuestions == 0)
+            {
+                questions = new List<Question>();
+                questions.Add(new Question("skddk", "Два плюс два умножить на два", 6));
+                questions.Add(new Question("skdd1", "Сколько нужно распилов, чтобы разделить бревно на 10 частей?", 9));
+                questions.Add(new Question("skd123", "На двух руках 10 пальцев. Сколько пальцев на 5 руках?", 25));
+                questions.Add(new Question("skddk554", "Укол делают 1 раз в 30 минут. Сколько нужно мин на 3 укола?", 60));
+                countQuestions = questions.Count;
+                MessageBox.Show($"Список вопросов был пуст, добавлены базовые вопросы.", "Гений - идиот");
+                var _baseQuestions = JsonConvert.SerializeObject(questions);
+                DataFileProvider.Replace(questionsDataFilePath, _baseQuestions, false);
+            }
+
             questionNumberLabel.Text = $"Вопрос номер 1";
             ShowNextQuestion();
         }
@@ -123,6 +137,7 @@ namespace GeniyIdiotWinFormApp
                         DataFileProvider.Replace(resultsDataFilePath, _userResults, false);
 
                         MessageBox.Show($"Тест окончен. Количество правильных ответов {countQuestions}. Ваш диагноз - {userDiagnose}", "Гений - идиот");
+                        nextButton.Enabled = false;
 
                         return;
                     }
@@ -149,6 +164,13 @@ namespace GeniyIdiotWinFormApp
 
             var random = new Random();
             var _countQuestions = questions.Count;
+            if (_countQuestions == 0)
+            {
+                MessageBox.Show("Вопросы кончились, перезапустите тест", "Гений - идиот");
+                return;
+
+            }
+
             var randomIndex = random.Next(_countQuestions);
             questionTextLabel.Text = questions[randomIndex].Text;
             rightAnswer = questions[randomIndex].Answer;
@@ -160,6 +182,12 @@ namespace GeniyIdiotWinFormApp
 
 
             QuestionsStorage.GetQuestionsFromDataFile(questionsDataFilePath, questionsForm.questionsDataGridView);
+            if (questionsForm.questionsDataGridView.Rows.Count < 2) 
+            {
+                MessageBox.Show("Вопросы кончились, перезапустите тест", "Гений - идиот");
+                return;
+            
+            }
             questionsForm.Show();
 
             questionsForm.questionsDataGridViewSelectionChanged += QuestionsDataGridView_SelectionChanged;
@@ -177,12 +205,13 @@ namespace GeniyIdiotWinFormApp
                     if (!string.IsNullOrEmpty(valueInFirstColumn))
                     {
                         QuestionsStorage.RemoveQuestionFromFile(questionsDataFilePath, valueInFirstColumn);
-                        MessageBox.Show("Вопрос удален!", "Гений - идиот");
+                        
                         row.Visible = false;
                         questionsForm.DeleteQuestionButton.Enabled = false;
 
                     }
                 }
+                MessageBox.Show("Вопрос удален!", "Гений - идиот");
             }
         }
 
@@ -195,25 +224,6 @@ namespace GeniyIdiotWinFormApp
             }
         }
 
-        //private void DeleteQuestionButton_Click(object sender, EventArgs e)
-        //{
-
-        //    if (questionsForm.questionsDataGridView.SelectedRows.Count > 0)
-        //    {
-        //        foreach (DataGridViewRow row in questionsForm.questionsDataGridView.SelectedRows)
-        //        {
-        //            string valueInFirstColumn = row.Cells[0].Value?.ToString(); // Получаем значение из первой колонки текущей строки
-        //            if (!string.IsNullOrEmpty(valueInFirstColumn))
-        //            {
-        //                QuestionsStorage.RemoveQuestionFromFile(questionsDataFilePath, valueInFirstColumn);
-        //                MessageBox.Show("Вопрос удален!", "Гений - идиот");
-        //                row.Visible = false;
-
-        //            }
-        //        }
-        //    }
-
-        //}
 
         private void добавитьВопросToolStripMenuItem_Click(object sender, EventArgs e)
         {
