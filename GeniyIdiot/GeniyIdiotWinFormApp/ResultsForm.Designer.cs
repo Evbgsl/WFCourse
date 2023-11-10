@@ -37,46 +37,50 @@
             // 
             // resultDataGridView
             // 
-            resultDataGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            resultDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             resultDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             resultDataGridView.Columns.AddRange(new DataGridViewColumn[] { userName, Percent, userDiagnose });
-            resultDataGridView.Location = new Point(-4, 12);
+            resultDataGridView.Dock = DockStyle.Fill;
+            resultDataGridView.Location = new Point(0, 0);
+            resultDataGridView.Margin = new Padding(2);
             resultDataGridView.Name = "resultDataGridView";
             resultDataGridView.RowHeadersWidth = 62;
             resultDataGridView.RowTemplate.Height = 33;
-            resultDataGridView.Size = new Size(810, 380);
+            resultDataGridView.Size = new Size(669, 310);
             resultDataGridView.TabIndex = 1;
             // 
             // userName
             // 
+            userName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             userName.HeaderText = "Пользователь";
             userName.MinimumWidth = 8;
             userName.Name = "userName";
-            userName.Width = 150;
             // 
             // Percent
             // 
+            Percent.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             Percent.HeaderText = "Кол верных";
             Percent.MinimumWidth = 8;
             Percent.Name = "Percent";
-            Percent.Width = 150;
             // 
             // userDiagnose
             // 
+            userDiagnose.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             userDiagnose.HeaderText = "Диагноз";
             userDiagnose.MinimumWidth = 8;
             userDiagnose.Name = "userDiagnose";
-            userDiagnose.Width = 150;
             // 
             // ResultsForm
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(669, 310);
             Controls.Add(resultDataGridView);
+            Margin = new Padding(2);
             Name = "ResultsForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "ResultsForm";
+            FormClosing += ResultsForm_FormClosing;
             ((System.ComponentModel.ISupportInitialize)resultDataGridView).EndInit();
             ResumeLayout(false);
         }
@@ -84,8 +88,8 @@
         #endregion
 
         public DataGridView resultDataGridView;
-        public DataGridViewTextBoxColumn userName;
-        public DataGridViewTextBoxColumn Percent;
-        public DataGridViewTextBoxColumn userDiagnose;
+        private DataGridViewTextBoxColumn userName;
+        private DataGridViewTextBoxColumn Percent;
+        private DataGridViewTextBoxColumn userDiagnose;
     }
 }

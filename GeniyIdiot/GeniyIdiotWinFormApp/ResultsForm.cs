@@ -16,5 +16,11 @@ namespace GeniyIdiotWinFormApp
         {
             InitializeComponent();
         }
+
+        private void ResultsForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true; // Отменить закрытие формы
+            this.Hide(); // Скрыть форму
+        }
     }
 }
