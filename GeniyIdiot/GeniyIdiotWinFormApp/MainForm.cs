@@ -3,7 +3,12 @@ using System.Windows.Forms;
 using GeniyIdiot.Common;
 using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.IO;
 using Application = System.Windows.Forms.Application;
+using System.Text.Json.Nodes;
+using System.Text.Json.Serialization;
+using System.Net.Http.Json;
+using Newtonsoft.Json;
 
 namespace GeniyIdiotWinFormApp
 {
@@ -13,6 +18,10 @@ namespace GeniyIdiotWinFormApp
         private string user;
         private string value;
         private string fileName;
+
+        private string questionsDataFilePath;
+        private string resultsDataFilePath;
+
         private int rightAnswer;
         private int countRightAnswers;
         private int countQuestions;
@@ -28,7 +37,6 @@ namespace GeniyIdiotWinFormApp
                                                 };
 
 
-
         public MainForm()
         {
             InitializeComponent();
@@ -42,9 +50,26 @@ namespace GeniyIdiotWinFormApp
             user = helloForm.userNameTextBox.Text;
 
             fileName = @"datafile.txt";
-            //user = new User("неизвестно");
-            value = DataFileProvider.GetValue(fileName);
-            questions = QuestionsStorage.GetQuestions(value);
+            questionsDataFilePath = @"questionsDataFile.json";
+            resultsDataFilePath = @"resultsDataFile.json";
+
+            if (!File.Exists(questionsDataFilePath))
+            {
+                questions = new List<Question>();
+                questions.Add(new Question("skddk", "Два плюс два умножить на два", 6));
+                questions.Add(new Question("skdd1", "Сколько нужно распилов, чтобы разделить бревно на 10 частей?", 9));
+                questions.Add(new Question("skd123", "На двух руках 10 пальцев. Сколько пальцев на 5 руках?", 25));
+                questions.Add(new Question("skddk554", "Укол делают 1 раз в 30 минут. Сколько нужно мин на 3 укола?", 60));
+
+
+                var _newQuestions = JsonConvert.SerializeObject(questions);
+                DataFileProvider.Replace(questionsDataFilePath, _newQuestions, false);                
+            }
+
+            value = DataFileProvider.GetValue(questionsDataFilePath);
+            questions = JsonConvert.DeserializeObject<List<Question>>(value);
+
+
             countQuestions = questions.Count;
             questionNumberLabel.Text = $"Вопрос номер 1";
             ShowNextQuestion();
@@ -106,12 +131,6 @@ namespace GeniyIdiotWinFormApp
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Application.Restart();
-
-        }
-
         private void начатьЗановоToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Restart();
@@ -138,7 +157,9 @@ namespace GeniyIdiotWinFormApp
 
         private void показатьВопросыToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            QuestionsStorage.GetQuestionsFromDataFile(value, fileName, questionsDataGridView);
+            
+            
+            QuestionsStorage.GetQuestionsFromDataFile(questionsDataFilePath, questionsDataGridView);
 
 
             DeleteQuestionButton.Visible = true;
@@ -171,7 +192,7 @@ namespace GeniyIdiotWinFormApp
                     string valueInFirstColumn = row.Cells[0].Value?.ToString(); // Получаем значение из первой колонки текущей строки
                     if (!string.IsNullOrEmpty(valueInFirstColumn))
                     {
-                        QuestionsStorage.RemoveQuestionFromFile(fileName, valueInFirstColumn);
+                        QuestionsStorage.RemoveQuestionFromFile(questionsDataFilePath, valueInFirstColumn);
                         MessageBox.Show("Вопрос удален!", "Гений - идиот");
                         row.Visible = false;
 
@@ -183,12 +204,10 @@ namespace GeniyIdiotWinFormApp
 
         private void добавитьВопросToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //resultPanel.Visible = true;
             addQuestionButton.Visible = true;
             answerTextBox.Visible = true;
             questionTextBox.Visible = true;
             addQuestionLabel.Visible = true;
-
         }
 
         private void addQuestionButton_Click(object sender, EventArgs e)
@@ -203,10 +222,19 @@ namespace GeniyIdiotWinFormApp
                     var stringForQuestion = questionTextBox.Text;
                     var answerForQuestion = Convert.ToInt32(answerTextBox.Text);
                     var newQuestion = new Question(id, stringForQuestion, answerForQuestion);
-                    string _newQuestion = $"question#@{newQuestion.Id}@{newQuestion.Text}@{newQuestion.Answer}";
-                    DataFileProvider.Append(fileName, _newQuestion);
+
+                    value = DataFileProvider.GetValue(questionsDataFilePath);
+                    questions = JsonConvert.DeserializeObject<List<Question>>(value);
+                    questions.Add(newQuestion);
+
+                    var _newQuestions = JsonConvert.SerializeObject(questions);
+
+
+                    
+                    DataFileProvider.Replace(questionsDataFilePath, _newQuestions, false);
                     MessageBox.Show("Добавлен вопрос!", "Гений - идиот");
-                    QuestionsStorage.GetQuestionsFromDataFile(value, fileName, questionsDataGridView);
+                    QuestionsStorage.GetQuestionsFromDataFile(questionsDataFilePath, questionsDataGridView);
+
                     return;
                 }
                 catch (Exception ex)

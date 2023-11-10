@@ -37,33 +37,37 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(75, 20);
+            label1.Location = new Point(107, 33);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(118, 15);
+            label1.Size = new Size(180, 25);
             label1.TabIndex = 0;
             label1.Text = "Добро пожаловать! ";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(57, 56);
+            label2.Location = new Point(81, 93);
+            label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(156, 15);
+            label2.Size = new Size(235, 25);
             label2.TabIndex = 1;
             label2.Text = "Введите имя пользователя!";
             // 
             // userNameTextBox
             // 
-            userNameTextBox.Location = new Point(34, 103);
+            userNameTextBox.Location = new Point(49, 172);
+            userNameTextBox.Margin = new Padding(4, 5, 4, 5);
             userNameTextBox.Name = "userNameTextBox";
-            userNameTextBox.Size = new Size(212, 23);
+            userNameTextBox.Size = new Size(301, 31);
             userNameTextBox.TabIndex = 2;
             // 
             // startButton
             // 
-            startButton.Location = new Point(34, 141);
+            startButton.Location = new Point(49, 235);
+            startButton.Margin = new Padding(4, 5, 4, 5);
             startButton.Name = "startButton";
-            startButton.Size = new Size(212, 23);
+            startButton.Size = new Size(303, 38);
             startButton.TabIndex = 3;
             startButton.Text = "Начать тест";
             startButton.UseVisualStyleBackColor = true;
@@ -71,13 +75,15 @@
             // 
             // HelloForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(285, 189);
+            ClientSize = new Size(407, 315);
+            ControlBox = false;
             Controls.Add(startButton);
             Controls.Add(userNameTextBox);
             Controls.Add(label2);
             Controls.Add(label1);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "HelloForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Гений - идиот";

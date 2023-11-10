@@ -28,6 +28,15 @@ namespace GeniyIdiot.Common
         }
 
 
+        public static void Replace(string fileName, string value, bool rewrite)
+        {
+            using (StreamWriter writer = new StreamWriter(fileName))
+            {
+                writer.WriteLine(value);
+                writer.Close();
+            }
+        }
+
         public static string GetValue(string fileName)
         {
             var reader = new StreamReader(fileName, Encoding.UTF8);
