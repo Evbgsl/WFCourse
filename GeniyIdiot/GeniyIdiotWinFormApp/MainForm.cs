@@ -96,6 +96,7 @@ namespace GeniyIdiotWinFormApp
             }
 
             questionNumberLabel.Text = $"Вопрос номер 1";
+            timer1.Tick += timer1_Tick;
             ShowNextQuestion();
         }
 
@@ -158,26 +159,46 @@ namespace GeniyIdiotWinFormApp
         //Работа с вопросами
         private void ShowNextQuestion()
         {
+            timer1.Stop();
+            timer1.Enabled = false;
+            progressBar1.Value = 0;
+
+            timer1.Interval = 1000;
+            timer1.Start();
+            timer1.Enabled = true;
+            
+
             userAnswerTextBox.Text = null;
             questionNumber++;
             questionNumberLabel.Text = $"Вопрос номер {questionNumber}";
-
 
             var random = new Random();
             var _countQuestions = questions.Count;
             if (_countQuestions == 0)
             {
+                timer1.Stop();
+                timer1.Enabled = false;
                 MessageBox.Show("Вопросы кончились, перезапустите тест", "Гений - идиот");
                 return;
-
             }
-
             var randomIndex = random.Next(_countQuestions);
             questionTextLabel.Text = questions[randomIndex].Text;
-            //questionTextLabel.Location = new Point((this.ClientSize.Width - questionTextLabel.Width) / 2, (this.ClientSize.Height - questionTextLabel.Height) / 2);
-            //questionTextLabel.AutoSize = true;
             rightAnswer = questions[randomIndex].Answer;
             questions.RemoveAt(randomIndex);
+        }
+
+        private void timer1_Tick(object? sender, EventArgs e)
+        {
+            progressBar1.PerformStep();
+
+            if (progressBar1.Value == progressBar1.Maximum)
+            {
+                timer1.Stop();
+                timer1.Enabled = false;
+                ShowNextQuestion();
+
+
+            }
         }
 
         private void показатьВопросыToolStripMenuItem_Click(object sender, EventArgs e)
