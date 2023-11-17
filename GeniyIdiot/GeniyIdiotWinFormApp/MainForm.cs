@@ -139,8 +139,7 @@ namespace GeniyIdiotWinFormApp
                         var _userResults = JsonConvert.SerializeObject(usersResults);
                         DataFileProvider.Replace(resultsDataFilePath, _userResults, false);
 
-                        MessageBox.Show($"Тест окончен. Количество правильных ответов {countQuestions}. Ваш диагноз - {userDiagnose}", "Гений - идиот");
-                        nextButton.Enabled = false;
+                        StopTheTest(userDiagnose);
 
                         return;
                     }
@@ -154,11 +153,25 @@ namespace GeniyIdiotWinFormApp
             }
         }
 
+        private void StopTheTest(string userDiagnose)
+        {
+            timer1.Stop();
+            timer1.Enabled = false;
+            progressBar1.Visible = false;
+            MessageBox.Show($"Тест окончен. Количество правильных ответов {countQuestions}. Ваш диагноз - {userDiagnose}", "Гений - идиот");
+            nextButton.Enabled = false;
+            userAnswerTextBox.Enabled = false;
+
+            finishLabel.Text = $"{user.Name}, {userDiagnose}, для тебя тест закончен, начни заново!";
+            finishLabel.Visible = true;
+        }
+
 
 
         //Работа с вопросами
         private void ShowNextQuestion()
         {
+            progressBar1.Visible = true;
             timer1.Stop();
             timer1.Enabled = false;
             progressBar1.Value = 0;
@@ -166,7 +179,7 @@ namespace GeniyIdiotWinFormApp
             timer1.Interval = 1000;
             timer1.Start();
             timer1.Enabled = true;
-            
+
 
             userAnswerTextBox.Text = null;
             questionNumber++;
