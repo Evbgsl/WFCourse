@@ -113,7 +113,8 @@ namespace GeniyIdiotWinFormApp
 
         }
 
-        private void nextButton_Click(object sender, EventArgs e)
+
+        private void nextButton_Click_1(object sender, EventArgs e)
         {
             NextStep();
 
@@ -227,7 +228,7 @@ namespace GeniyIdiotWinFormApp
             if (progressBar1.Value == progressBar1.Maximum)
             {
                 timer1.Stop();
-                
+
                 timer1.Enabled = false;
                 ShowNextQuestion();
             }

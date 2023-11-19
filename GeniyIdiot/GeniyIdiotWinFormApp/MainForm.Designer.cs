@@ -62,6 +62,7 @@
             nextButton.TabIndex = 0;
             nextButton.Text = "Далее...";
             nextButton.UseVisualStyleBackColor = true;
+            nextButton.Click += nextButton_Click_1;
             // 
             // questionNumberLabel
             // 
