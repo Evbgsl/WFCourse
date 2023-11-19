@@ -46,6 +46,7 @@ namespace GeniyIdiotWinFormApp
         public MainForm()
         {
             InitializeComponent();
+
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -56,9 +57,9 @@ namespace GeniyIdiotWinFormApp
 
 
 
-
             helloForm.ShowDialog();
             user = new User(helloForm.userNameTextBox.Text, "", 0);
+            userAnswerTextBox.Focus();
 
             fileName = @"datafile.txt";
             questionsDataFilePath = @"questionsDataFile.json";
@@ -96,61 +97,90 @@ namespace GeniyIdiotWinFormApp
             }
 
             questionNumberLabel.Text = $"Вопрос номер 1";
+
+            timer1.Tick += timer1_Tick;
+
             ShowNextQuestion();
+
         }
 
-        private void nextButton_Click(object sender, EventArgs e)
+        private void userAnswerTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-
+            if (e.KeyCode == Keys.Enter)
             {
-                try
+                NextStep();
+            }
+
+        }
+
+
+        private void nextButton_Click_1(object sender, EventArgs e)
+        {
+            NextStep();
+
+        }
+
+        private void NextStep()
+        {
+            try
+            {
+                var userAnswer = Convert.ToInt32(userAnswerTextBox.Text);
+                if (userAnswer == rightAnswer)
                 {
-                    var userAnswer = Convert.ToInt32(userAnswerTextBox.Text);
-                    if (userAnswer == rightAnswer)
-                    {
-                        countRightAnswers++;
-                    }
-                    var endTest = questions.Count == 0;
-                    if (endTest)
-                    {
-
-                        var percentOfRightAnswers = 100 * countRightAnswers / countQuestions;
-                        var userDiagnose = DiagnoseStorage.GetDiagnose(diagnoses, percentOfRightAnswers);
-
-
-                        user.Diagnose = userDiagnose;
-                        user.PercentOfRightAnswers = percentOfRightAnswers;
-                        var usersResults = new List<User>();
-
-                        if (!File.Exists(resultsDataFilePath))
-                        {
-                            usersResults = new List<User>();
-                        }
-                        else
-                        {
-                            value = DataFileProvider.GetValue(resultsDataFilePath);
-                            usersResults = JsonConvert.DeserializeObject<List<User>>(value);
-
-                        }
-
-                        usersResults.Add(user);
-
-                        var _userResults = JsonConvert.SerializeObject(usersResults);
-                        DataFileProvider.Replace(resultsDataFilePath, _userResults, false);
-
-                        MessageBox.Show($"Тест окончен. Количество правильных ответов {countQuestions}. Ваш диагноз - {userDiagnose}", "Гений - идиот");
-                        nextButton.Enabled = false;
-
-                        return;
-                    }
-                    ShowNextQuestion();
+                    countRightAnswers++;
                 }
-                catch (Exception ex)
+                var endTest = questions.Count == 0;
+                if (endTest)
                 {
-                    MessageBox.Show("Некорректный формат числа", "Гений - идиот");
+
+                    var percentOfRightAnswers = 100 * countRightAnswers / countQuestions;
+                    var userDiagnose = DiagnoseStorage.GetDiagnose(diagnoses, percentOfRightAnswers);
+
+
+                    user.Diagnose = userDiagnose;
+                    user.PercentOfRightAnswers = percentOfRightAnswers;
+                    var usersResults = new List<User>();
+
+                    if (!File.Exists(resultsDataFilePath))
+                    {
+                        usersResults = new List<User>();
+                    }
+                    else
+                    {
+                        value = DataFileProvider.GetValue(resultsDataFilePath);
+                        usersResults = JsonConvert.DeserializeObject<List<User>>(value);
+
+                    }
+
+                    usersResults.Add(user);
+
+                    var _userResults = JsonConvert.SerializeObject(usersResults);
+                    DataFileProvider.Replace(resultsDataFilePath, _userResults, false);
+
+                    StopTheTest(userDiagnose);
+
                     return;
                 }
+                ShowNextQuestion();
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Некорректный формат числа", "Гений - идиот");
+                return;
+            }
+        }
+
+        private void StopTheTest(string userDiagnose)
+        {
+            timer1.Stop();
+            timer1.Enabled = false;
+            progressBar1.Visible = false;
+            MessageBox.Show($"Тест окончен. Количество правильных ответов {countRightAnswers}. Ваш диагноз - {userDiagnose}", "Гений - идиот");
+            nextButton.Enabled = false;
+            userAnswerTextBox.Enabled = false;
+
+            finishLabel.Text = $"{user.Name}, ты - {userDiagnose.ToLower()}, тест закончен, начни заново!";
+            finishLabel.Visible = true;
         }
 
 
@@ -158,26 +188,50 @@ namespace GeniyIdiotWinFormApp
         //Работа с вопросами
         private void ShowNextQuestion()
         {
+            progressBar1.Visible = true;
+            timer1.Stop();
+            timer1.Enabled = false;
+            progressBar1.Value = 0;
+
+            timer1.Interval = 1000;
+            timer1.Start();
+            timer1.Enabled = true;
+
+
             userAnswerTextBox.Text = null;
             questionNumber++;
             questionNumberLabel.Text = $"Вопрос номер {questionNumber}";
+
 
 
             var random = new Random();
             var _countQuestions = questions.Count;
             if (_countQuestions == 0)
             {
+                timer1.Stop();
+                timer1.Enabled = false;
                 MessageBox.Show("Вопросы кончились, перезапустите тест", "Гений - идиот");
                 return;
-
             }
-
             var randomIndex = random.Next(_countQuestions);
             questionTextLabel.Text = questions[randomIndex].Text;
-            //questionTextLabel.Location = new Point((this.ClientSize.Width - questionTextLabel.Width) / 2, (this.ClientSize.Height - questionTextLabel.Height) / 2);
-            //questionTextLabel.AutoSize = true;
             rightAnswer = questions[randomIndex].Answer;
             questions.RemoveAt(randomIndex);
+        }
+
+        private void timer1_Tick(object? sender, EventArgs e)
+        {
+            userAnswerTextBox.Focus();
+            progressBar1.PerformStep();
+
+
+            if (progressBar1.Value == progressBar1.Maximum)
+            {
+                timer1.Stop();
+
+                timer1.Enabled = false;
+                ShowNextQuestion();
+            }
         }
 
         private void показатьВопросыToolStripMenuItem_Click(object sender, EventArgs e)
@@ -291,6 +345,11 @@ namespace GeniyIdiotWinFormApp
         }
 
 
+        //Test 1
+        //test 2
+        //test 3
+
+
         //Работа с меню
         private void ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -323,6 +382,8 @@ namespace GeniyIdiotWinFormApp
         {
 
         }
+
+
     }
 
 }

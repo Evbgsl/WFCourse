@@ -61,6 +61,7 @@
             userNameTextBox.Name = "userNameTextBox";
             userNameTextBox.Size = new Size(301, 31);
             userNameTextBox.TabIndex = 2;
+            userNameTextBox.KeyDown += userNameTextBox_KeyDown;
             // 
             // startButton
             // 
