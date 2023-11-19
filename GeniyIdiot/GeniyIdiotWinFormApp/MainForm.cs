@@ -174,11 +174,11 @@ namespace GeniyIdiotWinFormApp
             timer1.Stop();
             timer1.Enabled = false;
             progressBar1.Visible = false;
-            MessageBox.Show($"Тест окончен. Количество правильных ответов {countQuestions}. Ваш диагноз - {userDiagnose}", "Гений - идиот");
+            MessageBox.Show($"Тест окончен. Количество правильных ответов {countRightAnswers}. Ваш диагноз - {userDiagnose}", "Гений - идиот");
             nextButton.Enabled = false;
             userAnswerTextBox.Enabled = false;
 
-            finishLabel.Text = $"{user.Name}, {userDiagnose.ToLower()}, для тебя тест закончен, начни заново!";
+            finishLabel.Text = $"{user.Name}, ты - {userDiagnose.ToLower()}, тест закончен, начни заново!";
             finishLabel.Visible = true;
         }
 
