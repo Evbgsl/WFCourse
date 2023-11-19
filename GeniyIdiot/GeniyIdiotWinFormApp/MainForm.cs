@@ -227,10 +227,9 @@ namespace GeniyIdiotWinFormApp
             if (progressBar1.Value == progressBar1.Maximum)
             {
                 timer1.Stop();
+                
                 timer1.Enabled = false;
                 ShowNextQuestion();
-
-
             }
         }
 
