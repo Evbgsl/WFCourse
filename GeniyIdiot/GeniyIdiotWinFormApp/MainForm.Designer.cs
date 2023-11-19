@@ -58,7 +58,7 @@
             nextButton.Location = new Point(24, 227);
             nextButton.Margin = new Padding(4, 5, 4, 5);
             nextButton.Name = "nextButton";
-            nextButton.Size = new Size(751, 63);
+            nextButton.Size = new Size(941, 63);
             nextButton.TabIndex = 0;
             nextButton.Text = "Далее...";
             nextButton.UseVisualStyleBackColor = true;
@@ -67,7 +67,7 @@
             // 
             questionNumberLabel.AutoSize = true;
             questionNumberLabel.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            questionNumberLabel.Location = new Point(334, 58);
+            questionNumberLabel.Location = new Point(13, 44);
             questionNumberLabel.Margin = new Padding(4, 0, 4, 0);
             questionNumberLabel.Name = "questionNumberLabel";
             questionNumberLabel.Size = new Size(108, 25);
@@ -77,18 +77,18 @@
             // questionTextLabel
             // 
             questionTextLabel.Anchor = AnchorStyles.Top;
-            questionTextLabel.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            questionTextLabel.Location = new Point(55, 112);
+            questionTextLabel.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Regular, GraphicsUnit.Point);
+            questionTextLabel.Location = new Point(31, 82);
             questionTextLabel.Margin = new Padding(4, 0, 4, 0);
             questionTextLabel.Name = "questionTextLabel";
-            questionTextLabel.Size = new Size(666, 32);
+            questionTextLabel.Size = new Size(926, 93);
             questionTextLabel.TabIndex = 2;
             questionTextLabel.Text = "Текст вопроса";
             questionTextLabel.TextAlign = ContentAlignment.TopCenter;
             // 
             // userAnswerTextBox
             // 
-            userAnswerTextBox.Location = new Point(440, 170);
+            userAnswerTextBox.Location = new Point(515, 175);
             userAnswerTextBox.Margin = new Padding(4, 5, 4, 5);
             userAnswerTextBox.Name = "userAnswerTextBox";
             userAnswerTextBox.Size = new Size(55, 31);
@@ -101,7 +101,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { toolStripMenuItem1 });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(785, 33);
+            menuStrip1.Size = new Size(987, 33);
             menuStrip1.TabIndex = 4;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -156,7 +156,7 @@
             // 
             // addQuestionButton
             // 
-            addQuestionButton.Location = new Point(589, 408);
+            addQuestionButton.Location = new Point(779, 413);
             addQuestionButton.Margin = new Padding(4, 5, 4, 5);
             addQuestionButton.Name = "addQuestionButton";
             addQuestionButton.Size = new Size(186, 38);
@@ -168,7 +168,7 @@
             // 
             // answerTextBox
             // 
-            answerTextBox.Location = new Point(473, 417);
+            answerTextBox.Location = new Point(653, 417);
             answerTextBox.Margin = new Padding(4, 5, 4, 5);
             answerTextBox.Name = "answerTextBox";
             answerTextBox.Size = new Size(97, 31);
@@ -180,7 +180,7 @@
             questionTextBox.Location = new Point(24, 417);
             questionTextBox.Margin = new Padding(4, 5, 4, 5);
             questionTextBox.Name = "questionTextBox";
-            questionTextBox.Size = new Size(441, 31);
+            questionTextBox.Size = new Size(612, 31);
             questionTextBox.TabIndex = 11;
             questionTextBox.Visible = false;
             // 
@@ -200,7 +200,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(273, 175);
+            label1.Location = new Point(331, 181);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
             label1.Size = new Size(134, 25);
@@ -217,7 +217,7 @@
             progressBar1.Location = new Point(24, 316);
             progressBar1.Maximum = 10;
             progressBar1.Name = "progressBar1";
-            progressBar1.Size = new Size(751, 40);
+            progressBar1.Size = new Size(941, 40);
             progressBar1.Step = 1;
             progressBar1.TabIndex = 13;
             // 
@@ -226,7 +226,7 @@
             finishLabel.Anchor = AnchorStyles.None;
             finishLabel.AutoSize = true;
             finishLabel.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            finishLabel.Location = new Point(24, 316);
+            finishLabel.Location = new Point(125, 316);
             finishLabel.Margin = new Padding(4, 0, 4, 0);
             finishLabel.Name = "finishLabel";
             finishLabel.Size = new Size(162, 32);
@@ -238,7 +238,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(785, 459);
+            ClientSize = new Size(987, 459);
             Controls.Add(finishLabel);
             Controls.Add(progressBar1);
             Controls.Add(label1);
