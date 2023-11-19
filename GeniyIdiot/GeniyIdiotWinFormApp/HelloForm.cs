@@ -31,5 +31,29 @@ namespace GeniyIdiotWinFormApp
                 Close();
             }
         }
+
+        private void userNameTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+
+                if (string.IsNullOrEmpty(userNameTextBox.Text))
+                {
+                    MessageBox.Show("Введите имя пользователя", "Гений - идиот");
+                    return;
+                }
+                {
+                    Close();
+                }
+                
+                // Ваш код для обработки нажатия Enter
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+            }
+
+
+
+
+        }
     }
 }
