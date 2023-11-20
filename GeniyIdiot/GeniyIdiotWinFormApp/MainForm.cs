@@ -41,6 +41,7 @@ namespace GeniyIdiotWinFormApp
 
 
         //Основная логика
+        //test
         public MainForm()
         {
             InitializeComponent();
