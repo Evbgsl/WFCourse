@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             questionsDataGridView = new DataGridView();
-            DeleteQuestionButton = new Button();
-            deleteQuestionLabel = new Label();
             IdQuestion = new DataGridViewTextBoxColumn();
             Question = new DataGridViewTextBoxColumn();
             Answer = new DataGridViewTextBoxColumn();
+            DeleteQuestionButton = new Button();
+            deleteQuestionLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)questionsDataGridView).BeginInit();
             SuspendLayout();
             // 
@@ -44,35 +44,12 @@
             questionsDataGridView.Columns.AddRange(new DataGridViewColumn[] { IdQuestion, Question, Answer });
             questionsDataGridView.Dock = DockStyle.Top;
             questionsDataGridView.Location = new Point(0, 0);
-            questionsDataGridView.Margin = new Padding(2);
             questionsDataGridView.Name = "questionsDataGridView";
             questionsDataGridView.RowHeadersWidth = 62;
             questionsDataGridView.RowTemplate.Height = 33;
-            questionsDataGridView.Size = new Size(425, 261);
+            questionsDataGridView.Size = new Size(607, 435);
             questionsDataGridView.TabIndex = 2;
             questionsDataGridView.SelectionChanged += questionsDataGridView_SelectionChanged;
-            // 
-            // DeleteQuestionButton
-            // 
-            DeleteQuestionButton.Enabled = false;
-            DeleteQuestionButton.Location = new Point(322, 280);
-            DeleteQuestionButton.Margin = new Padding(2);
-            DeleteQuestionButton.Name = "DeleteQuestionButton";
-            DeleteQuestionButton.Size = new Size(98, 28);
-            DeleteQuestionButton.TabIndex = 12;
-            DeleteQuestionButton.Text = "Удалить";
-            DeleteQuestionButton.UseVisualStyleBackColor = true;
-            DeleteQuestionButton.Click += DeleteQuestionButton_Click;
-            // 
-            // deleteQuestionLabel
-            // 
-            deleteQuestionLabel.AutoSize = true;
-            deleteQuestionLabel.Location = new Point(11, 287);
-            deleteQuestionLabel.Margin = new Padding(2, 0, 2, 0);
-            deleteQuestionLabel.Name = "deleteQuestionLabel";
-            deleteQuestionLabel.Size = new Size(307, 15);
-            deleteQuestionLabel.TabIndex = 11;
-            deleteQuestionLabel.Text = "Выделите строку с вопросом, который нужно удалить";
             // 
             // IdQuestion
             // 
@@ -98,14 +75,35 @@
             Answer.Name = "Answer";
             Answer.Width = 50;
             // 
+            // DeleteQuestionButton
+            // 
+            DeleteQuestionButton.Enabled = false;
+            DeleteQuestionButton.Location = new Point(460, 467);
+            DeleteQuestionButton.Name = "DeleteQuestionButton";
+            DeleteQuestionButton.Size = new Size(140, 47);
+            DeleteQuestionButton.TabIndex = 12;
+            DeleteQuestionButton.Text = "Удалить";
+            DeleteQuestionButton.UseVisualStyleBackColor = true;
+            DeleteQuestionButton.Click += DeleteQuestionButton_Click;
+            // 
+            // deleteQuestionLabel
+            // 
+            deleteQuestionLabel.AutoSize = true;
+            deleteQuestionLabel.Location = new Point(16, 478);
+            deleteQuestionLabel.Name = "deleteQuestionLabel";
+            deleteQuestionLabel.Size = new Size(459, 25);
+            deleteQuestionLabel.TabIndex = 11;
+            deleteQuestionLabel.Text = "Выделите строку с вопросом, который нужно удалить";
+            // 
             // QuestionsForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(425, 325);
+            ClientSize = new Size(607, 542);
             Controls.Add(DeleteQuestionButton);
             Controls.Add(deleteQuestionLabel);
             Controls.Add(questionsDataGridView);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "QuestionsForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "QuestionsForm";

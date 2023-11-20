@@ -49,7 +49,10 @@
             timer1 = new System.Windows.Forms.Timer(components);
             progressBar1 = new ProgressBar();
             finishLabel = new Label();
+            resultPanel = new Panel();
+            diagnoseLabel = new Label();
             menuStrip1.SuspendLayout();
+            resultPanel.SuspendLayout();
             SuspendLayout();
             // 
             // nextButton
@@ -68,7 +71,7 @@
             // 
             questionNumberLabel.AutoSize = true;
             questionNumberLabel.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            questionNumberLabel.Location = new Point(13, 44);
+            questionNumberLabel.Location = new Point(24, 44);
             questionNumberLabel.Margin = new Padding(4, 0, 4, 0);
             questionNumberLabel.Name = "questionNumberLabel";
             questionNumberLabel.Size = new Size(108, 25);
@@ -224,23 +227,45 @@
             // 
             // finishLabel
             // 
-            finishLabel.Anchor = AnchorStyles.None;
+            finishLabel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             finishLabel.AutoSize = true;
             finishLabel.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            finishLabel.Location = new Point(125, 316);
+            finishLabel.Location = new Point(41, 214);
             finishLabel.Margin = new Padding(4, 0, 4, 0);
             finishLabel.Name = "finishLabel";
             finishLabel.Size = new Size(162, 32);
             finishLabel.TabIndex = 14;
             finishLabel.Text = "Тест окончен";
-            finishLabel.Visible = false;
+            finishLabel.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // resultPanel
+            // 
+            resultPanel.Controls.Add(diagnoseLabel);
+            resultPanel.Controls.Add(finishLabel);
+            resultPanel.Location = new Point(24, 44);
+            resultPanel.Name = "resultPanel";
+            resultPanel.Size = new Size(941, 312);
+            resultPanel.TabIndex = 15;
+            resultPanel.Visible = false;
+            // 
+            // diagnoseLabel
+            // 
+            diagnoseLabel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            diagnoseLabel.AutoSize = true;
+            diagnoseLabel.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            diagnoseLabel.Location = new Point(50, 86);
+            diagnoseLabel.Name = "diagnoseLabel";
+            diagnoseLabel.Size = new Size(70, 28);
+            diagnoseLabel.TabIndex = 15;
+            diagnoseLabel.Text = "label2";
+            diagnoseLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(987, 459);
-            Controls.Add(finishLabel);
+            Controls.Add(resultPanel);
             Controls.Add(progressBar1);
             Controls.Add(label1);
             Controls.Add(addQuestionLabel);
@@ -260,6 +285,8 @@
             Load += MainForm_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
+            resultPanel.ResumeLayout(false);
+            resultPanel.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -286,5 +313,7 @@
         private System.Windows.Forms.Timer timer1;
         private ProgressBar progressBar1;
         private Label finishLabel;
+        private Panel resultPanel;
+        private Label diagnoseLabel;
     }
 }

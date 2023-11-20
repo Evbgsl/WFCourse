@@ -40,13 +40,10 @@ namespace GeniyIdiotWinFormApp
                                                 };
 
 
-
         //Основная логика
-
         public MainForm()
         {
             InitializeComponent();
-
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -54,8 +51,6 @@ namespace GeniyIdiotWinFormApp
             var helloForm = new HelloForm();
             questionsForm = new QuestionsForm();
             resultsForm = new ResultsForm();
-
-
 
             helloForm.ShowDialog();
             user = new User(helloForm.userNameTextBox.Text, "", 0);
@@ -67,13 +62,7 @@ namespace GeniyIdiotWinFormApp
 
             if (!File.Exists(questionsDataFilePath))
             {
-                questions = new List<Question>();
-                questions.Add(new Question("skddk", "Два плюс два умножить на два", 6));
-                questions.Add(new Question("skdd1", "Сколько нужно распилов, чтобы разделить бревно на 10 частей?", 9));
-                questions.Add(new Question("skd123", "На двух руках 10 пальцев. Сколько пальцев на 5 руках?", 25));
-                questions.Add(new Question("skddk554", "Укол делают 1 раз в 30 минут. Сколько нужно мин на 3 укола?", 60));
-
-
+                NewQuestionsWriter();
                 var _newQuestions = JsonConvert.SerializeObject(questions);
                 DataFileProvider.Replace(questionsDataFilePath, _newQuestions, false);
             }
@@ -85,11 +74,7 @@ namespace GeniyIdiotWinFormApp
 
             if (countQuestions == 0)
             {
-                questions = new List<Question>();
-                questions.Add(new Question("skddk", "Два плюс два умножить на два", 6));
-                questions.Add(new Question("skdd1", "Сколько нужно распилов, чтобы разделить бревно на 10 частей?", 9));
-                questions.Add(new Question("skd123", "На двух руках 10 пальцев. Сколько пальцев на 5 руках?", 25));
-                questions.Add(new Question("skddk554", "Укол делают 1 раз в 30 минут. Сколько нужно мин на 3 укола?", 60));
+                NewQuestionsWriter();
                 countQuestions = questions.Count;
                 MessageBox.Show($"Список вопросов был пуст, добавлены базовые вопросы.", "Гений - идиот");
                 var _baseQuestions = JsonConvert.SerializeObject(questions);
@@ -101,7 +86,6 @@ namespace GeniyIdiotWinFormApp
             timer1.Tick += timer1_Tick;
 
             ShowNextQuestion();
-
         }
 
         private void userAnswerTextBox_KeyDown(object sender, KeyEventArgs e)
@@ -110,14 +94,11 @@ namespace GeniyIdiotWinFormApp
             {
                 NextStep();
             }
-
         }
-
 
         private void nextButton_Click_1(object sender, EventArgs e)
         {
             NextStep();
-
         }
 
         private void NextStep()
@@ -132,33 +113,7 @@ namespace GeniyIdiotWinFormApp
                 var endTest = questions.Count == 0;
                 if (endTest)
                 {
-
-                    var percentOfRightAnswers = 100 * countRightAnswers / countQuestions;
-                    var userDiagnose = DiagnoseStorage.GetDiagnose(diagnoses, percentOfRightAnswers);
-
-
-                    user.Diagnose = userDiagnose;
-                    user.PercentOfRightAnswers = percentOfRightAnswers;
-                    var usersResults = new List<User>();
-
-                    if (!File.Exists(resultsDataFilePath))
-                    {
-                        usersResults = new List<User>();
-                    }
-                    else
-                    {
-                        value = DataFileProvider.GetValue(resultsDataFilePath);
-                        usersResults = JsonConvert.DeserializeObject<List<User>>(value);
-
-                    }
-
-                    usersResults.Add(user);
-
-                    var _userResults = JsonConvert.SerializeObject(usersResults);
-                    DataFileProvider.Replace(resultsDataFilePath, _userResults, false);
-
-                    StopTheTest(userDiagnose);
-
+                    EndTest();
                     return;
                 }
                 ShowNextQuestion();
@@ -170,22 +125,61 @@ namespace GeniyIdiotWinFormApp
             }
         }
 
-        private void StopTheTest(string userDiagnose)
+        private void EndTest()
         {
+            var percentOfRightAnswers = 100 * countRightAnswers / countQuestions;
+            var userDiagnose = DiagnoseStorage.GetDiagnose(diagnoses, percentOfRightAnswers);
+
+
+            user.Diagnose = userDiagnose;
+            user.PercentOfRightAnswers = percentOfRightAnswers;
+            var usersResults = new List<User>();
+
+            if (!File.Exists(resultsDataFilePath))
+            {
+                usersResults = new List<User>();
+            }
+            else
+            {
+                value = DataFileProvider.GetValue(resultsDataFilePath);
+                usersResults = JsonConvert.DeserializeObject<List<User>>(value);
+            }
+
+            usersResults.Add(user);
+
+            var _userResults = JsonConvert.SerializeObject(usersResults);
+            DataFileProvider.Replace(resultsDataFilePath, _userResults, false);
+
             timer1.Stop();
             timer1.Enabled = false;
             progressBar1.Visible = false;
-            MessageBox.Show($"Тест окончен. Количество правильных ответов {countRightAnswers}. Ваш диагноз - {userDiagnose}", "Гений - идиот");
-            nextButton.Enabled = false;
-            userAnswerTextBox.Enabled = false;
 
+            ShowResultEndTest(userDiagnose);
+
+            return;
+        }
+
+        private void ShowResultEndTest(string userDiagnose)
+        {
+            resultPanel.Visible = true;
+            diagnoseLabel.Text = $"Тест окончен. Количество правильных ответов {countRightAnswers}. Ваш диагноз - {userDiagnose}";
             finishLabel.Text = $"{user.Name}, ты - {userDiagnose.ToLower()}, тест закончен, начни заново!";
-            finishLabel.Visible = true;
         }
 
 
-
         //Работа с вопросами
+        private void NewQuestionsWriter()
+        {
+            questions = new List<Question>
+            {
+                new Question("aa1234", "Два плюс два умножить на два", 6),
+                new Question("ab1234", "Сколько нужно распилов, чтобы разделить бревно на 10 частей?", 9),
+                new Question("ac1234", "На двух руках 10 пальцев. Сколько пальцев на 5 руках?", 25),
+                new Question("ad1234", "Укол делают 1 раз в 30 минут. Сколько нужно мин на 3 укола?", 60),
+                new Question("ae1234", "Пять свечей горело, две потухли. Сколько свечей осталось?", 2)
+            };
+        }
+
         private void ShowNextQuestion()
         {
             progressBar1.Visible = true;
@@ -197,20 +191,18 @@ namespace GeniyIdiotWinFormApp
             timer1.Start();
             timer1.Enabled = true;
 
-
             userAnswerTextBox.Text = null;
             questionNumber++;
             questionNumberLabel.Text = $"Вопрос номер {questionNumber}";
 
-
-
             var random = new Random();
             var _countQuestions = questions.Count;
+
             if (_countQuestions == 0)
             {
                 timer1.Stop();
                 timer1.Enabled = false;
-                MessageBox.Show("Вопросы кончились, перезапустите тест", "Гений - идиот");
+                EndTest();
                 return;
             }
             var randomIndex = random.Next(_countQuestions);
@@ -219,37 +211,17 @@ namespace GeniyIdiotWinFormApp
             questions.RemoveAt(randomIndex);
         }
 
-        private void timer1_Tick(object? sender, EventArgs e)
-        {
-            userAnswerTextBox.Focus();
-            progressBar1.PerformStep();
-
-
-            if (progressBar1.Value == progressBar1.Maximum)
-            {
-                timer1.Stop();
-
-                timer1.Enabled = false;
-                ShowNextQuestion();
-            }
-        }
-
         private void показатьВопросыToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-
             QuestionsStorage.GetQuestionsFromDataFile(questionsDataFilePath, questionsForm.questionsDataGridView);
             if (questionsForm.questionsDataGridView.Rows.Count < 2)
             {
                 MessageBox.Show("Вопросы кончились, перезапустите тест", "Гений - идиот");
                 return;
-
             }
             questionsForm.Show();
-
             questionsForm.questionsDataGridViewSelectionChanged += QuestionsDataGridView_SelectionChanged;
             questionsForm.DeleteQuestionButtonClickEvent += QuestionsForm_DeleteQuestionButtonClickEvent;
-
         }
 
         private void QuestionsForm_DeleteQuestionButtonClickEvent(object? sender, EventArgs e)
@@ -274,18 +246,14 @@ namespace GeniyIdiotWinFormApp
 
         private void QuestionsDataGridView_SelectionChanged(object? sender, EventArgs e)
         {
-
             if (questionsForm.questionsDataGridView.SelectedRows.Count > 0)
             {
                 questionsForm.DeleteQuestionButton.Enabled = true;
             }
         }
 
-
         private void добавитьВопросToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //questionsForm.Show();
-
             addQuestionButton.Visible = true;
             answerTextBox.Visible = true;
             questionTextBox.Visible = true;
@@ -294,7 +262,6 @@ namespace GeniyIdiotWinFormApp
 
         private void addQuestionButton_Click(object sender, EventArgs e)
         {
-
             if (!string.IsNullOrEmpty(answerTextBox.Text) && !string.IsNullOrEmpty(questionTextBox.Text))
             {
 
@@ -326,7 +293,6 @@ namespace GeniyIdiotWinFormApp
 
 
         //Работа с результатами 
-
         private void ShowResults()
         {
             resultsForm.resultDataGridView.Rows.Clear();
@@ -338,16 +304,8 @@ namespace GeniyIdiotWinFormApp
             {
                 resultsForm.resultDataGridView.Rows.Add(user.Name, user.PercentOfRightAnswers, user.Diagnose);
             }
-            //resultPanel.Visible = true;
-
-            //resultDataGridView.Visible = true;
             resultsForm.Show();
         }
-
-
-        //Test 1
-        //test 2
-        //test 3
 
 
         //Работа с меню
@@ -355,7 +313,6 @@ namespace GeniyIdiotWinFormApp
         {
             MessageBox.Show("Супер тест 2023", "Гений - идиот");
             return;
-
         }
 
         private void начатьЗановоToolStripMenuItem_Click(object sender, EventArgs e)
@@ -373,17 +330,20 @@ namespace GeniyIdiotWinFormApp
             ShowResults();
         }
 
-        private void deleteQuestionLabel_Click(object sender, EventArgs e)
+        //Таймер
+        private void timer1_Tick(object? sender, EventArgs e)
         {
+            userAnswerTextBox.Focus();
+            progressBar1.PerformStep();
 
+
+            if (progressBar1.Value == progressBar1.Maximum)
+            {
+                timer1.Stop();
+                timer1.Enabled = false;
+                ShowNextQuestion();
+            }
         }
-
-        private void resultDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-
     }
 
 }
