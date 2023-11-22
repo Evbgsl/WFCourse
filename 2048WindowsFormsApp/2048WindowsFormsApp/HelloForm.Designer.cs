@@ -37,36 +37,41 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(68, 28);
+            this.label1.Location = new System.Drawing.Point(102, 43);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(138, 16);
+            this.label1.Size = new System.Drawing.Size(201, 25);
             this.label1.TabIndex = 0;
             this.label1.Text = "Введите имя игрока";
             // 
             // userNameTextBox
             // 
-            this.userNameTextBox.Location = new System.Drawing.Point(84, 78);
+            this.userNameTextBox.Location = new System.Drawing.Point(126, 120);
+            this.userNameTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.userNameTextBox.Name = "userNameTextBox";
-            this.userNameTextBox.Size = new System.Drawing.Size(100, 20);
+            this.userNameTextBox.Size = new System.Drawing.Size(148, 26);
             this.userNameTextBox.TabIndex = 1;
             // 
             // startButton
             // 
-            this.startButton.Location = new System.Drawing.Point(71, 124);
+            this.startButton.Location = new System.Drawing.Point(106, 191);
+            this.startButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(135, 23);
+            this.startButton.Size = new System.Drawing.Size(202, 35);
             this.startButton.TabIndex = 2;
             this.startButton.Text = "Начать игру!";
             this.startButton.UseVisualStyleBackColor = true;
+            this.startButton.Click += new System.EventHandler(this.startButton_Click);
             // 
             // HelloForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(275, 191);
+            this.ClientSize = new System.Drawing.Size(412, 294);
             this.Controls.Add(this.startButton);
             this.Controls.Add(this.userNameTextBox);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "HelloForm";
             this.Text = "HelloForm";
             this.ResumeLayout(false);

@@ -30,8 +30,7 @@ namespace _2048WindowsFormsApp
         private void MainForm_Load(object sender, EventArgs e)
         {
 
-            var helloForm = new HelloForm();
-            helloForm.ShowDialog();
+       
 
 
 
