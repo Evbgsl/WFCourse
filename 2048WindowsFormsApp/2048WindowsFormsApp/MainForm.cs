@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -321,21 +322,36 @@ namespace _2048WindowsFormsApp
 
         private void правилаИгрыToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
-            
-            var rulesForm = new Form();
-            rulesForm.Size = new Size(640, 480);
-            rulesForm.StartPosition = FormStartPosition.CenterScreen;
-            rulesForm.Text = "2048";
-            
-            var rulesTextBox = new RichTextBox();
-            rulesTextBox.Dock = DockStyle.Fill;
+            var rulesOfGame2048 = @"rulesOfGame2048.json";
+            if (!File.Exists(rulesOfGame2048))
+            {
+                MessageBox.Show("Сегодня правила не завезли, разбирайтесь сами.", "2048");
+            }
+            else 
+            {
+                var rulesForm = new Form();
+                rulesForm.Size = new Size(640, 480);
+                rulesForm.StartPosition = FormStartPosition.CenterScreen;
+                rulesForm.Text = "2048";
 
-            rulesForm.Controls.Add(rulesTextBox);
+                var rulesTextBox = new RichTextBox();
+                rulesTextBox.Dock = DockStyle.Fill;
 
-            rulesTextBox.Text = "Правила игры 2048";
+                rulesForm.Controls.Add(rulesTextBox);
 
-            rulesForm.ShowDialog();
+                var value = DataFileProvider.GetValue(rulesOfGame2048);
+                rulesTextBox.Text = value;
+
+                rulesForm.ShowDialog();
+            
+
+            }
+
         }
+
+       
     }
+
+
+
 }
