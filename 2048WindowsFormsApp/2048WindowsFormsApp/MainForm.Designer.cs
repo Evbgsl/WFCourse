@@ -80,20 +80,23 @@
             // начатьЗановоToolStripMenuItem
             // 
             this.начатьЗановоToolStripMenuItem.Name = "начатьЗановоToolStripMenuItem";
-            this.начатьЗановоToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.начатьЗановоToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.начатьЗановоToolStripMenuItem.Text = "Начать заново";
+            this.начатьЗановоToolStripMenuItem.Click += new System.EventHandler(this.начатьЗановоToolStripMenuItem_Click);
             // 
             // правилаИгрыToolStripMenuItem
             // 
             this.правилаИгрыToolStripMenuItem.Name = "правилаИгрыToolStripMenuItem";
-            this.правилаИгрыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.правилаИгрыToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.правилаИгрыToolStripMenuItem.Text = "Правила игры";
+            this.правилаИгрыToolStripMenuItem.Click += new System.EventHandler(this.правилаИгрыToolStripMenuItem_Click);
             // 
             // выходToolStripMenuItem
             // 
             this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            this.выходToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.выходToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.выходToolStripMenuItem.Text = "Выход";
+            this.выходToolStripMenuItem.Click += new System.EventHandler(this.выходToolStripMenuItem_Click);
             // 
             // MainForm
             // 

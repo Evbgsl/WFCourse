@@ -305,5 +305,20 @@ namespace _2048WindowsFormsApp
             GenerateNumber();
             ShowScore();
         }
+
+        private void начатьЗановоToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
+        }
+
+        private void выходToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void правилаИгрыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Вывести правила игры");
+        }
     }
 }
