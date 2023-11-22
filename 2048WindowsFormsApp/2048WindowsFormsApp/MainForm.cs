@@ -17,11 +17,19 @@ namespace _2048WindowsFormsApp
         private Label[,] labelsMap;
         private static Random random = new Random();
         private int score;
+        private int numberedLabelsCounter;
         
         public MainForm()
         {
             InitializeComponent();
+            var helloForm = new HelloForm();
+            helloForm.ShowDialog();
+
+            //using HelloForm
         }
+
+        
+
 
         private void MainForm_Load(object sender, EventArgs e)
         {
@@ -307,7 +315,7 @@ namespace _2048WindowsFormsApp
             var rulesOfGame2048 = @"rulesOfGame2048.json";
             if (!File.Exists(rulesOfGame2048))
             {
-                MessageBox.Show("Сегодня правила не завезли, разбирайтесь сами.", "2048");
+                MessageBox.Show("Сегодня правила не завезли, разбирайтесь сами", "2048");
             }
             else 
             {
@@ -332,7 +340,7 @@ namespace _2048WindowsFormsApp
         //Helpers
         private void GenerateNumber()
         {
-            while (true)
+            while (true && CheckEmptyLabels())
             {
                 var randomNumberLabel = random.Next(mapSize * mapSize);
                 var indexRow = randomNumberLabel / mapSize;
@@ -341,6 +349,7 @@ namespace _2048WindowsFormsApp
                 if (labelsMap[indexRow, indexColumn].Text == string.Empty)
                 {
                     labelsMap[indexRow, indexColumn].Text = GenererateRandom2_4().ToString();
+                    numberedLabelsCounter++;
                     break;
                 }
             }
@@ -353,6 +362,28 @@ namespace _2048WindowsFormsApp
             int index = rand.Next(0, A.Length);
             int result = A[index];
             return result;
+        }
+
+        private bool CheckEmptyLabels()
+        {
+            var flag = false;
+            for (int i = 0; i < mapSize; i++)
+            {
+                for (int j = 0; j < mapSize; j++)
+                {
+                    if (labelsMap[i, j].Text == string.Empty)
+                    {
+                        flag = true;
+                        break;
+                    }
+                }
+            }
+
+            if (!flag)
+            {
+                MessageBox.Show("Игра закончена", "2048");            
+            }
+            return flag;
         }
 
     }
