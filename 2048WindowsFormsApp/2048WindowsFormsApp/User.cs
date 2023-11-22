@@ -10,5 +10,12 @@ namespace _2048WindowsFormsApp
     {
         public string Name { get; set; }
         public int Result { get; set; }
+
+
+        public User(string name, int result) 
+        {
+            Name = name;
+            Result = result;        
+        }
     }
 }

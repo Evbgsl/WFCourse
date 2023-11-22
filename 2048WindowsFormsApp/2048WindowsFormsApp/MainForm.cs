@@ -22,10 +22,6 @@ namespace _2048WindowsFormsApp
         public MainForm()
         {
             InitializeComponent();
-            var helloForm = new HelloForm();
-            helloForm.ShowDialog();
-
-            //using HelloForm
         }
 
         
@@ -33,6 +29,42 @@ namespace _2048WindowsFormsApp
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+
+            var helloForm = new HelloForm();
+            helloForm.ShowDialog();
+
+
+
+            //userAnswerTextBox.Focus();
+
+
+            //var helloForm = new HelloForm();
+            //questionsForm = new QuestionsForm();
+            //resultsForm = new ResultsForm();
+
+            //helloForm.ShowDialog();
+            //user = new User(helloForm.userNameTextBox.Text, "", 0);
+            //userAnswerTextBox.Focus();
+
+            //fileName = @"datafile.txt";
+            //questionsDataFilePath = @"questionsDataFile.json";
+            //resultsDataFilePath = @"resultsDataFile.json";
+
+            //if (!File.Exists(questionsDataFilePath))
+            //{
+            //    NewQuestionsWriter();
+            //    var _newQuestions = JsonConvert.SerializeObject(questions);
+            //    DataFileProvider.Replace(questionsDataFilePath, _newQuestions, false);
+            //}
+
+            //value = DataFileProvider.GetValue(questionsDataFilePath);
+            //questions = JsonConvert.DeserializeObject<List<Question>>(value);
+
+            //countQuestions = questions.Count;
+
+
+
+
             InitMap();
             GenerateNumber();
             ShowScore();
