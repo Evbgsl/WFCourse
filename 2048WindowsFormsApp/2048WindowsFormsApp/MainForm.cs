@@ -135,6 +135,7 @@ namespace _2048WindowsFormsApp
                 }
 
             }
+
             if (e.KeyCode == Keys.Left)
             {
                 for (int i = 0; i < mapSize; i++)
@@ -244,6 +245,7 @@ namespace _2048WindowsFormsApp
 
 
             }
+
             if (e.KeyCode == Keys.Down)
             {
                 {
@@ -303,6 +305,7 @@ namespace _2048WindowsFormsApp
             }
 
             GenerateNumber();
+
             ShowScore();
         }
 
@@ -318,7 +321,21 @@ namespace _2048WindowsFormsApp
 
         private void правилаИгрыToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Вывести правила игры");
+            
+            
+            var rulesForm = new Form();
+            rulesForm.Size = new Size(640, 480);
+            rulesForm.StartPosition = FormStartPosition.CenterScreen;
+            rulesForm.Text = "2048";
+            
+            var rulesTextBox = new RichTextBox();
+            rulesTextBox.Dock = DockStyle.Fill;
+
+            rulesForm.Controls.Add(rulesTextBox);
+
+            rulesTextBox.Text = "Правила игры 2048";
+
+            rulesForm.ShowDialog();
         }
     }
 }
