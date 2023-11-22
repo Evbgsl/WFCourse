@@ -35,24 +35,6 @@ namespace _2048WindowsFormsApp
             ScoreLabel.Text = score.ToString(); 
         }
 
-        private void GenerateNumber()
-        {
-            while (true)
-            {
-
-                var randomNumberLabel = random.Next(mapSize * mapSize);
-                var indexRow = randomNumberLabel / mapSize;
-                var indexColumn = randomNumberLabel % mapSize;
-
-                if (labelsMap[indexRow, indexColumn].Text == string.Empty)
-                {
-                    //нужно сделать либо 2, либо 4
-                    labelsMap[indexRow, indexColumn].Text = "2";
-                    break;
-                }
-            }
-        }
-
         private void InitMap()
         {
             labelsMap = new Label[mapSize, mapSize];
@@ -346,5 +328,32 @@ namespace _2048WindowsFormsApp
             }
 
         }
+
+        //Helpers
+        private void GenerateNumber()
+        {
+            while (true)
+            {
+                var randomNumberLabel = random.Next(mapSize * mapSize);
+                var indexRow = randomNumberLabel / mapSize;
+                var indexColumn = randomNumberLabel % mapSize;
+
+                if (labelsMap[indexRow, indexColumn].Text == string.Empty)
+                {
+                    labelsMap[indexRow, indexColumn].Text = GenererateRandom2_4().ToString();
+                    break;
+                }
+            }
+        }
+
+        private int GenererateRandom2_4()
+        {
+            int[] A = new int[] { 2, 2, 2, 4 };
+            Random rand = new Random();
+            int index = rand.Next(0, A.Length);
+            int result = A[index];
+            return result;
+        }
+
     }
 }
