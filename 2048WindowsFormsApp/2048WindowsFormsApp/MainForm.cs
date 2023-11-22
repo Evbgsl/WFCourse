@@ -35,7 +35,6 @@ namespace _2048WindowsFormsApp
             ScoreLabel.Text = score.ToString(); 
         }
 
-
         private void GenerateNumber()
         {
             while (true)
@@ -310,6 +309,7 @@ namespace _2048WindowsFormsApp
             ShowScore();
         }
 
+        //Работа основного меню
         private void начатьЗановоToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Restart();
@@ -343,15 +343,8 @@ namespace _2048WindowsFormsApp
                 rulesTextBox.Text = value;
 
                 rulesForm.ShowDialog();
-            
-
             }
 
         }
-
-       
     }
-
-
-
 }
