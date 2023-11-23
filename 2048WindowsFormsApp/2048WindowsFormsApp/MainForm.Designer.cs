@@ -35,34 +35,39 @@
             this.начатьЗановоToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.правилаИгрыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.показатьРекордыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(134, 42);
+            this.label1.Location = new System.Drawing.Point(201, 65);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(33, 13);
+            this.label1.Size = new System.Drawing.Size(51, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Счет:";
             // 
             // ScoreLabel
             // 
             this.ScoreLabel.AutoSize = true;
-            this.ScoreLabel.Location = new System.Drawing.Point(188, 42);
+            this.ScoreLabel.Location = new System.Drawing.Point(282, 65);
+            this.ScoreLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ScoreLabel.Name = "ScoreLabel";
-            this.ScoreLabel.Size = new System.Drawing.Size(13, 13);
+            this.ScoreLabel.Size = new System.Drawing.Size(18, 20);
             this.ScoreLabel.TabIndex = 1;
             this.ScoreLabel.Text = "0";
             // 
             // menuStrip1
             // 
+            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(319, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(478, 35);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -72,41 +77,50 @@
             this.menuToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.начатьЗановоToolStripMenuItem,
             this.правилаИгрыToolStripMenuItem,
-            this.выходToolStripMenuItem});
+            this.выходToolStripMenuItem,
+            this.показатьРекордыToolStripMenuItem});
             this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
-            this.menuToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
+            this.menuToolStripMenuItem.Size = new System.Drawing.Size(78, 29);
             this.menuToolStripMenuItem.Text = "Меню";
             // 
             // начатьЗановоToolStripMenuItem
             // 
             this.начатьЗановоToolStripMenuItem.Name = "начатьЗановоToolStripMenuItem";
-            this.начатьЗановоToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.начатьЗановоToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.начатьЗановоToolStripMenuItem.Text = "Начать заново";
             this.начатьЗановоToolStripMenuItem.Click += new System.EventHandler(this.начатьЗановоToolStripMenuItem_Click);
             // 
             // правилаИгрыToolStripMenuItem
             // 
             this.правилаИгрыToolStripMenuItem.Name = "правилаИгрыToolStripMenuItem";
-            this.правилаИгрыToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.правилаИгрыToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.правилаИгрыToolStripMenuItem.Text = "Правила игры";
             this.правилаИгрыToolStripMenuItem.Click += new System.EventHandler(this.правилаИгрыToolStripMenuItem_Click);
             // 
             // выходToolStripMenuItem
             // 
             this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            this.выходToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.выходToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.выходToolStripMenuItem.Text = "Выход";
             this.выходToolStripMenuItem.Click += new System.EventHandler(this.выходToolStripMenuItem_Click);
             // 
+            // показатьРекордыToolStripMenuItem
+            // 
+            this.показатьРекордыToolStripMenuItem.Name = "показатьРекордыToolStripMenuItem";
+            this.показатьРекордыToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.показатьРекордыToolStripMenuItem.Text = "Показать рекорды";
+            this.показатьРекордыToolStripMenuItem.Click += new System.EventHandler(this.показатьРекордыToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(319, 389);
+            this.ClientSize = new System.Drawing.Size(478, 598);
             this.Controls.Add(this.ScoreLabel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "2048";
@@ -128,6 +142,7 @@
         private System.Windows.Forms.ToolStripMenuItem начатьЗановоToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem правилаИгрыToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem выходToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem показатьРекордыToolStripMenuItem;
     }
 }
 

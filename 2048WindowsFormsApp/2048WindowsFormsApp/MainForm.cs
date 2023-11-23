@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,6 +19,7 @@ namespace _2048WindowsFormsApp
         private static Random random = new Random();
         private int score;
         private int numberedLabelsCounter;
+        private Form resultsForm;
         
         public MainForm()
         {
@@ -30,42 +32,19 @@ namespace _2048WindowsFormsApp
         private void MainForm_Load(object sender, EventArgs e)
         {
             var helloForm = new HelloForm();
+            resultsForm = new ResultsForm();
+
+
             helloForm.ShowDialog();
             var userName = helloForm.userNameTextBox.Text;
             var user = new User(userName, 0);
+
+            
 
             InitMap();
             GenerateNumber();
             ShowScore();
         }
-
-
-        //userAnswerTextBox.Focus();
-
-
-        //var helloForm = new HelloForm();
-        //questionsForm = new QuestionsForm();
-        //resultsForm = new ResultsForm();
-
-        //helloForm.ShowDialog();
-        //user = new User(helloForm.userNameTextBox.Text, "", 0);
-        //userAnswerTextBox.Focus();
-
-        //fileName = @"datafile.txt";
-        //questionsDataFilePath = @"questionsDataFile.json";
-        //resultsDataFilePath = @"resultsDataFile.json";
-
-        //if (!File.Exists(questionsDataFilePath))
-        //{
-        //    NewQuestionsWriter();
-        //    var _newQuestions = JsonConvert.SerializeObject(questions);
-        //    DataFileProvider.Replace(questionsDataFilePath, _newQuestions, false);
-        //}
-
-        //value = DataFileProvider.GetValue(questionsDataFilePath);
-        //questions = JsonConvert.DeserializeObject<List<Question>>(value);
-
-        //countQuestions = questions.Count;
 
 
         private void ShowScore()
@@ -416,5 +395,27 @@ namespace _2048WindowsFormsApp
             return flag;
         }
 
+        private void показатьРекордыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var resultsDataFilePath = @"results.json";
+            DataFileProvider.CheckResultFile(resultsDataFilePath);
+
+            var value = DataFileProvider.GetValue(resultsDataFilePath);
+            var results = JsonConvert.DeserializeObject<List<User>>(value);
+
+            resultsForm.Show();
+
+            //resultsForm.??? //нет доступа к DataGrid
+
+   
+
+            //foreach ( var item in results ) 
+            //{
+                
+                
+            
+            //}
+
+        }
     }
 }

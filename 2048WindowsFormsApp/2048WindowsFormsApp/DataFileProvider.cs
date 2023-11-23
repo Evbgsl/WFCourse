@@ -1,5 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Text;
+using System.Windows.Forms;
 
 namespace _2048WindowsFormsApp
 {
@@ -42,6 +44,25 @@ namespace _2048WindowsFormsApp
             reader.Close();
             return value;
         }
+
+        public static void CheckResultFile(string resultsDataFilePath)
+        {
+            if (!File.Exists(resultsDataFilePath))
+            {
+                try
+                {
+                    File.WriteAllText(resultsDataFilePath, string.Empty);
+                    MessageBox.Show("Создан новый файл с результатами");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+
+        }
+
+
 
 
     }
