@@ -19,7 +19,7 @@ namespace _2048WindowsFormsApp
         private static Random random = new Random();
         private int score;
         private int numberedLabelsCounter;
-        private Form resultsForm;
+        public ResultsForm resultsForm;
         
         public MainForm()
         {
@@ -400,21 +400,20 @@ namespace _2048WindowsFormsApp
             var resultsDataFilePath = @"results.json";
             DataFileProvider.CheckResultFile(resultsDataFilePath);
 
+            resultsForm.resultsGridView.Rows.Clear();
+
             var value = DataFileProvider.GetValue(resultsDataFilePath);
             var results = JsonConvert.DeserializeObject<List<User>>(value);
+            
+            if (results != null)
+            {
+                foreach (var item in results)
+                {
+                    resultsForm.resultsGridView.Rows.Add(item.Name, item.Result);
+                }
+            }
 
             resultsForm.Show();
-
-            //resultsForm.??? //нет доступа к DataGrid
-
-   
-
-            //foreach ( var item in results ) 
-            //{
-                
-                
-            
-            //}
 
         }
     }
