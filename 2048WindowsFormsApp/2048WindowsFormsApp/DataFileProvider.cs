@@ -28,14 +28,14 @@ namespace _2048WindowsFormsApp
         //}
 
 
-        //public static void Replace(string fileName, string value, bool rewrite)
-        //{
-        //    using (StreamWriter writer = new StreamWriter(fileName))
-        //    {
-        //        writer.WriteLine(value);
-        //        writer.Close();
-        //    }
-        //}
+        public static void Replace(string fileName, string value, bool rewrite)
+        {
+            using (StreamWriter writer = new StreamWriter(fileName))
+            {
+                writer.WriteLine(value);
+                writer.Close();
+            }
+        }
 
         public static string GetValue(string fileName)
         {

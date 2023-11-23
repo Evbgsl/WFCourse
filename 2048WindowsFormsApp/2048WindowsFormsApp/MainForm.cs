@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,8 +18,10 @@ namespace _2048WindowsFormsApp
         private const int mapSize = 4;
         private Label[,] labelsMap;
         private static Random random = new Random();
+        private User user;
         private int score;
         private int numberedLabelsCounter;
+        public string resultsDataFilePath = @"results.json";
         public ResultsForm resultsForm;
         
         public MainForm()
@@ -26,9 +29,7 @@ namespace _2048WindowsFormsApp
             InitializeComponent();
         }
 
-        
-
-
+        //Основная логика программы
         private void MainForm_Load(object sender, EventArgs e)
         {
             var helloForm = new HelloForm();
@@ -37,7 +38,7 @@ namespace _2048WindowsFormsApp
 
             helloForm.ShowDialog();
             var userName = helloForm.userNameTextBox.Text;
-            var user = new User(userName, 0);
+            user = new User(userName, 0);
 
             
 
@@ -45,13 +46,10 @@ namespace _2048WindowsFormsApp
             GenerateNumber();
             ShowScore();
         }
-
-
         private void ShowScore()
         {
             ScoreLabel.Text = score.ToString(); 
         }
-
         private void InitMap()
         {
             labelsMap = new Label[mapSize, mapSize];
@@ -65,7 +63,6 @@ namespace _2048WindowsFormsApp
                 }
             }
         }
-
         private object CreateLabel(int indexRow, int indexColumn)
         {
             var label = new Label();
@@ -78,7 +75,6 @@ namespace _2048WindowsFormsApp
             label.Location = new Point(x, y);
             return label;
         }
-
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Right) 
@@ -313,12 +309,6 @@ namespace _2048WindowsFormsApp
         {
             Application.Restart();
         }
-
-        private void выходToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
         private void правилаИгрыToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var rulesOfGame2048 = @"rulesOfGame2048.json";
@@ -345,6 +335,31 @@ namespace _2048WindowsFormsApp
             }
 
         }
+        private void показатьРекордыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            resultsForm.resultsGridView.Rows.Clear();
+
+            if (!File.Exists(resultsDataFilePath))
+            {
+                MessageBox.Show("Предыдущих результатов нет");
+            }
+            else
+            {
+                var value = DataFileProvider.GetValue(resultsDataFilePath);
+                var results = JsonConvert.DeserializeObject<List<User>>(value);
+                foreach (var item in results)
+                {
+                    resultsForm.resultsGridView.Rows.Add(item.Name, item.Result);
+                }
+                resultsForm.Show();
+            }
+
+
+        }
+        private void выходToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
 
         //Helpers
         private void GenerateNumber()
@@ -363,7 +378,6 @@ namespace _2048WindowsFormsApp
                 }
             }
         }
-
         private int GenererateRandom2_4()
         {
             int[] A = new int[] { 2, 2, 2, 4 };
@@ -372,7 +386,6 @@ namespace _2048WindowsFormsApp
             int result = A[index];
             return result;
         }
-
         private bool CheckEmptyLabels()
         {
             var flag = false;
@@ -390,31 +403,28 @@ namespace _2048WindowsFormsApp
 
             if (!flag)
             {
+                SaveGameResults();
                 MessageBox.Show("Игра закончена", "2048");            
             }
             return flag;
         }
-
-        private void показатьРекордыToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SaveGameResults()
         {
-            var resultsDataFilePath = @"results.json";
-            DataFileProvider.CheckResultFile(resultsDataFilePath);
+            var _usersResults = new List<User>();
 
-            resultsForm.resultsGridView.Rows.Clear();
-
-            var value = DataFileProvider.GetValue(resultsDataFilePath);
-            var results = JsonConvert.DeserializeObject<List<User>>(value);
-            
-            if (results != null)
-            {
-                foreach (var item in results)
-                {
-                    resultsForm.resultsGridView.Rows.Add(item.Name, item.Result);
-                }
+            if (File.Exists(resultsDataFilePath))
+            {     
+                var value = DataFileProvider.GetValue(resultsDataFilePath);
+                _usersResults = JsonConvert.DeserializeObject<List<User>>(value);
             }
 
-            resultsForm.Show();
+            user.Result = score;
+            _usersResults.Add(user);
 
+            var _userResults = JsonConvert.SerializeObject(_usersResults);
+            DataFileProvider.Replace(resultsDataFilePath, _userResults, false);
         }
+
+
     }
 }
