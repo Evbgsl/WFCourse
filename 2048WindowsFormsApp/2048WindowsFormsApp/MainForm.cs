@@ -29,45 +29,44 @@ namespace _2048WindowsFormsApp
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-
-       
-
-
-
-            //userAnswerTextBox.Focus();
-
-
-            //var helloForm = new HelloForm();
-            //questionsForm = new QuestionsForm();
-            //resultsForm = new ResultsForm();
-
-            //helloForm.ShowDialog();
-            //user = new User(helloForm.userNameTextBox.Text, "", 0);
-            //userAnswerTextBox.Focus();
-
-            //fileName = @"datafile.txt";
-            //questionsDataFilePath = @"questionsDataFile.json";
-            //resultsDataFilePath = @"resultsDataFile.json";
-
-            //if (!File.Exists(questionsDataFilePath))
-            //{
-            //    NewQuestionsWriter();
-            //    var _newQuestions = JsonConvert.SerializeObject(questions);
-            //    DataFileProvider.Replace(questionsDataFilePath, _newQuestions, false);
-            //}
-
-            //value = DataFileProvider.GetValue(questionsDataFilePath);
-            //questions = JsonConvert.DeserializeObject<List<Question>>(value);
-
-            //countQuestions = questions.Count;
-
-
-
+            var helloForm = new HelloForm();
+            helloForm.ShowDialog();
+            var userName = helloForm.userNameTextBox.Text;
+            var user = new User(userName, 0);
 
             InitMap();
             GenerateNumber();
             ShowScore();
         }
+
+
+        //userAnswerTextBox.Focus();
+
+
+        //var helloForm = new HelloForm();
+        //questionsForm = new QuestionsForm();
+        //resultsForm = new ResultsForm();
+
+        //helloForm.ShowDialog();
+        //user = new User(helloForm.userNameTextBox.Text, "", 0);
+        //userAnswerTextBox.Focus();
+
+        //fileName = @"datafile.txt";
+        //questionsDataFilePath = @"questionsDataFile.json";
+        //resultsDataFilePath = @"resultsDataFile.json";
+
+        //if (!File.Exists(questionsDataFilePath))
+        //{
+        //    NewQuestionsWriter();
+        //    var _newQuestions = JsonConvert.SerializeObject(questions);
+        //    DataFileProvider.Replace(questionsDataFilePath, _newQuestions, false);
+        //}
+
+        //value = DataFileProvider.GetValue(questionsDataFilePath);
+        //questions = JsonConvert.DeserializeObject<List<Question>>(value);
+
+        //countQuestions = questions.Count;
+
 
         private void ShowScore()
         {

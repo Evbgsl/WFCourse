@@ -30,41 +30,22 @@ namespace _2048WindowsFormsApp
 
         }
 
+        private void userNameTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (string.IsNullOrEmpty(userNameTextBox.Text))
+                {
+                    MessageBox.Show("Введите имя пользователя", "Гений - идиот");
+                    return;
+                }
+                {
+                    Close();
+                }
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+            }
 
-        //private void startButton_Click(object sender, EventArgs e)
-        //{
-        //    if (string.IsNullOrEmpty(userNameTextBox.Text))
-        //    {
-        //        MessageBox.Show("Введите имя пользователя", "Гений - идиот");
-        //        return;
-        //    }
-        //    {
-        //        Close();
-        //    }
-        //}
-
-        //private void userNameTextBox_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //    if (e.KeyCode == Keys.Enter)
-        //    {
-
-        //        if (string.IsNullOrEmpty(userNameTextBox.Text))
-        //        {
-        //            MessageBox.Show("Введите имя пользователя", "Гений - идиот");
-        //            return;
-        //        }
-        //        {
-        //            Close();
-        //        }
-
-        //        // Ваш код для обработки нажатия Enter
-        //        e.Handled = true;
-        //        e.SuppressKeyPress = true;
-        //    }
-
-
-
-
-        //}
+        }
     }
 }
