@@ -1,4 +1,7 @@
-﻿using System;
+﻿using _2048WindowsFormsApp.Properties;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,25 +19,44 @@ namespace _2048WindowsFormsApp
         private const int mapSize = 4;
         private Label[,] labelsMap;
         private static Random random = new Random();
+        private User user;
         private int score;
+        private int numberedLabelsCounter;
+        public string resultsDataFilePath = @"results.json";
+        public ResultsForm resultsForm;
         
         public MainForm()
         {
             InitializeComponent();
         }
 
+        //Основная логика программы
         private void MainForm_Load(object sender, EventArgs e)
         {
+            var helloForm = new HelloForm();
+            resultsForm = new ResultsForm();
+
+
+            helloForm.ShowDialog();
+            var userName = helloForm.userNameTextBox.Text;
+            user = new User(userName, 0);
+
+            
+
             InitMap();
             GenerateNumber();
             ShowScore();
         }
-
         private void ShowScore()
         {
             ScoreLabel.Text = score.ToString(); 
+            if (score > Settings.Default.BestScore) 
+            {
+                Settings.Default.BestScore = score;
+                Settings.Default.Save();
+            }
+            BestScoreLabel.Text = Settings.Default.BestScore.ToString();
         }
-
         private void InitMap()
         {
             labelsMap = new Label[mapSize, mapSize];
@@ -48,7 +70,6 @@ namespace _2048WindowsFormsApp
                 }
             }
         }
-
         private object CreateLabel(int indexRow, int indexColumn)
         {
             var label = new Label();
@@ -61,7 +82,6 @@ namespace _2048WindowsFormsApp
             label.Location = new Point(x, y);
             return label;
         }
-
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Right) 
@@ -296,18 +316,12 @@ namespace _2048WindowsFormsApp
         {
             Application.Restart();
         }
-
-        private void выходToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
         private void правилаИгрыToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var rulesOfGame2048 = @"rulesOfGame2048.json";
             if (!File.Exists(rulesOfGame2048))
             {
-                MessageBox.Show("Сегодня правила не завезли, разбирайтесь сами.", "2048");
+                MessageBox.Show("Сегодня правила не завезли, разбирайтесь сами", "2048");
             }
             else 
             {
@@ -328,11 +342,36 @@ namespace _2048WindowsFormsApp
             }
 
         }
+        private void показатьРекордыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            resultsForm.resultsGridView.Rows.Clear();
+
+            if (!File.Exists(resultsDataFilePath))
+            {
+                MessageBox.Show("Предыдущих результатов нет");
+            }
+            else
+            {
+                var value = DataFileProvider.GetValue(resultsDataFilePath);
+                var results = JsonConvert.DeserializeObject<List<User>>(value);
+                foreach (var item in results)
+                {
+                    resultsForm.resultsGridView.Rows.Add(item.Name, item.Result);
+                }
+                resultsForm.Show();
+            }
+
+
+        }
+        private void выходToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
 
         //Helpers
         private void GenerateNumber()
         {
-            while (true)
+            while (true && CheckEmptyLabels())
             {
                 var randomNumberLabel = random.Next(mapSize * mapSize);
                 var indexRow = randomNumberLabel / mapSize;
@@ -341,11 +380,11 @@ namespace _2048WindowsFormsApp
                 if (labelsMap[indexRow, indexColumn].Text == string.Empty)
                 {
                     labelsMap[indexRow, indexColumn].Text = GenererateRandom2_4().ToString();
+                    numberedLabelsCounter++;
                     break;
                 }
             }
         }
-
         private int GenererateRandom2_4()
         {
             int[] A = new int[] { 2, 2, 2, 4 };
@@ -354,6 +393,45 @@ namespace _2048WindowsFormsApp
             int result = A[index];
             return result;
         }
+        private bool CheckEmptyLabels()
+        {
+            var flag = false;
+            for (int i = 0; i < mapSize; i++)
+            {
+                for (int j = 0; j < mapSize; j++)
+                {
+                    if (labelsMap[i, j].Text == string.Empty)
+                    {
+                        flag = true;
+                        break;
+                    }
+                }
+            }
+
+            if (!flag)
+            {
+                SaveGameResults();
+                MessageBox.Show("Игра закончена", "2048");            
+            }
+            return flag;
+        }
+        private void SaveGameResults()
+        {
+            var _usersResults = new List<User>();
+
+            if (File.Exists(resultsDataFilePath))
+            {     
+                var value = DataFileProvider.GetValue(resultsDataFilePath);
+                _usersResults = JsonConvert.DeserializeObject<List<User>>(value);
+            }
+
+            user.Result = score;
+            _usersResults.Add(user);
+
+            var _userResults = JsonConvert.SerializeObject(_usersResults);
+            DataFileProvider.Replace(resultsDataFilePath, _userResults, false);
+        }
+
 
     }
 }

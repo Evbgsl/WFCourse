@@ -1,5 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Text;
+using System.Windows.Forms;
 
 namespace _2048WindowsFormsApp
 {
@@ -26,14 +28,14 @@ namespace _2048WindowsFormsApp
         //}
 
 
-        //public static void Replace(string fileName, string value, bool rewrite)
-        //{
-        //    using (StreamWriter writer = new StreamWriter(fileName))
-        //    {
-        //        writer.WriteLine(value);
-        //        writer.Close();
-        //    }
-        //}
+        public static void Replace(string fileName, string value, bool rewrite)
+        {
+            using (StreamWriter writer = new StreamWriter(fileName))
+            {
+                writer.WriteLine(value);
+                writer.Close();
+            }
+        }
 
         public static string GetValue(string fileName)
         {
@@ -42,6 +44,25 @@ namespace _2048WindowsFormsApp
             reader.Close();
             return value;
         }
+
+        public static void CheckResultFile(string resultsDataFilePath)
+        {
+            if (!File.Exists(resultsDataFilePath))
+            {
+                try
+                {
+                    File.WriteAllText(resultsDataFilePath, string.Empty);
+                    MessageBox.Show("Создан новый файл с результатами");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+
+        }
+
+
 
 
     }
