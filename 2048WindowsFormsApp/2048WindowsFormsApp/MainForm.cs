@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using _2048WindowsFormsApp.Properties;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -49,6 +50,12 @@ namespace _2048WindowsFormsApp
         private void ShowScore()
         {
             ScoreLabel.Text = score.ToString(); 
+            if (score > Settings.Default.BestScore) 
+            {
+                Settings.Default.BestScore = score;
+                Settings.Default.Save();
+            }
+            BestScoreLabel.Text = Settings.Default.BestScore.ToString();
         }
         private void InitMap()
         {
