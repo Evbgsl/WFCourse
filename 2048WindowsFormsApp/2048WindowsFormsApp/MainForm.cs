@@ -370,6 +370,12 @@ namespace _2048WindowsFormsApp
         {
             Application.Exit();
         }
+        private void изменитьРазмерПоляToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var mapSizeInputDialog = new MapSizeInputDialog();
+            mapSizeInputDialog.ShowDialog();
+            Settings.Default.MapSizeSet = Convert.ToInt32(mapSizeInputDialog.mapSizeTextBox.Text);
+        }
 
         //Helpers
         private void GenerateNumber()
@@ -435,11 +441,6 @@ namespace _2048WindowsFormsApp
             DataFileProvider.Replace(resultsDataFilePath, _userResults, false);
         }
 
-        private void изменитьРазмерПоляToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var mapSizeInputDialog = new MapSizeInputDialog();
-            mapSizeInputDialog.ShowDialog();
-            Settings.Default.MapSizeSet = Convert.ToInt32(mapSizeInputDialog.mapSizeTextBox.Text);
-        }
+
     }
 }
