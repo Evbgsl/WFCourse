@@ -87,6 +87,7 @@ namespace _2048WindowsFormsApp
         }
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
+            #region Обработка нажатия стрелок
             if (e.KeyCode == Keys.Right) 
             {
                 for (int i = 0; i < mapSize; i++)
@@ -308,12 +309,32 @@ namespace _2048WindowsFormsApp
                 }
 
             }
+            #endregion
 
             GenerateNumber();
 
             ShowScore();
+
+            for (int i = 0; i < mapSize; i++)
+            {
+                for (int j = 0; j < mapSize; j++)
+                {
+                    ChangeLabelColor(labelsMap[i, j]);
+                }
+            }
+
         }
 
+        private void ChangeLabelColor(Label label)
+        {
+            if (label.Text == string.Empty)
+            {
+                label.BackColor = Color.FromArgb(255, 255, 0); 
+                return;
+            }
+            var exponentOfTwo = WhatPowerOfTwo(Convert.ToInt32(label.Text));
+            label.BackColor = Color.FromArgb(255-exponentOfTwo*20, 255 - exponentOfTwo*20, 0);
+        }
         //Работа основного меню
         private void начатьЗановоToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -439,6 +460,24 @@ namespace _2048WindowsFormsApp
 
             var _userResults = JsonConvert.SerializeObject(_usersResults);
             DataFileProvider.Replace(resultsDataFilePath, _userResults, false);
+        }
+        private int WhatPowerOfTwo(int number)
+        {
+            // Check if the number is a power of two
+            if (number <= 0 || (number & (number - 1)) != 0)
+            {
+                // If the number is not a power of two, return a special value (e.g., -1) to indicate that
+                return -1;
+            }
+
+            int exponent = 0;
+            while ((number & 1) == 0)
+            {
+                number >>= 1;
+                exponent++;
+            }
+
+            return exponent;
         }
 
 
