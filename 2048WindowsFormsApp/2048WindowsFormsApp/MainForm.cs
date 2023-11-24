@@ -16,7 +16,7 @@ namespace _2048WindowsFormsApp
 {
     public partial class MainForm : Form
     {
-        private const int mapSize = 4;
+        private int mapSize;
         private Label[,] labelsMap;
         private static Random random = new Random();
         private User user;
@@ -36,12 +36,15 @@ namespace _2048WindowsFormsApp
             var helloForm = new HelloForm();
             resultsForm = new ResultsForm();
 
-
             helloForm.ShowDialog();
             var userName = helloForm.userNameTextBox.Text;
             user = new User(userName, 0);
 
-            
+            mapSize = Settings.Default.MapSizeSet;
+
+            var mainFormWidth = mapSize * (70 + 6) + 30;
+            var mainFormHeith = mapSize * (70 + 6) + 115;
+            Size = new Size(mainFormWidth, mainFormHeith);
 
             InitMap();
             GenerateNumber();
@@ -432,6 +435,11 @@ namespace _2048WindowsFormsApp
             DataFileProvider.Replace(resultsDataFilePath, _userResults, false);
         }
 
-
+        private void изменитьРазмерПоляToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var mapSizeInputDialog = new MapSizeInputDialog();
+            mapSizeInputDialog.ShowDialog();
+            Settings.Default.MapSizeSet = Convert.ToInt32(mapSizeInputDialog.mapSizeTextBox.Text);
+        }
     }
 }

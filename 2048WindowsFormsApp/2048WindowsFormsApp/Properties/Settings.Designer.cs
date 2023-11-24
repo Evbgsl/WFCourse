@@ -34,5 +34,17 @@ namespace _2048WindowsFormsApp.Properties {
                 this["BestScore"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("4")]
+        public int MapSizeSet {
+            get {
+                return ((int)(this["MapSizeSet"]));
+            }
+            set {
+                this["MapSizeSet"] = value;
+            }
+        }
     }
 }

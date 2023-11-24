@@ -38,6 +38,7 @@
             this.показатьРекордыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label2 = new System.Windows.Forms.Label();
             this.BestScoreLabel = new System.Windows.Forms.Label();
+            this.изменитьРазмерПоляToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -78,7 +79,8 @@
             this.начатьЗановоToolStripMenuItem,
             this.правилаИгрыToolStripMenuItem,
             this.выходToolStripMenuItem,
-            this.показатьРекордыToolStripMenuItem});
+            this.показатьРекордыToolStripMenuItem,
+            this.изменитьРазмерПоляToolStripMenuItem});
             this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
             this.menuToolStripMenuItem.Size = new System.Drawing.Size(53, 22);
             this.menuToolStripMenuItem.Text = "Меню";
@@ -86,28 +88,28 @@
             // начатьЗановоToolStripMenuItem
             // 
             this.начатьЗановоToolStripMenuItem.Name = "начатьЗановоToolStripMenuItem";
-            this.начатьЗановоToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.начатьЗановоToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
             this.начатьЗановоToolStripMenuItem.Text = "Начать заново";
             this.начатьЗановоToolStripMenuItem.Click += new System.EventHandler(this.начатьЗановоToolStripMenuItem_Click);
             // 
             // правилаИгрыToolStripMenuItem
             // 
             this.правилаИгрыToolStripMenuItem.Name = "правилаИгрыToolStripMenuItem";
-            this.правилаИгрыToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.правилаИгрыToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
             this.правилаИгрыToolStripMenuItem.Text = "Правила игры";
             this.правилаИгрыToolStripMenuItem.Click += new System.EventHandler(this.правилаИгрыToolStripMenuItem_Click);
             // 
             // выходToolStripMenuItem
             // 
             this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            this.выходToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.выходToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
             this.выходToolStripMenuItem.Text = "Выход";
             this.выходToolStripMenuItem.Click += new System.EventHandler(this.выходToolStripMenuItem_Click);
             // 
             // показатьРекордыToolStripMenuItem
             // 
             this.показатьРекордыToolStripMenuItem.Name = "показатьРекордыToolStripMenuItem";
-            this.показатьРекордыToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.показатьРекордыToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
             this.показатьРекордыToolStripMenuItem.Text = "Показать рекорды";
             this.показатьРекордыToolStripMenuItem.Click += new System.EventHandler(this.показатьРекордыToolStripMenuItem_Click);
             // 
@@ -128,6 +130,13 @@
             this.BestScoreLabel.Size = new System.Drawing.Size(35, 13);
             this.BestScoreLabel.TabIndex = 4;
             this.BestScoreLabel.Text = "label3";
+            // 
+            // изменитьРазмерПоляToolStripMenuItem
+            // 
+            this.изменитьРазмерПоляToolStripMenuItem.Name = "изменитьРазмерПоляToolStripMenuItem";
+            this.изменитьРазмерПоляToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            this.изменитьРазмерПоляToolStripMenuItem.Text = "Изменить размер поля";
+            this.изменитьРазмерПоляToolStripMenuItem.Click += new System.EventHandler(this.изменитьРазмерПоляToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -164,6 +173,7 @@
         private System.Windows.Forms.ToolStripMenuItem показатьРекордыToolStripMenuItem;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label BestScoreLabel;
+        private System.Windows.Forms.ToolStripMenuItem изменитьРазмерПоляToolStripMenuItem;
     }
 }
 
