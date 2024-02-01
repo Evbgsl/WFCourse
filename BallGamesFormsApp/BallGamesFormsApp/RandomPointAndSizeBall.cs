@@ -7,4 +7,5 @@
             this.ballSize = random.Next(30, 70);
         }
     }
+
 }

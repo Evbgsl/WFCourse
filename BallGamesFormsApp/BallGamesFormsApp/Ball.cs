@@ -26,4 +26,5 @@ namespace BallGamesFormsApp
             graphics.FillEllipse(brush, rectangle);
         }
     }
+
 }
