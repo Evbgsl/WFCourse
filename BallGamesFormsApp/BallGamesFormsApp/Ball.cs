@@ -21,18 +21,21 @@ namespace BallGamesFormsApp
         private int randomVx;
         private int randomVy;
 
+        private Rectangle rectangle;
+
         protected int ballSize = 70;
 
         public Ball(MainForm form)
         {
             this.form = form;
         }
+        
 
         public void Show()
         {
             var graphics = form.CreateGraphics();
             var brush = Brushes.Aqua;
-            var rectangle = new Rectangle(x, y, ballSize, ballSize);
+            rectangle = new Rectangle(x, y, ballSize, ballSize);
             graphics.FillEllipse(brush, rectangle);
         }
 
@@ -40,7 +43,7 @@ namespace BallGamesFormsApp
         {
             var graphics = form.CreateGraphics();
             var brush = Brushes.White;
-            var rectangle = new Rectangle(x, y, ballSize, ballSize);
+            rectangle = new Rectangle(x, y, ballSize, ballSize);
             graphics.FillEllipse(brush, rectangle);
 
         }
@@ -50,8 +53,8 @@ namespace BallGamesFormsApp
             randomVx = random.Next(2) * 2 - 1;
             randomVy = random.Next(2) * 2 - 1;
 
-            vx = random.Next(2,20) * randomVx;
-            vy = random.Next(2, 20) * randomVy;
+            vx = random.Next(2, 5) * randomVx;
+            vy = random.Next(2, 5) * randomVy;
         }
 
         private void Go() 
@@ -67,6 +70,14 @@ namespace BallGamesFormsApp
             Show();
         
         }
+
+        public bool CheckBallInForm()
+        {
+            return !(rectangle.X < 0 || rectangle.Y < 0 || rectangle.X + ballSize > form.Width || rectangle.Y + ballSize > form.Height);
+        }
+
+
+
     }
 
 }

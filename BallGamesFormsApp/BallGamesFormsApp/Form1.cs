@@ -29,7 +29,7 @@ namespace BallGamesFormsApp
         private void button1_Click(object sender, EventArgs e)
         {
            moveBalls = new List<MoveBall>();
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < 8; i++)
             {
                 var moveBall = new MoveBall(this);
                 moveBalls.Add(moveBall);
@@ -40,10 +40,19 @@ namespace BallGamesFormsApp
 
         private void moveBallButton_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < 20; i++)
+            int countBalls = 0;
+
+            for (int i = 0; i < 8; i++)
             {
                 moveBalls[i].Stop();
             }
+
+            for (int i = 0; i < 8; i++)
+            {
+                if (moveBalls[i].CheckBallInForm()) countBalls++;
+            }
+
+            MessageBox.Show(countBalls.ToString());
 
         }
     }
