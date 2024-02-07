@@ -30,7 +30,6 @@ namespace BallGamesFormsApp
             this.form = form;
         }
         
-
         public void Show()
         {
             var graphics = form.CreateGraphics();
@@ -48,15 +47,6 @@ namespace BallGamesFormsApp
 
         }
 
-        public void Randomizer()
-        {
-            randomVx = random.Next(2) * 2 - 1;
-            randomVy = random.Next(2) * 2 - 1;
-
-            vx = random.Next(2, 5) * randomVx;
-            vy = random.Next(2, 5) * randomVy;
-        }
-
         private void Go() 
         {
             x += vx;
@@ -68,15 +58,21 @@ namespace BallGamesFormsApp
             Clear();
             Go();
             Show();
-        
+        }
+
+        public void Randomizer()
+        {
+            randomVx = random.Next(2) * 2 - 1;
+            randomVy = random.Next(2) * 2 - 1;
+
+            vx = random.Next(2, 5) * randomVx;
+            vy = random.Next(2, 5) * randomVy;
         }
 
         public bool CheckBallInForm()
         {
             return !(rectangle.X < 0 || rectangle.Y < 0 || rectangle.X + ballSize > form.Width || rectangle.Y + ballSize > form.Height);
         }
-
-
 
     }
 
